@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<license version="1.0">
+  <type>trial</type>
+  <customer>
+    <name>Evaluator</name>
+  </customer>
+  <period>
+    <since>2016-06-01</since>
+    <till>2016-08-30</till>
+  </period>
+  <products>
+    <product id="2" name="selfConnect FIX Engine for .NET" />
+  </products>
+  <checksum>07AFF8BD385C8B0CF5FAC3CB81D972BB</checksum>
+</license>

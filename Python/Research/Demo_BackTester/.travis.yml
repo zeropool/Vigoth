@@ -1,0 +1,29 @@
+language: python
+
+cache:
+  directories:
+    - $HOME/.cache/pip/wheels
+    - $HOME/opt
+
+python:
+  - "2.7"
+# Currenly TA-lib does not work with py3
+#  - "3.3"
+#  - "3.4"
+#  - "nightly"
+
+env:
+  global:
+    - TA_INCLUDE_PATH=$HOME/opt/include
+    - TA_LIBRARY_PATH=$HOME/opt/lib
+
+install:
+  - "[ -d $HOME/opt/include/ta-lib ] || tar -xzvf deps/ta-lib.tar.gz"
+  - "[ -d $HOME/opt/include/ta-lib ] || { cd ta-lib && ./configure --prefix=$HOME/opt && make && make install && cd ..; }"
+  - pip install --upgrade pip
+  - pip install --no-deps -r requirements-test.txt
+  - pip install coveralls
+
+script: py.test --flake8 --cov trader trader
+
+after_success: coveralls

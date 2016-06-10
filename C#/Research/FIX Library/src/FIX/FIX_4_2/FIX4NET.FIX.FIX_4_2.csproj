@@ -1,0 +1,207 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{933716E7-988D-49DE-A011-3D9408F49803}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>FIX4NET.FIX.FIX_4_2</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FIX4NET.FIX.FIX_4_2</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\FIX4NET.FIX.FIX_4_2.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Log4NET\log4net-1.2.10\bin\net\2.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <ProjectReference Include="..\..\FIX4NET.csproj">
+      <Name>FIX4NET</Name>
+      <Project>{78E3B874-1BD0-4E3E-82E0-5ECDF6633FB3}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\FIX4NET.FIX.csproj">
+      <Name>FIX4NET.FIX</Name>
+      <Project>{B2877A82-9510-423A-8014-8B9017FF42B6}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Advertisement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Allocation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AllocationACK.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessMessageReject.cs" />
+    <Compile Include="DontKnowTrade.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Email.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExecutionReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Heartbeat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IndicationOfInterest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ListCancelRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ListExecute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ListStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ListStatusRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logout.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MessageFactoryFIX.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NewOrderList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NewOrderSingle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="News.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderCancelReject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderCancelReplaceRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderCancelRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrderStatusRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ParseFieldExceptionFIX.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quote.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QuoteRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResendRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SequenceReset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TestRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Values\MsgType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FIX4NET.FIX.FIX_4_2.build" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

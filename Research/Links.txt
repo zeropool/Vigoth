@@ -1,0 +1,12 @@
+http://stockcharts.com/school/doku.php?id=chart_school
+https://www.mql5.com/en/articles/1447
+https://www.mql5.com/en/articles/1825
+http://www.scribd.com/doc/18040260/Gann-Theory-Overview
+http://www.investopedia.com/articles/technical/111401.asp
+https://www.mql5.com/en/articles/292
+https://www.mql5.com/en/articles/250
+http://mathworld.wolfram.com/Legendre-GaussQuadrature.html
+http://mathworld.wolfram.com/LegendrePolynomial.html
+https://en.wikipedia.org/wiki/Logistic_distribution
+https://en.wikipedia.org/wiki/Pascal%27s_triangle
+http://www.case.hu-berlin.de/

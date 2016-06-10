@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FIX4NET.Net</name>
+    </assembly>
+    <members>
+        <member name="T:FIX4NET.Net.LogoutException">
+            <summary>
+            Summary description for LogoutException.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.Net.SocketEngine">
+            <summary>
+            Summary description for SocketEngine.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.Net.SocketListener">
+            <summary>
+            Summary description for SocketListener.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.Net.SocketLogonArgs">
+            <summary>
+            Summary description for SocketLogonArgs.
+            </summary>
+        </member>
+    </members>
+</doc>

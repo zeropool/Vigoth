@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Dialect xmlns="http://ref.onixs.biz/fix/dialects"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://ref.onixs.biz/fix/dialects http://ref.onixs.biz/fix/dialects/dialects-2_14.xsd">
+
+
+  <!-- For example:
+  <FIX version="4.0">
+    <Message type="D">
+      <Group numberOfInstancesTag="78" name="NoAllocs">
+        --><!-- Number of repeating groups for pre-trade allocation, does not belong to Standard FIX 4.0 --><!--
+        <Field tag="79" name="AllocAccount"/>
+        --><!--  Does not belong to Standard FIX 4.0 --><!--
+        <Field tag="661" name="AllocAcctIDSource"/>
+        --><!--  Does not belong to Standard FIX 4.0 --><!--
+        <Field tag="736" name="AllocSettlCurrency"/>
+        --><!--  Does not belong to Standard FIX 4.0 --><!--
+        --><!-- Other group fields --><!--
+      </Group>
+    </Message>
+  </FIX>
+  -->
+
+</Dialect>

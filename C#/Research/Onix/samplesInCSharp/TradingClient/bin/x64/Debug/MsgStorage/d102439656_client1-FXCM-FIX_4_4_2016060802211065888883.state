@@ -1,0 +1,8 @@
+InSeqNum= 
+OutSeqNum=2
+SenderCompID=d102439656_client1
+TargetCompID=FXCM
+Terminated=false
+Version=FIX.4.4
+FilePartCount= 
+SessionCreationTime=20160608-02:21:10.658710100

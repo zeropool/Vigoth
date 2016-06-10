@@ -1,0 +1,3 @@
+recursive-include examples *.py
+recursive-include pythalesians *.py
+recursive-include conf *.*

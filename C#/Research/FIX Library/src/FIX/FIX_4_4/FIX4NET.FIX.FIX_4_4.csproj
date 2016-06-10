@@ -1,0 +1,161 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DBA32206-17A3-40A5-A4F0-6BABEE6BBFD2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FIX4NET.FIX.FIX_4_4</RootNamespace>
+    <AssemblyName>FIX4NET.FIX.FIX_4_4</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Log4NET\log4net-1.2.10\bin\net\2.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Advertisement.cs" />
+    <Compile Include="AllocationInstruction.cs" />
+    <Compile Include="AllocationInstructionAck.cs" />
+    <Compile Include="AllocationReport.cs" />
+    <Compile Include="AllocationReportAck.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssignmentReport.cs" />
+    <Compile Include="BidRequest.cs" />
+    <Compile Include="BidResponse.cs" />
+    <Compile Include="BusinessMessageReject.cs" />
+    <Compile Include="CollateralAssignment.cs" />
+    <Compile Include="CollateralInquiry.cs" />
+    <Compile Include="CollateralInquiryAck.cs" />
+    <Compile Include="CollateralReport.cs" />
+    <Compile Include="CollateralRequest.cs" />
+    <Compile Include="CollateralResponse.cs" />
+    <Compile Include="Confirmation.cs" />
+    <Compile Include="ConfirmationAck.cs" />
+    <Compile Include="ConfirmationRequest.cs" />
+    <Compile Include="CrossOrderCancelReplaceRequest.cs" />
+    <Compile Include="CrossOrderCancelRequest.cs" />
+    <Compile Include="DerivativeSecurityList.cs" />
+    <Compile Include="DerivativeSecurityListRequest.cs" />
+    <Compile Include="DontKnowTrade.cs" />
+    <Compile Include="Email.cs" />
+    <Compile Include="ExecutionReport.cs" />
+    <Compile Include="Heartbeat.cs" />
+    <Compile Include="IndicationOfInterest.cs" />
+    <Compile Include="ListCancelRequest.cs" />
+    <Compile Include="ListExecute.cs" />
+    <Compile Include="ListStatus.cs" />
+    <Compile Include="ListStatusRequest.cs" />
+    <Compile Include="ListStrikePrice.cs" />
+    <Compile Include="Logon.cs" />
+    <Compile Include="Logout.cs" />
+    <Compile Include="MarketDataIncrementalRefresh.cs" />
+    <Compile Include="MarketDataRequest.cs" />
+    <Compile Include="MarketDataRequestReject.cs" />
+    <Compile Include="MarketDataSnapshotFullRefresh.cs" />
+    <Compile Include="MassQuote.cs" />
+    <Compile Include="MassQuoteAcknowledgement.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageFactoryFIX.cs" />
+    <Compile Include="MultilegOrderCancelReplaceRequest.cs" />
+    <Compile Include="NetworkStatusRequest.cs" />
+    <Compile Include="NetworkStatusResponse.cs" />
+    <Compile Include="NewOrderCross.cs" />
+    <Compile Include="NewOrderList.cs" />
+    <Compile Include="NewOrderMultileg.cs" />
+    <Compile Include="NewOrderSingle.cs" />
+    <Compile Include="News.cs" />
+    <Compile Include="OrderCancelReject.cs" />
+    <Compile Include="OrderCancelReplaceRequest.cs" />
+    <Compile Include="OrderCancelRequest.cs" />
+    <Compile Include="OrderMassCancelReport.cs" />
+    <Compile Include="OrderMassCancelRequest.cs" />
+    <Compile Include="OrderMassStatusRequest.cs" />
+    <Compile Include="OrderStatusRequest.cs" />
+    <Compile Include="ParseFieldExceptionFIX.cs" />
+    <Compile Include="PositionMaintenanceReport.cs" />
+    <Compile Include="PositionMaintenanceRequest.cs" />
+    <Compile Include="PositionReport.cs" />
+    <Compile Include="Quote.cs" />
+    <Compile Include="QuoteCancel.cs" />
+    <Compile Include="QuoteRequest.cs" />
+    <Compile Include="QuoteRequestReject.cs" />
+    <Compile Include="QuoteResponse.cs" />
+    <Compile Include="QuoteStatusReport.cs" />
+    <Compile Include="QuoteStatusRequest.cs" />
+    <Compile Include="RegistrationInstructions.cs" />
+    <Compile Include="RegistrationInstructionsResponse.cs" />
+    <Compile Include="Reject.cs" />
+    <Compile Include="RequestForPositions.cs" />
+    <Compile Include="RequestForPositionsAck.cs" />
+    <Compile Include="ResendRequest.cs" />
+    <Compile Include="RFQRequest.cs" />
+    <Compile Include="SecurityDefinition.cs" />
+    <Compile Include="SecurityDefinitionRequest.cs" />
+    <Compile Include="SecurityList.cs" />
+    <Compile Include="SecurityListRequest.cs" />
+    <Compile Include="SecurityStatus.cs" />
+    <Compile Include="SecurityStatusRequest.cs" />
+    <Compile Include="SecurityTypeRequest.cs" />
+    <Compile Include="SecurityTypes.cs" />
+    <Compile Include="SequenceReset.cs" />
+    <Compile Include="SettlementInstructionRequest.cs" />
+    <Compile Include="SettlementInstructions.cs" />
+    <Compile Include="TestRequest.cs" />
+    <Compile Include="TradeCaptureReport.cs" />
+    <Compile Include="TradeCaptureReportAck.cs" />
+    <Compile Include="TradeCaptureReportRequest.cs" />
+    <Compile Include="TradeCaptureReportRequestAck.cs" />
+    <Compile Include="TradingSessionStatus.cs" />
+    <Compile Include="TradingSessionStatusRequest.cs" />
+    <Compile Include="UserRequest.cs" />
+    <Compile Include="UserResponse.cs" />
+    <Compile Include="Values\MsgType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FIX4NET.csproj">
+      <Project>{78E3B874-1BD0-4E3E-82E0-5ECDF6633FB3}</Project>
+      <Name>FIX4NET</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FIX4NET.FIX.csproj">
+      <Project>{B2877A82-9510-423A-8014-8B9017FF42B6}</Project>
+      <Name>FIX4NET.FIX</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FIX4NET.FIX.FIX_4_4.build" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

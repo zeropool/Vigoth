@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Dialect xmlns="http://ref.onixs.biz/fix/dialects"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://ref.onixs.biz/fix/dialects http://ref.onixs.biz/fix/dialects/dialects-2_14.xsd">
+
+
+  <FIX version="4.4">
+	<Message type="SampleCustomFixMessage">
+		<Field tag="847" name="TargetStrategy"/> 
+		<Field tag="168" name="EffectiveTime"/> 
+		<Group numberOfInstancesTag="957" name="NoStrategyParameters">
+			<Field tag="958" name="StrategyParameterName"/> 
+			<Field tag="959" name="StrategyParameterType"/> 			
+			<Field tag="960" name="StrategyParameterValue"/> 			
+		</Group>
+	</Message> 
+</FIX>
+
+</Dialect>

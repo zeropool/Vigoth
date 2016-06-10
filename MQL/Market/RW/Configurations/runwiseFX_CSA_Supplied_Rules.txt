@@ -1,0 +1,31 @@
+' Capture distance (number of bars) of buy arrow
+[indi.bdub_buy]
+indicatorNameOnMetaTrader=BDUB_9387
+colorIndex=2
+period=0
+shift=1
+inputProperties=
+interpretationMethod=B
+interpretationParameters=
+digits=AUTO
+nullValue=-1.0
+
+' Capture distance (number of bars) of nearest sell arrow
+[indi.bdub_sell]
+indicatorNameOnMetaTrader=BDUB_9387
+colorIndex=3
+period=0
+shift=1
+inputProperties=
+interpretationMethod=B
+interpretationParameters=
+digits=AUTO
+nullValue=-1.0
+
+[rule.entry.bdubEntry]
+,i.bdub_{t.buysellInv},=,0,AND
+,i.bdub_{t.buysell},=,1,TRADE_OPEN,"waiting"
+
+[rule.exit.bdubExit]
+,i.bdub_{t.buysell},=,0,AND,"waiting 1"
+,i.bdub_{t.buysellInv},=,1,FORCE_CLOSE,"waiting 2"

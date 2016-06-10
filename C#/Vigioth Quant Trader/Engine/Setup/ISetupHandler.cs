@@ -1,0 +1,89 @@
+﻿
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using VigiothCapital.QuantTrader.Interfaces;
+using VigiothCapital.QuantTrader.Engine.RealTime;
+using VigiothCapital.QuantTrader.Engine.Results;
+using VigiothCapital.QuantTrader.Engine.TransactionHandlers;
+using VigiothCapital.QuantTrader.Packets;
+
+namespace VigiothCapital.QuantTrader.Engine.Setup
+{
+    /// <summary>
+    /// Interface to setup the algorithm. Pass in a raw algorithm, return one with portfolio, cash, etc already preset.
+    /// </summary>
+    [InheritedExport(typeof(ISetupHandler))]
+    public interface ISetupHandler : IDisposable
+    {
+        /// <summary>
+        /// Any errors from the initialization stored here:
+        /// </summary>
+        List<string> Errors 
+        { 
+            get; 
+            set; 
+        }
+
+        /// <summary>
+        /// Get the maximum runtime for this algorithm job.
+        /// </summary>
+        TimeSpan MaximumRuntime
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Algorithm starting capital for statistics calculations
+        /// </summary>
+        decimal StartingPortfolioValue
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Start date for analysis loops to search for data.
+        /// </summary>
+        DateTime StartingDate
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Maximum number of orders for the algorithm run -- applicable for backtests only.
+        /// </summary>
+        int MaxOrders
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Create a new instance of an algorithm from a physical dll path.
+        /// </summary>
+        /// <param name="assemblyPath">The path to the assembly's location</param>
+        /// <param name="language">Language of the assembly.</param>
+        /// <returns>A new instance of IAlgorithm, or throws an exception if there was an error</returns>
+        IAlgorithm CreateAlgorithmInstance(string assemblyPath, Language language);
+
+        /// <summary>
+        /// Creates the brokerage as specified by the job packet
+        /// </summary>
+        /// <param name="algorithmNodePacket">Job packet</param>
+        /// <param name="uninitializedAlgorithm">The algorithm instance before Initialize has been called</param>
+        /// <returns>The brokerage instance, or throws if error creating instance</returns>
+        IBrokerage CreateBrokerage(AlgorithmNodePacket algorithmNodePacket, IAlgorithm uninitializedAlgorithm);
+
+        /// <summary>
+        /// Primary entry point to setup a new algorithm
+        /// </summary>
+        /// <param name="algorithm">Algorithm instance</param>
+        /// <param name="brokerage">New brokerage output instance</param>
+        /// <param name="job">Algorithm job task</param>
+        /// <param name="resultHandler">The configured result handler</param>
+        /// <param name="transactionHandler">The configurated transaction handler</param>
+        /// <param name="realTimeHandler">The configured real time handler</param>
+        /// <returns>True on successfully setting up the algorithm state, or false on error.</returns>
+        bool Setup(IAlgorithm algorithm, IBrokerage brokerage, AlgorithmNodePacket job, IResultHandler resultHandler, ITransactionHandler transactionHandler, IRealTimeHandler realTimeHandler);
+    }
+}

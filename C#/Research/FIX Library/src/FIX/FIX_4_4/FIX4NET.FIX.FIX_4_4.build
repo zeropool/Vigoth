@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<project name="FIX4NET.FIX.FIX_4_4" default="build">
+
+	<property name="base.dir" value="../../.." />
+	<include buildfile="../../../base.build" />
+	<call target="initialize" />
+	
+	<target name="build" description="compiles the source code">
+		<csc target="library" output="${output.dir}/${project::get-name()}.dll" doc="${output.dir}/${project::get-name()}.xml"
+			debug="${debug}" define="${base.defines}" optimize="${build.optimize}" keyfile="${fix4net.snk}">
+      <nowarn>
+        <!-- do not report warnings for missing XML comments -->
+        <warning number="1591" />
+      </nowarn>
+			<sources>
+				<include name="*.cs" />
+				<include name="Values/*.cs" />
+			</sources>
+			<references basedir="${output.dir}">
+				<include name="FIX4NET.dll" />
+				<include name="FIX4NET.FIX.dll" />
+				<include name="${log4net.dir}/log4net.dll" />
+			</references>
+		</csc>
+	</target>
+       
+</project>

@@ -1,0 +1,40 @@
+<FIXML>
+  <SecDef
+  RspTyp="100"
+  ReqID="1234567"
+  RptID="3400001">
+    <Hdr
+    SID="CME"
+    SSub="CPAPI "
+    TID="BRKR"
+    TSub="user123"/>
+    <Instrmt
+    ID="CS"
+    Src="H"
+    Desc="WTI Calendar Swap"
+    SecTyp="FUT"
+    Exch="NYMEX"
+    ProdCmplx="ENRGY"
+    ProdTerm="3"
+    TmUnit="Mo"
+    UOM="Bbl"
+    UOMQty="1000"
+    PxUOM="Bbl"
+    PxUOMQty="1"
+    PxQteMeth="STD"
+    PxQteCcy="USD"
+    MinPxIncr="0.01"
+    SettlMeth="C"
+    FutValMeth="FUT"
+    ListMeth="0"/>
+    <InstrmtExt>
+      <Attrb Typ="29" Val="Y"/>
+      <Attrb Typ="25" Val="1"/>
+      <Attrb Typ="24" Val="2"/>
+      <Attrb Typ="24" Val="12"/>
+    </InstrmtExt>
+    <ProdClsfnGrp>
+      <ProdClsfn Rsn="7" Val="Crude Oil"/>
+    </ProdClsfnGrp>
+  </SecDef>
+</FIXML>

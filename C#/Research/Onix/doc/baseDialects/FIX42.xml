@@ -1,0 +1,1695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dialect xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ref.onixs.biz/fix/dialects http://ref.onixs.biz/fix/dialects/dialects-2_14.xsd" xmlns="http://onixs.biz/fix/dialects">
+  <FIX version="4.2" revision="1.0.0.0 (2014-12-05)" id="FIX42">
+    <Component name="Header">
+      <Field tag="8" name="BeginString" isRequired="true" />
+      <Field tag="9" name="BodyLength" isRequired="true" />
+      <Field tag="35" name="MsgType" isRequired="true" />
+      <Field tag="49" name="SenderCompID" isRequired="true" />
+      <Field tag="56" name="TargetCompID" isRequired="true" />
+      <Field tag="115" name="OnBehalfOfCompID" />
+      <Field tag="128" name="DeliverToCompID" />
+      <Field tag="90" name="SecureDataLen" />
+      <Field tag="91" name="SecureData" />
+      <Field tag="34" name="MsgSeqNum" isRequired="true" />
+      <Field tag="50" name="SenderSubID" />
+      <Field tag="142" name="SenderLocationID" />
+      <Field tag="57" name="TargetSubID" />
+      <Field tag="143" name="TargetLocationID" />
+      <Field tag="116" name="OnBehalfOfSubID" />
+      <Field tag="144" name="OnBehalfOfLocationID" />
+      <Field tag="129" name="DeliverToSubID" />
+      <Field tag="145" name="DeliverToLocationID" />
+      <Field tag="43" name="PossDupFlag" />
+      <Field tag="97" name="PossResend" />
+      <Field tag="52" name="SendingTime" isRequired="true" />
+      <Field tag="122" name="OrigSendingTime" />
+      <Field tag="212" name="XmlDataLen" />
+      <Field tag="213" name="XmlData" />
+      <Field tag="347" name="MessageEncoding" />
+      <Field tag="369" name="LastMsgSeqNumProcessed" />
+      <Field tag="370" name="OnBehalfOfSendingTime" />
+    </Component>
+    <Component name="Trailer">
+      <Field tag="93" name="SignatureLength" />
+      <Field tag="89" name="Signature" />
+      <Field tag="10" name="CheckSum" isRequired="true" />
+    </Component>
+    <Message type="0" mode="override">
+      <Component name="Header" />
+      <Field tag="112" name="TestReqID" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="1" mode="override">
+      <Component name="Header" />
+      <Field tag="112" name="TestReqID" isRequired="true" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="2" mode="override">
+      <Component name="Header" />
+      <Field tag="7" name="BeginSeqNo" isRequired="true" />
+      <Field tag="16" name="EndSeqNo" isRequired="true" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="3" mode="override">
+      <Component name="Header" />
+      <Field tag="45" name="RefSeqNum" isRequired="true" />
+      <Field tag="371" name="RefTagID" />
+      <Field tag="372" name="RefMsgType" />
+      <Field tag="373" name="SessionRejectReason" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="4" mode="override">
+      <Component name="Header" />
+      <Field tag="123" name="GapFillFlag" />
+      <Field tag="36" name="NewSeqNo" isRequired="true" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="5" mode="override">
+      <Component name="Header" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="6" mode="override">
+      <Component name="Header" />
+      <Field tag="23" name="IOIid" isRequired="true" />
+      <Field tag="28" name="IOITransType" isRequired="true" />
+      <Field tag="26" name="IOIRefID" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="54" name="Side" isRequired="true" />
+      <Field tag="27" name="IOIShares" isRequired="true" />
+      <Field tag="44" name="Price" />
+      <Field tag="15" name="Currency" />
+      <Field tag="62" name="ValidUntilTime" />
+      <Field tag="25" name="IOIQltyInd" />
+      <Field tag="130" name="IOINaturalFlag" />
+      <Group numberOfInstancesTag="199" name="NoIOIQualifiers">
+        <Field tag="104" name="IOIQualifier" />
+      </Group>
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="149" name="URLLink" />
+      <Group numberOfInstancesTag="215" name="NoRoutingIDs">
+        <Field tag="216" name="RoutingType" />
+        <Field tag="217" name="RoutingID" />
+      </Group>
+      <Field tag="218" name="SpreadToBenchmark" />
+      <Field tag="219" name="Benchmark" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="7" mode="override">
+      <Component name="Header" />
+      <Field tag="2" name="AdvId" isRequired="true" />
+      <Field tag="5" name="AdvTransType" isRequired="true" />
+      <Field tag="3" name="AdvRefID" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="4" name="AdvSide" isRequired="true" />
+      <Field tag="53" name="Shares" isRequired="true" />
+      <Field tag="44" name="Price" />
+      <Field tag="15" name="Currency" />
+      <Field tag="75" name="TradeDate" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Field tag="149" name="URLLink" />
+      <Field tag="30" name="LastMkt" />
+      <Field tag="336" name="TradingSessionID" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="8" mode="override">
+      <Component name="Header" />
+      <Field tag="37" name="OrderID" isRequired="true" />
+      <Field tag="198" name="SecondaryOrderID" />
+      <Field tag="11" name="ClOrdID" />
+      <Field tag="41" name="OrigClOrdID" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="76" name="ExecBroker" />
+      <Group numberOfInstancesTag="382" name="NoContraBrokers">
+        <Field tag="375" name="ContraBroker" />
+        <Field tag="337" name="ContraTrader" />
+        <Field tag="437" name="ContraTradeQty" />
+        <Field tag="438" name="ContraTradeTime" />
+      </Group>
+      <Field tag="66" name="ListID" />
+      <Field tag="17" name="ExecID" isRequired="true" />
+      <Field tag="20" name="ExecTransType" isRequired="true" />
+      <Field tag="19" name="ExecRefID" />
+      <Field tag="150" name="ExecType" isRequired="true" />
+      <Field tag="39" name="OrdStatus" isRequired="true" />
+      <Field tag="103" name="OrdRejReason" />
+      <Field tag="378" name="ExecRestatementReason" />
+      <Field tag="1" name="Account" />
+      <Field tag="63" name="SettlmntTyp" />
+      <Field tag="64" name="FutSettDate" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="54" name="Side" isRequired="true" />
+      <Field tag="38" name="OrderQty" />
+      <Field tag="152" name="CashOrderQty" />
+      <Field tag="40" name="OrdType" />
+      <Field tag="44" name="Price" />
+      <Field tag="99" name="StopPx" />
+      <Field tag="211" name="PegDifference" />
+      <Field tag="388" name="DiscretionInst" />
+      <Field tag="389" name="DiscretionOffset" />
+      <Field tag="15" name="Currency" />
+      <Field tag="376" name="ComplianceID" />
+      <Field tag="377" name="SolicitedFlag" />
+      <Field tag="59" name="TimeInForce" />
+      <Field tag="168" name="EffectiveTime" />
+      <Field tag="432" name="ExpireDate" />
+      <Field tag="126" name="ExpireTime" />
+      <Field tag="18" name="ExecInst" />
+      <Field tag="47" name="Rule80A" />
+      <Field tag="32" name="LastShares" />
+      <Field tag="31" name="LastPx" />
+      <Field tag="194" name="LastSpotRate" />
+      <Field tag="195" name="LastForwardPoints" />
+      <Field tag="30" name="LastMkt" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="29" name="LastCapacity" />
+      <Field tag="151" name="LeavesQty" isRequired="true" />
+      <Field tag="14" name="CumQty" isRequired="true" />
+      <Field tag="6" name="AvgPx" isRequired="true" />
+      <Field tag="424" name="DayOrderQty" />
+      <Field tag="425" name="DayCumQty" />
+      <Field tag="426" name="DayAvgPx" />
+      <Field tag="427" name="GTBookingInst" />
+      <Field tag="75" name="TradeDate" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="113" name="ReportToExch" />
+      <Field tag="12" name="Commission" />
+      <Field tag="13" name="CommType" />
+      <Field tag="381" name="GrossTradeAmt" />
+      <Field tag="119" name="SettlCurrAmt" />
+      <Field tag="120" name="SettlCurrency" />
+      <Field tag="155" name="SettlCurrFxRate" />
+      <Field tag="156" name="SettlCurrFxRateCalc" />
+      <Field tag="21" name="HandlInst" />
+      <Field tag="110" name="MinQty" />
+      <Field tag="111" name="MaxFloor" />
+      <Field tag="77" name="OpenClose" />
+      <Field tag="210" name="MaxShow" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Field tag="193" name="FutSettDate2" />
+      <Field tag="192" name="OrderQty2" />
+      <Field tag="439" name="ClearingFirm" />
+      <Field tag="440" name="ClearingAccount" />
+      <Field tag="442" name="MultiLegReportingType" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="9" mode="override">
+      <Component name="Header" />
+      <Field tag="37" name="OrderID" isRequired="true" />
+      <Field tag="198" name="SecondaryOrderID" />
+      <Field tag="11" name="ClOrdID" isRequired="true" />
+      <Field tag="41" name="OrigClOrdID" isRequired="true" />
+      <Field tag="39" name="OrdStatus" isRequired="true" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="76" name="ExecBroker" />
+      <Field tag="66" name="ListID" />
+      <Field tag="1" name="Account" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="434" name="CxlRejResponseTo" isRequired="true" />
+      <Field tag="102" name="CxlRejReason" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="A" mode="override">
+      <Component name="Header" />
+      <Field tag="98" name="EncryptMethod" isRequired="true" />
+      <Field tag="108" name="HeartBtInt" isRequired="true" />
+      <Field tag="95" name="RawDataLength" />
+      <Field tag="96" name="RawData" />
+      <Field tag="141" name="ResetSeqNumFlag" />
+      <Field tag="383" name="MaxMessageSize" />
+      <Group numberOfInstancesTag="384" name="NoMsgTypes">
+        <Field tag="372" name="RefMsgType" />
+        <Field tag="385" name="MsgDirection" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="B" mode="override">
+      <Component name="Header" />
+      <Field tag="42" name="OrigTime" />
+      <Field tag="61" name="Urgency" />
+      <Field tag="148" name="Headline" isRequired="true" />
+      <Field tag="358" name="EncodedHeadlineLen" />
+      <Field tag="359" name="EncodedHeadline" />
+      <Group numberOfInstancesTag="215" name="NoRoutingIDs">
+        <Field tag="216" name="RoutingType" />
+        <Field tag="217" name="RoutingID" />
+      </Group>
+      <Group numberOfInstancesTag="146" name="NoRelatedSym">
+        <Field tag="46" name="RelatdSym" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+      </Group>
+      <Group numberOfInstancesTag="33" name="LinesOfText">
+        <Field tag="58" name="Text" isRequired="true" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+      </Group>
+      <Field tag="149" name="URLLink" />
+      <Field tag="95" name="RawDataLength" />
+      <Field tag="96" name="RawData" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="C" mode="override">
+      <Component name="Header" />
+      <Field tag="164" name="EmailThreadID" isRequired="true" />
+      <Field tag="94" name="EmailType" isRequired="true" />
+      <Field tag="42" name="OrigTime" />
+      <Field tag="147" name="Subject" isRequired="true" />
+      <Field tag="356" name="EncodedSubjectLen" />
+      <Field tag="357" name="EncodedSubject" />
+      <Group numberOfInstancesTag="215" name="NoRoutingIDs">
+        <Field tag="216" name="RoutingType" />
+        <Field tag="217" name="RoutingID" />
+      </Group>
+      <Group numberOfInstancesTag="146" name="NoRelatedSym">
+        <Field tag="46" name="RelatdSym" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+      </Group>
+      <Field tag="37" name="OrderID" />
+      <Field tag="11" name="ClOrdID" />
+      <Group numberOfInstancesTag="33" name="LinesOfText">
+        <Field tag="58" name="Text" isRequired="true" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+      </Group>
+      <Field tag="95" name="RawDataLength" />
+      <Field tag="96" name="RawData" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="D" mode="override">
+      <Component name="Header" />
+      <Field tag="11" name="ClOrdID" isRequired="true" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="76" name="ExecBroker" />
+      <Field tag="1" name="Account" />
+      <Group numberOfInstancesTag="78" name="NoAllocs">
+        <Field tag="79" name="AllocAccount" />
+        <Field tag="80" name="AllocShares" />
+      </Group>
+      <Field tag="63" name="SettlmntTyp" />
+      <Field tag="64" name="FutSettDate" />
+      <Field tag="21" name="HandlInst" isRequired="true" />
+      <Field tag="18" name="ExecInst" />
+      <Field tag="110" name="MinQty" />
+      <Field tag="111" name="MaxFloor" />
+      <Field tag="100" name="ExDestination" />
+      <Group numberOfInstancesTag="386" name="NoTradingSessions">
+        <Field tag="336" name="TradingSessionID" />
+      </Group>
+      <Field tag="81" name="ProcessCode" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="140" name="PrevClosePx" />
+      <Field tag="54" name="Side" isRequired="true" />
+      <Field tag="114" name="LocateReqd" />
+      <Field tag="60" name="TransactTime" isRequired="true" />
+      <Field tag="38" name="OrderQty" />
+      <Field tag="152" name="CashOrderQty" />
+      <Field tag="40" name="OrdType" isRequired="true" />
+      <Field tag="44" name="Price" />
+      <Field tag="99" name="StopPx" />
+      <Field tag="15" name="Currency" />
+      <Field tag="376" name="ComplianceID" />
+      <Field tag="377" name="SolicitedFlag" />
+      <Field tag="23" name="IOIid" />
+      <Field tag="117" name="QuoteID" />
+      <Field tag="59" name="TimeInForce" />
+      <Field tag="168" name="EffectiveTime" />
+      <Field tag="432" name="ExpireDate" />
+      <Field tag="126" name="ExpireTime" />
+      <Field tag="427" name="GTBookingInst" />
+      <Field tag="12" name="Commission" />
+      <Field tag="13" name="CommType" />
+      <Field tag="47" name="Rule80A" />
+      <Field tag="121" name="ForexReq" />
+      <Field tag="120" name="SettlCurrency" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Field tag="193" name="FutSettDate2" />
+      <Field tag="192" name="OrderQty2" />
+      <Field tag="77" name="OpenClose" />
+      <Field tag="203" name="CoveredOrUncovered" />
+      <Field tag="204" name="CustomerOrFirm" />
+      <Field tag="210" name="MaxShow" />
+      <Field tag="211" name="PegDifference" />
+      <Field tag="388" name="DiscretionInst" />
+      <Field tag="389" name="DiscretionOffset" />
+      <Field tag="439" name="ClearingFirm" />
+      <Field tag="440" name="ClearingAccount" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="E" mode="override">
+      <Component name="Header" />
+      <Field tag="66" name="ListID" isRequired="true" />
+      <Field tag="390" name="BidID" />
+      <Field tag="391" name="ClientBidID" />
+      <Field tag="414" name="ProgRptReqs" />
+      <Field tag="394" name="BidType" isRequired="true" />
+      <Field tag="415" name="ProgPeriodInterval" />
+      <Field tag="433" name="ListExecInstType" />
+      <Field tag="69" name="ListExecInst" />
+      <Field tag="352" name="EncodedListExecInstLen" />
+      <Field tag="353" name="EncodedListExecInst" />
+      <Field tag="68" name="TotNoOrders" isRequired="true" />
+      <Group numberOfInstancesTag="73" name="NoOrders">
+        <Field tag="11" name="ClOrdID" isRequired="true" />
+        <Field tag="67" name="ListSeqNo" isRequired="true" />
+        <Field tag="160" name="SettlInstMode" />
+        <Field tag="109" name="ClientID" />
+        <Field tag="76" name="ExecBroker" />
+        <Field tag="1" name="Account" />
+        <Group numberOfInstancesTag="78" name="NoAllocs">
+          <Field tag="79" name="AllocAccount" />
+          <Field tag="80" name="AllocShares" />
+        </Group>
+        <Field tag="63" name="SettlmntTyp" />
+        <Field tag="64" name="FutSettDate" />
+        <Field tag="21" name="HandlInst" />
+        <Field tag="18" name="ExecInst" />
+        <Field tag="110" name="MinQty" />
+        <Field tag="111" name="MaxFloor" />
+        <Field tag="100" name="ExDestination" />
+        <Group numberOfInstancesTag="386" name="NoTradingSessions">
+          <Field tag="336" name="TradingSessionID" />
+        </Group>
+        <Field tag="81" name="ProcessCode" />
+        <Field tag="55" name="Symbol" isRequired="true" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+        <Field tag="140" name="PrevClosePx" />
+        <Field tag="54" name="Side" isRequired="true" />
+        <Field tag="401" name="SideValueInd" />
+        <Field tag="114" name="LocateReqd" />
+        <Field tag="60" name="TransactTime" />
+        <Field tag="38" name="OrderQty" />
+        <Field tag="152" name="CashOrderQty" />
+        <Field tag="40" name="OrdType" />
+        <Field tag="44" name="Price" />
+        <Field tag="99" name="StopPx" />
+        <Field tag="15" name="Currency" />
+        <Field tag="376" name="ComplianceID" />
+        <Field tag="377" name="SolicitedFlag" />
+        <Field tag="23" name="IOIid" />
+        <Field tag="117" name="QuoteID" />
+        <Field tag="59" name="TimeInForce" />
+        <Field tag="168" name="EffectiveTime" />
+        <Field tag="432" name="ExpireDate" />
+        <Field tag="126" name="ExpireTime" />
+        <Field tag="427" name="GTBookingInst" />
+        <Field tag="12" name="Commission" />
+        <Field tag="13" name="CommType" />
+        <Field tag="47" name="Rule80A" />
+        <Field tag="121" name="ForexReq" />
+        <Field tag="120" name="SettlCurrency" />
+        <Field tag="58" name="Text" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+        <Field tag="193" name="FutSettDate2" />
+        <Field tag="192" name="OrderQty2" />
+        <Field tag="77" name="OpenClose" />
+        <Field tag="203" name="CoveredOrUncovered" />
+        <Field tag="204" name="CustomerOrFirm" />
+        <Field tag="210" name="MaxShow" />
+        <Field tag="211" name="PegDifference" />
+        <Field tag="388" name="DiscretionInst" />
+        <Field tag="389" name="DiscretionOffset" />
+        <Field tag="439" name="ClearingFirm" />
+        <Field tag="440" name="ClearingAccount" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="F" mode="override">
+      <Component name="Header" />
+      <Field tag="41" name="OrigClOrdID" isRequired="true" />
+      <Field tag="37" name="OrderID" />
+      <Field tag="11" name="ClOrdID" isRequired="true" />
+      <Field tag="66" name="ListID" />
+      <Field tag="1" name="Account" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="76" name="ExecBroker" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="54" name="Side" isRequired="true" />
+      <Field tag="60" name="TransactTime" isRequired="true" />
+      <Field tag="38" name="OrderQty" />
+      <Field tag="152" name="CashOrderQty" />
+      <Field tag="376" name="ComplianceID" />
+      <Field tag="377" name="SolicitedFlag" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="G" mode="override">
+      <Component name="Header" />
+      <Field tag="37" name="OrderID" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="76" name="ExecBroker" />
+      <Field tag="41" name="OrigClOrdID" isRequired="true" />
+      <Field tag="11" name="ClOrdID" isRequired="true" />
+      <Field tag="66" name="ListID" />
+      <Field tag="1" name="Account" />
+      <Group numberOfInstancesTag="78" name="NoAllocs">
+        <Field tag="79" name="AllocAccount" />
+        <Field tag="80" name="AllocShares" />
+      </Group>
+      <Field tag="63" name="SettlmntTyp" />
+      <Field tag="64" name="FutSettDate" />
+      <Field tag="21" name="HandlInst" isRequired="true" />
+      <Field tag="18" name="ExecInst" />
+      <Field tag="110" name="MinQty" />
+      <Field tag="111" name="MaxFloor" />
+      <Field tag="100" name="ExDestination" />
+      <Group numberOfInstancesTag="386" name="NoTradingSessions">
+        <Field tag="336" name="TradingSessionID" />
+      </Group>
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="54" name="Side" isRequired="true" />
+      <Field tag="60" name="TransactTime" isRequired="true" />
+      <Field tag="38" name="OrderQty" />
+      <Field tag="152" name="CashOrderQty" />
+      <Field tag="40" name="OrdType" isRequired="true" />
+      <Field tag="44" name="Price" />
+      <Field tag="99" name="StopPx" />
+      <Field tag="211" name="PegDifference" />
+      <Field tag="388" name="DiscretionInst" />
+      <Field tag="389" name="DiscretionOffset" />
+      <Field tag="376" name="ComplianceID" />
+      <Field tag="377" name="SolicitedFlag" />
+      <Field tag="15" name="Currency" />
+      <Field tag="59" name="TimeInForce" />
+      <Field tag="168" name="EffectiveTime" />
+      <Field tag="432" name="ExpireDate" />
+      <Field tag="126" name="ExpireTime" />
+      <Field tag="427" name="GTBookingInst" />
+      <Field tag="12" name="Commission" />
+      <Field tag="13" name="CommType" />
+      <Field tag="47" name="Rule80A" />
+      <Field tag="121" name="ForexReq" />
+      <Field tag="120" name="SettlCurrency" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Field tag="193" name="FutSettDate2" />
+      <Field tag="192" name="OrderQty2" />
+      <Field tag="77" name="OpenClose" />
+      <Field tag="203" name="CoveredOrUncovered" />
+      <Field tag="204" name="CustomerOrFirm" />
+      <Field tag="210" name="MaxShow" />
+      <Field tag="114" name="LocateReqd" />
+      <Field tag="439" name="ClearingFirm" />
+      <Field tag="440" name="ClearingAccount" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="H" mode="override">
+      <Component name="Header" />
+      <Field tag="37" name="OrderID" />
+      <Field tag="11" name="ClOrdID" isRequired="true" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="1" name="Account" />
+      <Field tag="76" name="ExecBroker" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="54" name="Side" isRequired="true" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="J" mode="override">
+      <Component name="Header" />
+      <Field tag="70" name="AllocID" isRequired="true" />
+      <Field tag="71" name="AllocTransType" isRequired="true" />
+      <Field tag="72" name="RefAllocID" />
+      <Field tag="196" name="AllocLinkID" />
+      <Field tag="197" name="AllocLinkType" />
+      <Group numberOfInstancesTag="73" name="NoOrders">
+        <Field tag="11" name="ClOrdID" />
+        <Field tag="37" name="OrderID" />
+        <Field tag="198" name="SecondaryOrderID" />
+        <Field tag="66" name="ListID" />
+        <Field tag="105" name="WaveNo" />
+      </Group>
+      <Group numberOfInstancesTag="124" name="NoExecs">
+        <Field tag="32" name="LastShares" />
+        <Field tag="17" name="ExecID" />
+        <Field tag="31" name="LastPx" />
+        <Field tag="29" name="LastCapacity" />
+      </Group>
+      <Field tag="54" name="Side" isRequired="true" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="53" name="Shares" isRequired="true" />
+      <Field tag="30" name="LastMkt" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="6" name="AvgPx" isRequired="true" />
+      <Field tag="15" name="Currency" />
+      <Field tag="74" name="AvgPrxPrecision" />
+      <Field tag="75" name="TradeDate" isRequired="true" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="63" name="SettlmntTyp" />
+      <Field tag="64" name="FutSettDate" />
+      <Field tag="381" name="GrossTradeAmt" />
+      <Field tag="118" name="NetMoney" />
+      <Field tag="77" name="OpenClose" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Field tag="157" name="NumDaysInterest" />
+      <Field tag="158" name="AccruedInterestRate" />
+      <Group numberOfInstancesTag="78" name="NoAllocs">
+        <Field tag="79" name="AllocAccount" />
+        <Field tag="366" name="AllocPrice" />
+        <Field tag="80" name="AllocShares" isRequired="true" />
+        <Field tag="81" name="ProcessCode" />
+        <Field tag="92" name="BrokerOfCredit" />
+        <Field tag="208" name="NotifyBrokerOfCredit" />
+        <Field tag="209" name="AllocHandlInst" />
+        <Field tag="161" name="AllocText" />
+        <Field tag="360" name="EncodedAllocTextLen" />
+        <Field tag="361" name="EncodedAllocText" />
+        <Field tag="76" name="ExecBroker" />
+        <Field tag="109" name="ClientID" />
+        <Field tag="12" name="Commission" />
+        <Field tag="13" name="CommType" />
+        <Field tag="153" name="AllocAvgPx" />
+        <Field tag="154" name="AllocNetMoney" />
+        <Field tag="119" name="SettlCurrAmt" />
+        <Field tag="120" name="SettlCurrency" />
+        <Field tag="155" name="SettlCurrFxRate" />
+        <Field tag="156" name="SettlCurrFxRateCalc" />
+        <Field tag="159" name="AccruedInterestAmt" />
+        <Field tag="160" name="SettlInstMode" />
+        <Group numberOfInstancesTag="136" name="NoMiscFees">
+          <Field tag="137" name="MiscFeeAmt" />
+          <Field tag="138" name="MiscFeeCurr" />
+          <Field tag="139" name="MiscFeeType" />
+        </Group>
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="K" mode="override">
+      <Component name="Header" />
+      <Field tag="66" name="ListID" isRequired="true" />
+      <Field tag="60" name="TransactTime" isRequired="true" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="L" mode="override">
+      <Component name="Header" />
+      <Field tag="66" name="ListID" isRequired="true" />
+      <Field tag="391" name="ClientBidID" />
+      <Field tag="390" name="BidID" />
+      <Field tag="60" name="TransactTime" isRequired="true" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="M" mode="override">
+      <Component name="Header" />
+      <Field tag="66" name="ListID" isRequired="true" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="N" mode="override">
+      <Component name="Header" />
+      <Field tag="66" name="ListID" isRequired="true" />
+      <Field tag="429" name="ListStatusType" isRequired="true" />
+      <Field tag="82" name="NoRpts" isRequired="true" />
+      <Field tag="431" name="ListOrderStatus" isRequired="true" />
+      <Field tag="83" name="RptSeq" isRequired="true" />
+      <Field tag="444" name="ListStatusText" />
+      <Field tag="445" name="EncodedListStatusTextLen" />
+      <Field tag="446" name="EncodedListStatusText" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="68" name="TotNoOrders" isRequired="true" />
+      <Group numberOfInstancesTag="73" name="NoOrders">
+        <Field tag="11" name="ClOrdID" isRequired="true" />
+        <Field tag="14" name="CumQty" isRequired="true" />
+        <Field tag="39" name="OrdStatus" isRequired="true" />
+        <Field tag="151" name="LeavesQty" isRequired="true" />
+        <Field tag="84" name="CxlQty" isRequired="true" />
+        <Field tag="6" name="AvgPx" isRequired="true" />
+        <Field tag="103" name="OrdRejReason" />
+        <Field tag="58" name="Text" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="P" mode="override">
+      <Component name="Header" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="76" name="ExecBroker" />
+      <Field tag="70" name="AllocID" isRequired="true" />
+      <Field tag="75" name="TradeDate" isRequired="true" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="87" name="AllocStatus" isRequired="true" />
+      <Field tag="88" name="AllocRejCode" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="Q" mode="override">
+      <Component name="Header" />
+      <Field tag="37" name="OrderID" isRequired="true" />
+      <Field tag="17" name="ExecID" isRequired="true" />
+      <Field tag="127" name="DKReason" isRequired="true" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="54" name="Side" isRequired="true" />
+      <Field tag="38" name="OrderQty" />
+      <Field tag="152" name="CashOrderQty" />
+      <Field tag="32" name="LastShares" />
+      <Field tag="31" name="LastPx" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="R" mode="override">
+      <Component name="Header" />
+      <Field tag="131" name="QuoteReqID" isRequired="true" />
+      <Group numberOfInstancesTag="146" name="NoRelatedSym">
+        <Field tag="55" name="Symbol" isRequired="true" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+        <Field tag="140" name="PrevClosePx" />
+        <Field tag="303" name="QuoteRequestType" />
+        <Field tag="336" name="TradingSessionID" />
+        <Field tag="54" name="Side" />
+        <Field tag="38" name="OrderQty" />
+        <Field tag="64" name="FutSettDate" />
+        <Field tag="40" name="OrdType" />
+        <Field tag="193" name="FutSettDate2" />
+        <Field tag="192" name="OrderQty2" />
+        <Field tag="126" name="ExpireTime" />
+        <Field tag="60" name="TransactTime" />
+        <Field tag="15" name="Currency" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="S" mode="override">
+      <Component name="Header" />
+      <Field tag="131" name="QuoteReqID" />
+      <Field tag="117" name="QuoteID" isRequired="true" />
+      <Field tag="301" name="QuoteResponseLevel" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="132" name="BidPx" />
+      <Field tag="133" name="OfferPx" />
+      <Field tag="134" name="BidSize" />
+      <Field tag="135" name="OfferSize" />
+      <Field tag="62" name="ValidUntilTime" />
+      <Field tag="188" name="BidSpotRate" />
+      <Field tag="190" name="OfferSpotRate" />
+      <Field tag="189" name="BidForwardPoints" />
+      <Field tag="191" name="OfferForwardPoints" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="64" name="FutSettDate" />
+      <Field tag="40" name="OrdType" />
+      <Field tag="193" name="FutSettDate2" />
+      <Field tag="192" name="OrderQty2" />
+      <Field tag="15" name="Currency" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="T" mode="override">
+      <Component name="Header" />
+      <Field tag="162" name="SettlInstID" isRequired="true" />
+      <Field tag="163" name="SettlInstTransType" isRequired="true" />
+      <Field tag="214" name="SettlInstRefID" isRequired="true" />
+      <Field tag="160" name="SettlInstMode" isRequired="true" />
+      <Field tag="165" name="SettlInstSource" isRequired="true" />
+      <Field tag="79" name="AllocAccount" isRequired="true" />
+      <Field tag="166" name="SettlLocation" />
+      <Field tag="75" name="TradeDate" />
+      <Field tag="70" name="AllocID" />
+      <Field tag="30" name="LastMkt" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="54" name="Side" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="168" name="EffectiveTime" />
+      <Field tag="60" name="TransactTime" isRequired="true" />
+      <Field tag="109" name="ClientID" />
+      <Field tag="76" name="ExecBroker" />
+      <Field tag="169" name="StandInstDbType" />
+      <Field tag="170" name="StandInstDbName" />
+      <Field tag="171" name="StandInstDbID" />
+      <Field tag="172" name="SettlDeliveryType" />
+      <Field tag="173" name="SettlDepositoryCode" />
+      <Field tag="174" name="SettlBrkrCode" />
+      <Field tag="175" name="SettlInstCode" />
+      <Field tag="176" name="SecuritySettlAgentName" />
+      <Field tag="177" name="SecuritySettlAgentCode" />
+      <Field tag="178" name="SecuritySettlAgentAcctNum" />
+      <Field tag="179" name="SecuritySettlAgentAcctName" />
+      <Field tag="180" name="SecuritySettlAgentContactName" />
+      <Field tag="181" name="SecuritySettlAgentContactPhone" />
+      <Field tag="182" name="CashSettlAgentName" />
+      <Field tag="183" name="CashSettlAgentCode" />
+      <Field tag="184" name="CashSettlAgentAcctNum" />
+      <Field tag="185" name="CashSettlAgentAcctName" />
+      <Field tag="186" name="CashSettlAgentContactName" />
+      <Field tag="187" name="CashSettlAgentContactPhone" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="V" mode="override">
+      <Component name="Header" />
+      <Field tag="262" name="MDReqID" isRequired="true" />
+      <Field tag="263" name="SubscriptionRequestType" isRequired="true" />
+      <Field tag="264" name="MarketDepth" isRequired="true" />
+      <Field tag="265" name="MDUpdateType" />
+      <Field tag="266" name="AggregatedBook" />
+      <Group numberOfInstancesTag="267" name="NoMDEntryTypes">
+        <Field tag="269" name="MDEntryType" isRequired="true" />
+      </Group>
+      <Group numberOfInstancesTag="146" name="NoRelatedSym">
+        <Field tag="55" name="Symbol" isRequired="true" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+        <Field tag="336" name="TradingSessionID" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="W" mode="override">
+      <Component name="Header" />
+      <Field tag="262" name="MDReqID" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="291" name="FinancialStatus" />
+      <Field tag="292" name="CorporateAction" />
+      <Field tag="387" name="TotalVolumeTraded" />
+      <Group numberOfInstancesTag="268" name="NoMDEntries">
+        <Field tag="269" name="MDEntryType" isRequired="true" />
+        <Field tag="270" name="MDEntryPx" isRequired="true" />
+        <Field tag="15" name="Currency" />
+        <Field tag="271" name="MDEntrySize" />
+        <Field tag="272" name="MDEntryDate" />
+        <Field tag="273" name="MDEntryTime" />
+        <Field tag="274" name="TickDirection" />
+        <Field tag="275" name="MDMkt" />
+        <Field tag="336" name="TradingSessionID" />
+        <Field tag="276" name="QuoteCondition" />
+        <Field tag="277" name="TradeCondition" />
+        <Field tag="282" name="MDEntryOriginator" />
+        <Field tag="283" name="LocationID" />
+        <Field tag="284" name="DeskID" />
+        <Field tag="286" name="OpenCloseSettleFlag" />
+        <Field tag="59" name="TimeInForce" />
+        <Field tag="432" name="ExpireDate" />
+        <Field tag="126" name="ExpireTime" />
+        <Field tag="110" name="MinQty" />
+        <Field tag="18" name="ExecInst" />
+        <Field tag="287" name="SellerDays" />
+        <Field tag="37" name="OrderID" />
+        <Field tag="299" name="QuoteEntryID" />
+        <Field tag="288" name="MDEntryBuyer" />
+        <Field tag="289" name="MDEntrySeller" />
+        <Field tag="346" name="NumberOfOrders" />
+        <Field tag="290" name="MDEntryPositionNo" />
+        <Field tag="58" name="Text" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="X" mode="override">
+      <Component name="Header" />
+      <Field tag="262" name="MDReqID" />
+      <Group numberOfInstancesTag="268" name="NoMDEntries">
+        <Field tag="279" name="MDUpdateAction" isRequired="true" />
+        <Field tag="285" name="DeleteReason" />
+        <Field tag="269" name="MDEntryType" />
+        <Field tag="278" name="MDEntryID" />
+        <Field tag="280" name="MDEntryRefID" />
+        <Field tag="55" name="Symbol" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+        <Field tag="291" name="FinancialStatus" />
+        <Field tag="292" name="CorporateAction" />
+        <Field tag="270" name="MDEntryPx" />
+        <Field tag="15" name="Currency" />
+        <Field tag="271" name="MDEntrySize" />
+        <Field tag="272" name="MDEntryDate" />
+        <Field tag="273" name="MDEntryTime" />
+        <Field tag="274" name="TickDirection" />
+        <Field tag="275" name="MDMkt" />
+        <Field tag="336" name="TradingSessionID" />
+        <Field tag="276" name="QuoteCondition" />
+        <Field tag="277" name="TradeCondition" />
+        <Field tag="282" name="MDEntryOriginator" />
+        <Field tag="283" name="LocationID" />
+        <Field tag="284" name="DeskID" />
+        <Field tag="286" name="OpenCloseSettleFlag" />
+        <Field tag="59" name="TimeInForce" />
+        <Field tag="432" name="ExpireDate" />
+        <Field tag="126" name="ExpireTime" />
+        <Field tag="110" name="MinQty" />
+        <Field tag="18" name="ExecInst" />
+        <Field tag="287" name="SellerDays" />
+        <Field tag="37" name="OrderID" />
+        <Field tag="299" name="QuoteEntryID" />
+        <Field tag="288" name="MDEntryBuyer" />
+        <Field tag="289" name="MDEntrySeller" />
+        <Field tag="346" name="NumberOfOrders" />
+        <Field tag="290" name="MDEntryPositionNo" />
+        <Field tag="387" name="TotalVolumeTraded" />
+        <Field tag="58" name="Text" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="Y" mode="override">
+      <Component name="Header" />
+      <Field tag="262" name="MDReqID" isRequired="true" />
+      <Field tag="281" name="MDReqRejReason" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="Z" mode="override">
+      <Component name="Header" />
+      <Field tag="131" name="QuoteReqID" />
+      <Field tag="117" name="QuoteID" isRequired="true" />
+      <Field tag="298" name="QuoteCancelType" isRequired="true" />
+      <Field tag="301" name="QuoteResponseLevel" />
+      <Field tag="336" name="TradingSessionID" />
+      <Group numberOfInstancesTag="295" name="NoQuoteEntries">
+        <Field tag="55" name="Symbol" isRequired="true" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+        <Field tag="311" name="UnderlyingSymbol" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="a" mode="override">
+      <Component name="Header" />
+      <Field tag="117" name="QuoteID" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="54" name="Side" />
+      <Field tag="336" name="TradingSessionID" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="b" mode="override">
+      <Component name="Header" />
+      <Field tag="131" name="QuoteReqID" />
+      <Field tag="117" name="QuoteID" />
+      <Field tag="297" name="QuoteAckStatus" isRequired="true" />
+      <Field tag="300" name="QuoteRejectReason" />
+      <Field tag="301" name="QuoteResponseLevel" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="58" name="Text" />
+      <Group numberOfInstancesTag="296" name="NoQuoteSets">
+        <Field tag="302" name="QuoteSetID" />
+        <Field tag="311" name="UnderlyingSymbol" />
+        <Field tag="312" name="UnderlyingSymbolSfx" />
+        <Field tag="309" name="UnderlyingSecurityID" />
+        <Field tag="305" name="UnderlyingIDSource" />
+        <Field tag="310" name="UnderlyingSecurityType" />
+        <Field tag="313" name="UnderlyingMaturityMonthYear" />
+        <Field tag="314" name="UnderlyingMaturityDay" />
+        <Field tag="315" name="UnderlyingPutOrCall" />
+        <Field tag="316" name="UnderlyingStrikePrice" />
+        <Field tag="317" name="UnderlyingOptAttribute" />
+        <Field tag="436" name="UnderlyingContractMultiplier" />
+        <Field tag="435" name="UnderlyingCouponRate" />
+        <Field tag="308" name="UnderlyingSecurityExchange" />
+        <Field tag="306" name="UnderlyingIssuer" />
+        <Field tag="362" name="EncodedUnderlyingIssuerLen" />
+        <Field tag="363" name="EncodedUnderlyingIssuer" />
+        <Field tag="307" name="UnderlyingSecurityDesc" />
+        <Field tag="364" name="EncodedUnderlyingSecurityDescLen" />
+        <Field tag="365" name="EncodedUnderlyingSecurityDesc" />
+        <Field tag="304" name="TotQuoteEntries" />
+        <Group numberOfInstancesTag="295" name="NoQuoteEntries">
+          <Field tag="299" name="QuoteEntryID" />
+          <Field tag="55" name="Symbol" />
+          <Field tag="65" name="SymbolSfx" />
+          <Field tag="48" name="SecurityID" />
+          <Field tag="22" name="IDSource" />
+          <Field tag="167" name="SecurityType" />
+          <Field tag="200" name="MaturityMonthYear" />
+          <Field tag="205" name="MaturityDay" />
+          <Field tag="201" name="PutOrCall" />
+          <Field tag="202" name="StrikePrice" />
+          <Field tag="206" name="OptAttribute" />
+          <Field tag="231" name="ContractMultiplier" />
+          <Field tag="223" name="CouponRate" />
+          <Field tag="207" name="SecurityExchange" />
+          <Field tag="106" name="Issuer" />
+          <Field tag="348" name="EncodedIssuerLen" />
+          <Field tag="349" name="EncodedIssuer" />
+          <Field tag="107" name="SecurityDesc" />
+          <Field tag="350" name="EncodedSecurityDescLen" />
+          <Field tag="351" name="EncodedSecurityDesc" />
+          <Field tag="368" name="QuoteEntryRejectReason" />
+        </Group>
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="c" mode="override">
+      <Component name="Header" />
+      <Field tag="320" name="SecurityReqID" isRequired="true" />
+      <Field tag="321" name="SecurityRequestType" isRequired="true" />
+      <Field tag="55" name="Symbol" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="15" name="Currency" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Field tag="336" name="TradingSessionID" />
+      <Group numberOfInstancesTag="146" name="NoRelatedSym">
+        <Field tag="311" name="UnderlyingSymbol" />
+        <Field tag="312" name="UnderlyingSymbolSfx" />
+        <Field tag="309" name="UnderlyingSecurityID" />
+        <Field tag="305" name="UnderlyingIDSource" />
+        <Field tag="310" name="UnderlyingSecurityType" />
+        <Field tag="313" name="UnderlyingMaturityMonthYear" />
+        <Field tag="314" name="UnderlyingMaturityDay" />
+        <Field tag="315" name="UnderlyingPutOrCall" />
+        <Field tag="316" name="UnderlyingStrikePrice" />
+        <Field tag="317" name="UnderlyingOptAttribute" />
+        <Field tag="436" name="UnderlyingContractMultiplier" />
+        <Field tag="435" name="UnderlyingCouponRate" />
+        <Field tag="308" name="UnderlyingSecurityExchange" />
+        <Field tag="306" name="UnderlyingIssuer" />
+        <Field tag="362" name="EncodedUnderlyingIssuerLen" />
+        <Field tag="363" name="EncodedUnderlyingIssuer" />
+        <Field tag="307" name="UnderlyingSecurityDesc" />
+        <Field tag="364" name="EncodedUnderlyingSecurityDescLen" />
+        <Field tag="365" name="EncodedUnderlyingSecurityDesc" />
+        <Field tag="319" name="RatioQty" />
+        <Field tag="54" name="Side" />
+        <Field tag="318" name="UnderlyingCurrency" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="d" mode="override">
+      <Component name="Header" />
+      <Field tag="320" name="SecurityReqID" isRequired="true" />
+      <Field tag="322" name="SecurityResponseID" isRequired="true" />
+      <Field tag="323" name="SecurityResponseType" />
+      <Field tag="393" name="TotalNumSecurities" isRequired="true" />
+      <Field tag="55" name="Symbol" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="15" name="Currency" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Group numberOfInstancesTag="146" name="NoRelatedSym">
+        <Field tag="311" name="UnderlyingSymbol" />
+        <Field tag="312" name="UnderlyingSymbolSfx" />
+        <Field tag="309" name="UnderlyingSecurityID" />
+        <Field tag="305" name="UnderlyingIDSource" />
+        <Field tag="310" name="UnderlyingSecurityType" />
+        <Field tag="313" name="UnderlyingMaturityMonthYear" />
+        <Field tag="314" name="UnderlyingMaturityDay" />
+        <Field tag="315" name="UnderlyingPutOrCall" />
+        <Field tag="316" name="UnderlyingStrikePrice" />
+        <Field tag="317" name="UnderlyingOptAttribute" />
+        <Field tag="436" name="UnderlyingContractMultiplier" />
+        <Field tag="435" name="UnderlyingCouponRate" />
+        <Field tag="308" name="UnderlyingSecurityExchange" />
+        <Field tag="306" name="UnderlyingIssuer" />
+        <Field tag="362" name="EncodedUnderlyingIssuerLen" />
+        <Field tag="363" name="EncodedUnderlyingIssuer" />
+        <Field tag="307" name="UnderlyingSecurityDesc" />
+        <Field tag="364" name="EncodedUnderlyingSecurityDescLen" />
+        <Field tag="365" name="EncodedUnderlyingSecurityDesc" />
+        <Field tag="319" name="RatioQty" />
+        <Field tag="54" name="Side" />
+        <Field tag="318" name="UnderlyingCurrency" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="e" mode="override">
+      <Component name="Header" />
+      <Field tag="324" name="SecurityStatusReqID" isRequired="true" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="15" name="Currency" />
+      <Field tag="263" name="SubscriptionRequestType" isRequired="true" />
+      <Field tag="336" name="TradingSessionID" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="f" mode="override">
+      <Component name="Header" />
+      <Field tag="324" name="SecurityStatusReqID" />
+      <Field tag="55" name="Symbol" isRequired="true" />
+      <Field tag="65" name="SymbolSfx" />
+      <Field tag="48" name="SecurityID" />
+      <Field tag="22" name="IDSource" />
+      <Field tag="167" name="SecurityType" />
+      <Field tag="200" name="MaturityMonthYear" />
+      <Field tag="205" name="MaturityDay" />
+      <Field tag="201" name="PutOrCall" />
+      <Field tag="202" name="StrikePrice" />
+      <Field tag="206" name="OptAttribute" />
+      <Field tag="231" name="ContractMultiplier" />
+      <Field tag="223" name="CouponRate" />
+      <Field tag="207" name="SecurityExchange" />
+      <Field tag="106" name="Issuer" />
+      <Field tag="348" name="EncodedIssuerLen" />
+      <Field tag="349" name="EncodedIssuer" />
+      <Field tag="107" name="SecurityDesc" />
+      <Field tag="350" name="EncodedSecurityDescLen" />
+      <Field tag="351" name="EncodedSecurityDesc" />
+      <Field tag="15" name="Currency" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="325" name="UnsolicitedIndicator" />
+      <Field tag="326" name="SecurityTradingStatus" />
+      <Field tag="291" name="FinancialStatus" />
+      <Field tag="292" name="CorporateAction" />
+      <Field tag="327" name="HaltReasonChar" />
+      <Field tag="328" name="InViewOfCommon" />
+      <Field tag="329" name="DueToRelated" />
+      <Field tag="330" name="BuyVolume" />
+      <Field tag="331" name="SellVolume" />
+      <Field tag="332" name="HighPx" />
+      <Field tag="333" name="LowPx" />
+      <Field tag="31" name="LastPx" />
+      <Field tag="60" name="TransactTime" />
+      <Field tag="334" name="Adjustment" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="g" mode="override">
+      <Component name="Header" />
+      <Field tag="335" name="TradSesReqID" isRequired="true" />
+      <Field tag="336" name="TradingSessionID" />
+      <Field tag="338" name="TradSesMethod" />
+      <Field tag="339" name="TradSesMode" />
+      <Field tag="263" name="SubscriptionRequestType" isRequired="true" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="h" mode="override">
+      <Component name="Header" />
+      <Field tag="335" name="TradSesReqID" />
+      <Field tag="336" name="TradingSessionID" isRequired="true" />
+      <Field tag="338" name="TradSesMethod" />
+      <Field tag="339" name="TradSesMode" />
+      <Field tag="325" name="UnsolicitedIndicator" />
+      <Field tag="340" name="TradSesStatus" isRequired="true" />
+      <Field tag="341" name="TradSesStartTime" />
+      <Field tag="342" name="TradSesOpenTime" />
+      <Field tag="343" name="TradSesPreCloseTime" />
+      <Field tag="344" name="TradSesCloseTime" />
+      <Field tag="345" name="TradSesEndTime" />
+      <Field tag="387" name="TotalVolumeTraded" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="i" mode="override">
+      <Component name="Header" />
+      <Field tag="131" name="QuoteReqID" />
+      <Field tag="117" name="QuoteID" isRequired="true" />
+      <Field tag="301" name="QuoteResponseLevel" />
+      <Field tag="293" name="DefBidSize" />
+      <Field tag="294" name="DefOfferSize" />
+      <Group numberOfInstancesTag="296" name="NoQuoteSets">
+        <Field tag="302" name="QuoteSetID" isRequired="true" />
+        <Field tag="311" name="UnderlyingSymbol" isRequired="true" />
+        <Field tag="312" name="UnderlyingSymbolSfx" />
+        <Field tag="309" name="UnderlyingSecurityID" />
+        <Field tag="305" name="UnderlyingIDSource" />
+        <Field tag="310" name="UnderlyingSecurityType" />
+        <Field tag="313" name="UnderlyingMaturityMonthYear" />
+        <Field tag="314" name="UnderlyingMaturityDay" />
+        <Field tag="315" name="UnderlyingPutOrCall" />
+        <Field tag="316" name="UnderlyingStrikePrice" />
+        <Field tag="317" name="UnderlyingOptAttribute" />
+        <Field tag="436" name="UnderlyingContractMultiplier" />
+        <Field tag="435" name="UnderlyingCouponRate" />
+        <Field tag="308" name="UnderlyingSecurityExchange" />
+        <Field tag="306" name="UnderlyingIssuer" />
+        <Field tag="362" name="EncodedUnderlyingIssuerLen" />
+        <Field tag="363" name="EncodedUnderlyingIssuer" />
+        <Field tag="307" name="UnderlyingSecurityDesc" />
+        <Field tag="364" name="EncodedUnderlyingSecurityDescLen" />
+        <Field tag="365" name="EncodedUnderlyingSecurityDesc" />
+        <Field tag="367" name="QuoteSetValidUntilTime" />
+        <Field tag="304" name="TotQuoteEntries" isRequired="true" />
+        <Group numberOfInstancesTag="295" name="NoQuoteEntries">
+          <Field tag="299" name="QuoteEntryID" isRequired="true" />
+          <Field tag="55" name="Symbol" />
+          <Field tag="65" name="SymbolSfx" />
+          <Field tag="48" name="SecurityID" />
+          <Field tag="22" name="IDSource" />
+          <Field tag="167" name="SecurityType" />
+          <Field tag="200" name="MaturityMonthYear" />
+          <Field tag="205" name="MaturityDay" />
+          <Field tag="201" name="PutOrCall" />
+          <Field tag="202" name="StrikePrice" />
+          <Field tag="206" name="OptAttribute" />
+          <Field tag="231" name="ContractMultiplier" />
+          <Field tag="223" name="CouponRate" />
+          <Field tag="207" name="SecurityExchange" />
+          <Field tag="106" name="Issuer" />
+          <Field tag="348" name="EncodedIssuerLen" />
+          <Field tag="349" name="EncodedIssuer" />
+          <Field tag="107" name="SecurityDesc" />
+          <Field tag="350" name="EncodedSecurityDescLen" />
+          <Field tag="351" name="EncodedSecurityDesc" />
+          <Field tag="132" name="BidPx" />
+          <Field tag="133" name="OfferPx" />
+          <Field tag="134" name="BidSize" />
+          <Field tag="135" name="OfferSize" />
+          <Field tag="62" name="ValidUntilTime" />
+          <Field tag="188" name="BidSpotRate" />
+          <Field tag="190" name="OfferSpotRate" />
+          <Field tag="189" name="BidForwardPoints" />
+          <Field tag="191" name="OfferForwardPoints" />
+          <Field tag="60" name="TransactTime" />
+          <Field tag="336" name="TradingSessionID" />
+          <Field tag="64" name="FutSettDate" />
+          <Field tag="40" name="OrdType" />
+          <Field tag="193" name="FutSettDate2" />
+          <Field tag="192" name="OrderQty2" />
+          <Field tag="15" name="Currency" />
+        </Group>
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="j" mode="override">
+      <Component name="Header" />
+      <Field tag="45" name="RefSeqNum" />
+      <Field tag="372" name="RefMsgType" isRequired="true" />
+      <Field tag="379" name="BusinessRejectRefID" />
+      <Field tag="380" name="BusinessRejectReason" isRequired="true" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="k" mode="override">
+      <Component name="Header" />
+      <Field tag="390" name="BidID" />
+      <Field tag="391" name="ClientBidID" isRequired="true" />
+      <Field tag="374" name="BidRequestTransType" isRequired="true" />
+      <Field tag="392" name="ListName" />
+      <Field tag="393" name="TotalNumSecurities" isRequired="true" />
+      <Field tag="394" name="BidType" isRequired="true" />
+      <Field tag="395" name="NumTickets" />
+      <Field tag="15" name="Currency" />
+      <Field tag="396" name="SideValue1" />
+      <Field tag="397" name="SideValue2" />
+      <Group numberOfInstancesTag="398" name="NoBidDescriptors">
+        <Field tag="399" name="BidDescriptorType" />
+        <Field tag="400" name="BidDescriptor" />
+        <Field tag="401" name="SideValueInd" />
+        <Field tag="404" name="LiquidityValue" />
+        <Field tag="441" name="LiquidityNumSecurities" />
+        <Field tag="402" name="LiquidityPctLow" />
+        <Field tag="403" name="LiquidityPctHigh" />
+        <Field tag="405" name="EFPTrackingError" />
+        <Field tag="406" name="FairValue" />
+        <Field tag="407" name="OutsideIndexPct" />
+        <Field tag="408" name="ValueOfFutures" />
+      </Group>
+      <Group numberOfInstancesTag="420" name="NoBidComponents">
+        <Field tag="66" name="ListID" />
+        <Field tag="54" name="Side" />
+        <Field tag="336" name="TradingSessionID" />
+        <Field tag="430" name="NetGrossInd" />
+        <Field tag="63" name="SettlmntTyp" />
+        <Field tag="64" name="FutSettDate" />
+        <Field tag="1" name="Account" />
+      </Group>
+      <Field tag="409" name="LiquidityIndType" />
+      <Field tag="410" name="WtAverageLiquidity" />
+      <Field tag="411" name="ExchangeForPhysical" />
+      <Field tag="412" name="OutMainCntryUIndex" />
+      <Field tag="413" name="CrossPercent" />
+      <Field tag="414" name="ProgRptReqs" />
+      <Field tag="415" name="ProgPeriodInterval" />
+      <Field tag="416" name="IncTaxInd" />
+      <Field tag="121" name="ForexReq" />
+      <Field tag="417" name="NumBidders" />
+      <Field tag="75" name="TradeDate" />
+      <Field tag="418" name="TradeType" isRequired="true" />
+      <Field tag="419" name="BasisPxType" isRequired="true" />
+      <Field tag="443" name="StrikeTime" />
+      <Field tag="58" name="Text" />
+      <Field tag="354" name="EncodedTextLen" />
+      <Field tag="355" name="EncodedText" />
+      <Component name="Trailer" />
+    </Message>
+    <Message type="l" mode="override">
+      <Component name="Header" />
+      <Field tag="390" name="BidID" />
+      <Field tag="391" name="ClientBidID" />
+      <Group numberOfInstancesTag="420" name="NoBidComponents">
+        <Field tag="12" name="Commission" isRequired="true" />
+        <Field tag="13" name="CommType" isRequired="true" />
+        <Field tag="66" name="ListID" />
+        <Field tag="421" name="Country" />
+        <Field tag="54" name="Side" />
+        <Field tag="44" name="Price" />
+        <Field tag="423" name="PriceType" />
+        <Field tag="406" name="FairValue" />
+        <Field tag="430" name="NetGrossInd" />
+        <Field tag="63" name="SettlmntTyp" />
+        <Field tag="64" name="FutSettDate" />
+        <Field tag="336" name="TradingSessionID" />
+        <Field tag="58" name="Text" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+    <Message type="m" mode="override">
+      <Component name="Header" />
+      <Field tag="66" name="ListID" isRequired="true" />
+      <Field tag="422" name="TotNoStrikes" isRequired="true" />
+      <Group numberOfInstancesTag="428" name="NoStrikes">
+        <Field tag="55" name="Symbol" isRequired="true" />
+        <Field tag="65" name="SymbolSfx" />
+        <Field tag="48" name="SecurityID" />
+        <Field tag="22" name="IDSource" />
+        <Field tag="167" name="SecurityType" />
+        <Field tag="200" name="MaturityMonthYear" />
+        <Field tag="205" name="MaturityDay" />
+        <Field tag="201" name="PutOrCall" />
+        <Field tag="202" name="StrikePrice" />
+        <Field tag="206" name="OptAttribute" />
+        <Field tag="231" name="ContractMultiplier" />
+        <Field tag="223" name="CouponRate" />
+        <Field tag="207" name="SecurityExchange" />
+        <Field tag="106" name="Issuer" />
+        <Field tag="348" name="EncodedIssuerLen" />
+        <Field tag="349" name="EncodedIssuer" />
+        <Field tag="107" name="SecurityDesc" />
+        <Field tag="350" name="EncodedSecurityDescLen" />
+        <Field tag="351" name="EncodedSecurityDesc" />
+        <Field tag="140" name="PrevClosePx" />
+        <Field tag="11" name="ClOrdID" />
+        <Field tag="54" name="Side" />
+        <Field tag="44" name="Price" isRequired="true" />
+        <Field tag="15" name="Currency" />
+        <Field tag="58" name="Text" />
+        <Field tag="354" name="EncodedTextLen" />
+        <Field tag="355" name="EncodedText" />
+      </Group>
+      <Component name="Trailer" />
+    </Message>
+  </FIX>
+</Dialect>

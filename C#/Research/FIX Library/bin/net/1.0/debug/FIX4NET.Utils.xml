@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FIX4NET.Utils</name>
+    </assembly>
+    <members>
+        <member name="M:FIX4NET.Utils.Convert.ParseInt(System.String)">
+            <summary>
+            Parses a int32 from a string.
+            </summary>
+            <param name="s">string that gets parsed</param>
+            <returns>int value of string</returns>
+        </member>
+        <member name="M:FIX4NET.Utils.Convert.ParseInt(System.String,System.Int32,System.Int32)">
+            <summary>
+            Parses a int32 from a string.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.Utils.Convert.ParseByte(System.String,System.Int32,System.Int32)">
+            <summary>
+            Parses a int16 from a string.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.Utils.PerformanceTimer">
+            <summary>
+            Summary description for PerformanceTimer.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.Utils.StringBuilderUtils">
+            <summary>
+            Summary description for StringBuilderUtils.
+            </summary>
+        </member>
+    </members>
+</doc>

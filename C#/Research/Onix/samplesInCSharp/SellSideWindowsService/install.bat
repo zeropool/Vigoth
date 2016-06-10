@@ -1,0 +1,1 @@
+installutil SellSideWindowsService.exe

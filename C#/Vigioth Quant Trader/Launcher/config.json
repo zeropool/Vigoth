@@ -1,0 +1,183 @@
+{
+  // this configuration file works by first loading all top-level
+  // configuration items and then will load the specified environment
+  // on top, this provides a layering affect. environment names can be
+  // anything, and just require definition in this file. There's
+  // two predefined environments, 'backtesting' and 'live', feel free
+  // to add more!
+
+  "environment": "backtesting",
+
+  // algorithm class selector
+  "algorithm-type-name": "BasicTemplateAlgorithm",
+
+  // Algorithm language selector - options CSharp, FSharp, VisualBasic, Python, Java
+  "algorithm-language": "CSharp",
+
+  //Physical DLL location
+  "algorithm-location": "VigiothCapital.QuantTrader.Algorithm.CSharp.dll",
+  //"algorithm-location": "VigiothCapital.QuantTrader.Algorithm.Python.dll",
+  //"algorithm-location": "VigiothCapital.QuantTrader.Algorithm.FSharp.dll",
+  //"algorithm-location": "VigiothCapital.QuantTrader.Algorithm.VisualBasic.dll",
+  //"algorithm-location": "VigiothCapital.QuantTrader.Algorithm.Java.dll",
+
+  // engine
+  "data-folder": "../../../Data/",
+
+  // handlers
+  "log-handler": "VigiothCapital.QuantTrader.Logging.CompositeLogHandler",
+  "messaging-handler": "VigiothCapital.QuantTrader.Messaging.Messaging",
+  "job-queue-handler": "VigiothCapital.QuantTrader.Queues.JobQueue",
+  "api-handler": "VigiothCapital.QuantTrader.Api.Api",
+  "command-queue-handler": "VigiothCapital.QuantTrader.Queues.EmptyCommandQueueHandler",
+  // this command queue will check a file to read json serialized commands (use TypeNameHandling.All)
+  //"command-queue-handler": "VigiothCapital.QuantTrader.Queues.FileCommandQueueHandler",
+  // used by the FileComandQueueHandler, serialize a ICommand and it will be run against algorithm
+  "command-json-file": "command.json",
+  "map-file-provider": "VigiothCapital.QuantTrader.Data.Auxiliary.LocalDiskMapFileProvider",
+  "factor-file-provider": "VigiothCapital.QuantTrader.Data.Auxiliary.LocalDiskFactorFileProvider",
+
+  // if one uses "true" as string in following token, market hours
+  // will remain open all hours and all days.
+  // Any other string beside "true" will make lean operate
+  // only during regular market hours.
+  "force-exchange-always-open": "false",
+
+  // interactive brokers configuration
+  "ib-account": "DUxxxx",
+  "ib-user-name": "",
+  "ib-password": "",
+  "ib-host": "127.0.0.1",
+  "ib-port": "4001",
+  "ib-agent-description": "Individual",
+  "ib-use-tws": "false",
+  "ib-tws-dir": "C:\\Jts",
+  "ib-controller-dir": "C:\\IBController",
+
+  //job configuration - required for local charting
+  // To get your QC user id type "uid" into the backtesting terminal.
+  "job-user-id": "0",
+
+  // tradier configuration
+  "tradier-account-id": "",
+  "tradier-access-token": "",
+  "tradier-refresh-token": "",
+  "tradier-issued-at": "",
+  "trader-lifespan": "",
+
+  // oanda configuration
+  "oanda-environment": "Practice",
+  "oanda-access-token": "",
+  "oanda-account-id": "",
+
+  // fxcm configuration
+  "fxcm-server": "http://www.fxcorporate.com/Hosts.jsp", 
+  "fxcm-terminal": "Demo", //Real or Demo
+  "fxcm-user-name": "",
+  "fxcm-password": "",
+  "fxcm-account-id": "",
+
+  // iqfeed configuration
+  "iqfeed-username": "",
+  "iqfeed-password": "",
+  "iqfeed-productName": "",
+  "iqfeed-version": "1.0",
+
+  // parameters to set in the algorithm (the below are just samples)
+  "parameters": {
+    "ema-fast": 10,
+    "ema-slow": 20
+  },
+
+  "environments": {
+
+    // defines the 'backtesting' environment
+    "backtesting": {
+      "live-mode": false,
+
+      "setup-handler": "VigiothCapital.QuantTrader.Engine.Setup.ConsoleSetupHandler",
+      "result-handler": "VigiothCapital.QuantTrader.Engine.Results.BacktestingResultHandler",
+      "data-feed-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.FileSystemDataFeed",
+      "real-time-handler": "VigiothCapital.QuantTrader.Engine.RealTime.BacktestingRealTimeHandler",
+      "transaction-handler": "VigiothCapital.QuantTrader.Engine.TransactionHandlers.BacktestingTransactionHandler"
+    },
+
+    // defines the 'live-paper' environment
+    "live-paper": {
+      "live-mode": "true",
+
+      // the paper brokerage requires the BacktestingTransactionHandler
+      "live-mode-brokerage": "PaperBrokerage",
+
+      "setup-handler": "VigiothCapital.QuantTrader.Engine.Setup.BrokerageSetupHandler",
+      "result-handler": "VigiothCapital.QuantTrader.Engine.Results.LiveTradingResultHandler",
+      "data-feed-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.LiveTradingDataFeed",
+      "data-queue-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.Queues.LiveDataQueue",
+      "real-time-handler": "VigiothCapital.QuantTrader.Engine.RealTime.LiveTradingRealTimeHandler",
+      "transaction-handler": "VigiothCapital.QuantTrader.Engine.TransactionHandlers.BacktestingTransactionHandler"
+    },
+
+    // defines the 'live-tradier' environment
+    "live-tradier": {
+      "live-mode": true,
+
+      // this setting will save tradier access/refresh tokens to a tradier-tokens.txt file
+      // that can be read in next time, this makes it easier to start/stop a tradier algorithm
+      "tradier-save-tokens": true,
+
+      // real brokerage implementations require the BrokerageTransactionHandler
+      "live-mode-brokerage": "TradierBrokerage",
+
+      "setup-handler": "VigiothCapital.QuantTrader.Engine.Setup.BrokerageSetupHandler",
+      "result-handler": "VigiothCapital.QuantTrader.Engine.Results.LiveTradingResultHandler",
+      "data-feed-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.LiveTradingDataFeed",
+      "data-queue-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.Queues.LiveDataQueue",
+      "real-time-handler": "VigiothCapital.QuantTrader.Engine.RealTime.LiveTradingRealTimeHandler",
+      "transaction-handler": "VigiothCapital.QuantTrader.Engine.TransactionHandlers.BrokerageTransactionHandler"
+    },
+
+    // defines the 'live-interactive' environment
+    "live-interactive": {
+      "live-mode": true,
+
+      // real brokerage implementations require the BrokerageTransactionHandler
+      "live-mode-brokerage": "InteractiveBrokersBrokerage",
+      "data-queue-handler": "InteractiveBrokersBrokerage",
+      "setup-handler": "VigiothCapital.QuantTrader.Engine.Setup.BrokerageSetupHandler",
+      "result-handler": "VigiothCapital.QuantTrader.Engine.Results.LiveTradingResultHandler",
+      "data-feed-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.LiveTradingDataFeed",
+      "real-time-handler": "VigiothCapital.QuantTrader.Engine.RealTime.LiveTradingRealTimeHandler",
+      "transaction-handler": "VigiothCapital.QuantTrader.Engine.TransactionHandlers.BrokerageTransactionHandler"
+    },
+
+    // defines the 'live-fxcm' environment
+    "live-fxcm": {
+      "live-mode": true,
+
+      // real brokerage implementations require the BrokerageTransactionHandler
+      "live-mode-brokerage": "FxcmBrokerage",
+      "data-queue-handler": "FxcmBrokerage",
+      "setup-handler": "VigiothCapital.QuantTrader.Engine.Setup.BrokerageSetupHandler",
+      "result-handler": "VigiothCapital.QuantTrader.Engine.Results.LiveTradingResultHandler",
+      "data-feed-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.LiveTradingDataFeed",
+      "real-time-handler": "VigiothCapital.QuantTrader.Engine.RealTime.LiveTradingRealTimeHandler",
+      "transaction-handler": "VigiothCapital.QuantTrader.Engine.TransactionHandlers.BrokerageTransactionHandler"
+    },
+
+    // defines the 'backtesting-desktop' environment
+    "backtesting-desktop": {
+      "live-mode": false,
+      "send-via-api": true,
+
+      "api-access-token": "",
+
+      "setup-handler": "VigiothCapital.QuantTrader.Engine.Setup.ConsoleSetupHandler",
+      "result-handler": "VigiothCapital.QuantTrader.Engine.Results.BacktestingResultHandler",
+      "data-feed-handler": "VigiothCapital.QuantTrader.Engine.DataFeeds.FileSystemDataFeed",
+      "real-time-handler": "VigiothCapital.QuantTrader.Engine.RealTime.BacktestingRealTimeHandler",
+      "transaction-handler": "VigiothCapital.QuantTrader.Engine.TransactionHandlers.BacktestingTransactionHandler",
+      "messaging-handler": "VigiothCapital.QuantTrader.Messaging.EventMessagingHandler",
+      "log-handler": "VigiothCapital.QuantTrader.Logging.QueueLogHandler"
+    }
+  }
+}

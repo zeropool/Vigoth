@@ -1,0 +1,7 @@
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Logging\bin\Debug\VigiothCapital.QuantTrader.Logging.xml
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Logging\bin\Debug\VigiothCapital.QuantTrader.Logging.dll
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Logging\bin\Debug\VigiothCapital.QuantTrader.Logging.pdb
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Logging\bin\Debug\MathNet.Numerics.dll
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Logging\bin\Debug\MathNet.Numerics.xml
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Logging\obj\Debug\VigiothCapital.QuantTrader.Logging.dll
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Logging\obj\Debug\VigiothCapital.QuantTrader.Logging.pdb

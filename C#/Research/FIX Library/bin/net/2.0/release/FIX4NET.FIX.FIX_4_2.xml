@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FIX4NET.FIX.FIX_4_2</name>
+    </assembly>
+    <members>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Advertisement">
+            <summary>
+            Summary description for Advertisement.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Message">
+            <summary>
+            Summary description for Message.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Allocation">
+            <summary>
+            Summary description for Allocation.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.AllocationACK">
+            <summary>
+            Summary description for AllocationACK.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.DontKnowTrade">
+            <summary>
+            Summary description for DontKnowTrade.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Email">
+            <summary>
+            Summary description for Email.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.ExecutionReport">
+            <summary>
+            Summary description for ExecutionReport.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Heartbeat">
+            <summary>
+            Summary description for Heartbeat.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.IndicationOfInterest">
+            <summary>
+            Summary description for IndicationOfInterest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.ListCancelRequest">
+            <summary>
+            Summary description for ListCancelRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.ListExecute">
+            <summary>
+            Summary description for ListExecute.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.ListStatus">
+            <summary>
+            Summary description for ListStatus.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.ListStatusRequest">
+            <summary>
+            Summary description for ListStatusRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Logon">
+            <summary>
+            Summary description for Logon.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Logout">
+            <summary>
+            Summary description for Logout.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.MessageFactoryFIX">
+            <summary>
+            Summary description for MessageFactory.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.NewOrderList">
+            <summary>
+            Summary description for NewOrderList.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.NewOrderSingle">
+            <summary>
+            Summary description for NewOrderSingle.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.News">
+            <summary>
+            Summary description for News.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.OrderCancelReject">
+            <summary>
+            Summary description for OrderCancelReject.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.OrderCancelReplaceRequest">
+            <summary>
+            Summary description for OrderCancelReplaceRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.OrderCancelRequest">
+            <summary>
+            Summary description for OrderCancelRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.OrderStatusRequest">
+            <summary>
+            Summary description for OrderStatusRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.ParseFieldExceptionFIX">
+            <summary>
+            Summary description for ParseFieldException_4_2.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Quote">
+            <summary>
+            Summary description for Quote.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.QuoteRequest">
+            <summary>
+            Summary description for QuoteRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Reject">
+            <summary>
+            Summary description for Reject.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.ResendRequest">
+            <summary>
+            Summary description for ResendRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.SequenceReset">
+            <summary>
+            Summary description for SequenceReset.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.TestRequest">
+            <summary>
+            Summary description for TestRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.FIX_4_2.Values.MsgType">
+            <summary>
+            Summary description for MsgType.
+            </summary>
+        </member>
+    </members>
+</doc>

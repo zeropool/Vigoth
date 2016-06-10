@@ -1,0 +1,11 @@
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\VigiothCapital.QuantTrader.Configuration.xml
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\VigiothCapital.QuantTrader.Configuration.dll
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\VigiothCapital.QuantTrader.Configuration.pdb
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\Newtonsoft.Json.dll
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\VigiothCapital.QuantTrader.Logging.dll
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\VigiothCapital.QuantTrader.Logging.pdb
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\VigiothCapital.QuantTrader.Logging.xml
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\bin\Debug\Newtonsoft.Json.xml
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\obj\Debug\VigiothCapital.QuantTrader.Configuration.csprojResolveAssemblyReference.cache
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\obj\Debug\VigiothCapital.QuantTrader.Configuration.dll
+C:\Users\SHLBND\Documents\GitHub\Vigoth\C#\Vigioth Quant Trader\Configuration\obj\Debug\VigiothCapital.QuantTrader.Configuration.pdb

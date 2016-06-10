@@ -1,0 +1,634 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FIXForge.NET.FIX.Scheduler-net-4.5.1_x64</name>
+    </assembly>
+    <members>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SessionEventArgs">
+            <summary>
+            Provides data for the Session actions events of the Scheduler.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.SessionEventArgs.#ctor(FIXForge.NET.FIX.Session)">
+            <summary>
+            Initializes new instance of SessionWarningEventArgs class.
+            </summary>
+            <param name="session">
+            Instance of FIX session which is either a source 
+            of warning or which is related with given warning.
+            </param>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionEventArgs.Session">
+            <summary>
+            Instance of FIX session which is either a destination 
+            of action.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SessionLoggingOutEventArgs">
+            <summary>
+            Provides data for the SessionLoggingOut event of the Scheduler.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.SessionLoggingOutEventArgs.#ctor(FIXForge.NET.FIX.Session)">
+            <summary>
+            Initializes new instance of SessionErrorEventArgs class.
+            </summary>
+            <param name="session">
+            Instance of FIX session which is either a source 
+            of error or which is related with given error.
+            </param>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionLoggingOutEventArgs.Session">
+            <summary>
+            Instance of FIX session which is either a source 
+            of error or which is related with given error.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionLoggingOutEventArgs.ShouldLogout">
+            <summary>
+            Gets or sets value if scheduler should perform logout.
+            If scheduler should perform logout set this value to 'true', 'false' otherwise.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SessionWarningEventArgs">
+            <summary>
+            Provides data for the Warning event of the Scheduler.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.SessionWarningEventArgs.#ctor(FIXForge.NET.FIX.Session,System.String)">
+            <summary>
+            Initializes new instance of SessionWarningEventArgs class.
+            </summary>
+            <param name="session">
+            Instance of FIX session which is either a source 
+            of warning or which is related with given warning.
+            </param>
+            <param name="warningReason">
+            Gets a message that describes current warning.
+            </param>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionWarningEventArgs.Session">
+            <summary>
+            Instance of FIX session which is either a source 
+            of warning or which is related with given warning.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionWarningEventArgs.Reason">
+            <summary>
+            Gets a message that describes current warning.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SessionErrorEventArgs">
+            <summary>
+            Provides data for the Error event of the Scheduler.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.SessionErrorEventArgs.#ctor(FIXForge.NET.FIX.Session,System.String,System.Exception)">
+            <summary>
+            Initializes new instance of SessionErrorEventArgs class.
+            </summary>
+            <param name="session">
+            Instance of FIX session which is either a source 
+            of error or which is related with given error.
+            </param>
+            <param name="errorReason">
+            Gets a message that describes current error.
+            </param>
+            <param name="exception">
+            Gets an Exception object which causes error.
+            </param>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionErrorEventArgs.Session">
+            <summary>
+            Instance of FIX session which is either a source 
+            of error or which is related with given error.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionErrorEventArgs.Reason">
+            <summary>
+            Gets a message that describes current error.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionErrorEventArgs.Exception">
+            <summary>
+            Gets an Exception object which causes error.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.Scheduler">
+            <summary>
+            Scheduler performs session connection maintenance according 
+            to the specified schedule for session activities. It monitors 
+            whenever criteria to log a particular session either on or off 
+            is triggered and automatically executes appropriate action.
+            <remarks>
+            Scheduler implements IDisposable interface to provide users
+            with the ability to shutdown scheduling services by single 
+            action. Supporting IDisposable interface also gives the 
+            opportunity to combine Scheduler with built-in language 
+            statements like using statement in C# and make scheduling 
+            more error-resistant.
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.Scheduler.#ctor">
+            <summary>
+            Initializes Scheduler instance with default configuration.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.Scheduler.#ctor(System.String)">
+            <summary>
+            Initializes Scheduler instance according to the options 
+            specified in given configuration file. In particular, 
+            Scheduler extracts from configuration a set of predefined 
+            session schedules and connection settings later available 
+            through Schedules and ConnectionSettings properties.
+            </summary>
+            <param name="configurationFile">
+            Path to the Scheduler's configuration.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.Scheduler.Finalize">
+            <summary>
+            Performs graceful shutdown of scheduling services.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.Scheduler.Register(FIXForge.NET.FIX.Session,System.String,System.String)">
+            <summary>
+            Adds session to automatic connection management. 
+            <remarks>
+            If session is being added during active time frame, 
+            it will be connected immediately. If session is being 
+            registered during inactive time frame and has active state, 
+            it will be disconnected. If session already registered, 
+            exception will be thrown.
+            </remarks>
+            </summary>
+            <param name="session">
+            Session to be scheduled.
+            </param>
+            <param name="scheduleId">
+            Id of predefined schedule to use for given session.
+            </param>
+            <param name="connectionSettingsId">
+            Id of predefined connection settings to use for given session.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.Scheduler.Register(FIXForge.NET.FIX.Session,FIXForge.NET.FIX.Scheduling.SessionSchedule,FIXForge.NET.FIX.Scheduling.SessionConnectionSettings)">
+            <summary>
+            Adds session to automatic connection management. If session 
+            is being added during active time frame, it will be connected 
+            immediately. If session is being registered during inactive
+            time frame and has active state, it will be disconnected.
+            If session already registered, exception will be thrown.
+            </summary>
+            <param name="session">
+            Session to be scheduled.
+            </param>
+            <param name="schedule">
+            Schedule which defines session connection 
+            time, periodicity as well as other attributes.
+            </param>
+            <param name="connectionSettings">
+            Connection settings for given session to 
+            be used when session must be connected.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.Scheduler.Unregister(FIXForge.NET.FIX.Session)">
+            <summary>
+            Removes session from automatic connection management services.
+            If session were not registered before, does actually nothing.
+            </summary>
+            <param name="session">Session which should be unregistered.</param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.Scheduler.Dispose">
+            <summary>
+            Performs graceful shutdown of scheduling services.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.Scheduler.ReconnectAttempts">
+            <summary>
+            Number of attempts to restore the telecommunication link.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.Scheduler.ReconnectInterval">
+            <summary>
+            Time interval between the attempts to restore the telecommunication link (in seconds).
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.Scheduler.UtcTimeUsage">
+            <summary>
+            This property allows switching local time to UTC time usage
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.Scheduler.Schedules">
+            <summary>
+            Collection of predefined session schedules 
+            associated with unique names (ids) as it was 
+            specified in Scheduler's configuration file.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.Scheduler.ConnectionSettings">
+            <summary>
+            Collection of predefined session connection
+            settings associated with unique names (ids) 
+            as it was specified in the configuration file.
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.Warning">
+            <summary>
+            Allows scheduler's users to be notified about warnings 
+            occurred while maintaining sessions connections.
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.Error">
+            <summary>
+            Allows scheduler's users to be notified about errors 
+            occurred while maintaining sessions connections.
+            <remarks>
+            <para>
+            Scheduler doesn't notify about all errors occurred 
+            while maintaining session activity. For example, if 
+            session was not connected within first time as well as 
+            connection was dropped, scheduler will not fire error 
+            event immediately. Instead, it will perform reconnection 
+            attempts according to FIX Engine settings. Only if all 
+            attempts will fail, scheduler will fire error event.
+            </para>
+            <para>
+            Once scheduler notified about inability to connect certain 
+            session, it will not perform more attempts to bring session 
+            to connected state until next logon (activity) time.
+            </para>
+            </remarks>
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.SessionLoggingOut">
+            <summary>
+            Allows scheduler's users to be notified about that scheduler wants 
+            to perform session logout and control this process.
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.SessionLoggedOut">
+            <summary>
+            Allows scheduler's users to be notified about that scheduler  
+            performs session logout.
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.SessionLoggingOn">
+            <summary>
+            Allows scheduler's users to be notified about that scheduler wants 
+            to perform session logon.
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.SessionLoggedOn">
+            <summary>
+            Allows scheduler's users to be notified about that scheduler  
+            performs session logon.
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.SessionResettingLocalSequenceNumbers">
+            <summary>
+            Allows scheduler's users to be notified about that scheduler wants 
+            to reset session local sequence numbers.
+            </summary>
+        </member>
+        <member name="E:FIXForge.NET.FIX.Scheduling.Scheduler.SessionResettedLocalSequenceNumbers">
+            <summary>
+            Allows scheduler's users to be notified about that scheduler 
+            reset session local sequence numbers.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SessionConnectionSettings">
+            <summary>
+            Collection of connection-related attributes for the session.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.SessionConnectionSettings.#ctor(FIXForge.NET.FIX.SessionRole,System.Int32,System.Boolean,FIXForge.NET.FIX.Message)">
+            <summary>
+            Initializes instance with given set of attributes.
+            </summary>
+            <param name="role">
+            Defines whether session must be 
+            connected as acceptor or initiator.
+            </param>
+            <param name="heartbeatInterval">
+            Defines time interval between heartbeat 
+            messages in case of initiator.
+            </param>
+            <param name="setResetSequenceNumbers">
+            Defines whether 'SetResetSequenceNumbers' flag must 
+            be sent within logon message in case of initiator. 
+            </param>
+            <param name="customLogonMessage">
+            Defines custom logon message which should be 
+            used at logon in case of initiator.
+            </param>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionConnectionSettings.Role">
+            <summary>
+            Specifies whether session must be connected as acceptor or initiator.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionConnectionSettings.HeartbeatInterval">
+            <summary>
+            If session must be logged on in role of initiator, 
+            defines value for heartbeat interval in seconds.
+            Otherwise has undefined value.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionConnectionSettings.SetResetSequenceNumbers">
+            <summary>
+            If session must be logged on in role of initiator, 
+            defines whether 'SetResetSequenceNumbers' flag must be 
+            sent within logon message. Otherwise has undefined value.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionConnectionSettings.CustomLogonMessage">
+            <summary>
+            If session must be logged on in role of initiator, 
+            defines custom logon message which must be sent at 
+            logon. Otherwise has null value.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.AcceptorConnectionSettings">
+            <summary>
+            Simplifies connection settings creation for the case when session is acceptor.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.AcceptorConnectionSettings.#ctor">
+            <summary>
+            Initializes instance with acceptor-related attributes.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.CounterpartySettings">
+            <summary>
+            Simplifies connection settings creation for the case when session is initiator.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.CounterpartySettings.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes instance with counterparty settings.
+            </summary>
+            <param name="host">
+            Defines remote host to which session must connect to.
+            </param>
+            <param name="port">
+            Defines port number to which session must connect to.
+            </param>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.CounterpartySettings.Host">
+            <summary>
+            If session must be logged on in role of initiator, 
+            defines remote host to which session must connect to. 
+            Otherwise value is empty string.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.CounterpartySettings.Port">
+            <summary>
+            If session must be logged on in role of initiator, 
+            this parameter defines port number to which session 
+            must connect to. Otherwise has undefined value.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings">
+            <summary>
+            Simplifies connection settings creation for the case when session is initiator.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+            <param name="host">
+            Defines remote host to which session must connect to.
+            </param>
+            <param name="port">
+            Defines port number to which session must connect to.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor(System.Boolean)">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+            <param name="setResetSequenceNumbers">
+            Defines whether 'SetResetSequenceNumbers' flag must be 
+            sent within logon message. 
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+            <param name="host">
+            Defines remote host to which session must connect to.
+            </param>
+            <param name="port">
+            Defines port number to which session must connect to.
+            </param>
+            <param name="setResetSequenceNumbers">
+            Defines whether 'SetResetSequenceNumbers' flag must be 
+            sent within logon message. 
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor(System.Int32)">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+            <param name="heartbeatInterval">
+            Defines time interval between heartbeat messages.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+            <param name="host">
+            Defines remote host to which session must connect to.
+            </param>
+            <param name="port">
+            Defines port number to which session must connect to.
+            </param>
+            <param name="heartbeatInterval">
+            Defines time interval between heartbeat messages.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor(System.Int32,System.Boolean,FIXForge.NET.FIX.Message)">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+            <param name="heartbeatInterval">
+            Defines time interval between heartbeat messages.
+            </param>
+            <param name="setResetSequenceNumbers">
+            Defines whether 'SetResetSequenceNumbers' flag must be 
+            sent within logon message. 
+            </param>
+            <param name="customLogonMessage">
+            Defines custom logon message which should be used at logon.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.#ctor(System.String,System.Int32,System.Int32,System.Boolean,FIXForge.NET.FIX.Message)">
+            <summary>
+            Initializes instance with initiator-related attributes.
+            </summary>
+            <param name="host">
+            Defines remote host to which session must connect to.
+            </param>
+            <param name="port">
+            Defines port number to which session must connect to.
+            </param>
+            <param name="heartbeatInterval">
+            Defines time interval between heartbeat messages.
+            </param>
+            <param name="setResetSequenceNumbers">
+            Defines whether 'SetResetSequenceNumbers' flag must be 
+            sent within logon message. 
+            </param>
+            <param name="customLogonMessage">
+            Defines custom logon message which should be used at logon.
+            </param>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.InitiatorConnectionSettings.Counterparties">
+            <summary>
+            Gets list of all counterparties.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SessionDuration">
+            <summary>
+            Specifies activity time frame for the session.
+            </summary>
+        </member>
+        <member name="F:FIXForge.NET.FIX.Scheduling.SessionDuration.Day">
+            <summary>
+            Session continues not more than 24 hours.
+            That is session logon and logout are 
+            performed within bounds of single day.
+            </summary>
+        </member>
+        <member name="F:FIXForge.NET.FIX.Scheduling.SessionDuration.Week">
+            <summary>
+            Session logon/logout occurs only once per week.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SequenceNumberResetPolicy">
+            <summary>
+            Defines session sequence number reset policy.
+            </summary>
+        </member>
+        <member name="F:FIXForge.NET.FIX.Scheduling.SequenceNumberResetPolicy.Never">
+            <summary>
+            Session sequence number must never be reset by scheduling services.
+            </summary>
+        </member>
+        <member name="F:FIXForge.NET.FIX.Scheduling.SequenceNumberResetPolicy.Daily">
+            <summary>
+            Session sequence number reset is performed on daily basis.
+            </summary>
+        </member>
+        <member name="F:FIXForge.NET.FIX.Scheduling.SequenceNumberResetPolicy.Weekly">
+            <summary>
+            Session sequence number reset is performed once per week.
+            </summary>
+        </member>
+        <member name="T:FIXForge.NET.FIX.Scheduling.SessionSchedule">
+            <summary>
+            Defines activity time frames for the session. 
+            Also provides the ability to define sequence number 
+            reset policy for the session.
+            </summary>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.SessionSchedule.#ctor(System.DayOfWeek,System.DayOfWeek,System.TimeSpan,System.TimeSpan,FIXForge.NET.FIX.Scheduling.SessionDuration,FIXForge.NET.FIX.Scheduling.SequenceNumberResetPolicy)">
+            <summary>
+            Initializes session schedule according to given parameters.
+            <remarks>
+            <para>
+            If session duration is single day, then logon and logout 
+            performed each day from the first day of week till the last 
+            day of week. Is session duration is defined as entire week
+            then session logon occurs on the first day of week and 
+            corresponding logout performed on the last day of week.
+            </para>
+            <para>
+            Session sequence number reset policy must correspond to 
+            the session duration time. In particular, if session continues 
+            entire week it's not possible to request scheduler to reset 
+            session sequence number on daily basis. 
+            </para>
+            </remarks>
+            </summary>
+            <param name="firstDay">
+            Defines first day of activity week for the session.
+            </param>
+            <param name="lastDay">
+            Defines last day of activity week for the session.
+            </param>
+            <param name="logonTime">
+            Defines time of logon for session for each activity 
+            day if session duration is single day. If session must 
+            continue entire week, defines time of logon performed on 
+            the first day of activity week.
+            </param>
+            <param name="logoutTime">
+            Defines time of logout for session for each activity 
+            day if session duration is single day. If session must 
+            continue entire week, defines time of logout performed on 
+            the last day of activity week.
+            </param>
+            <param name="sessionDuration">
+            Defines whether session continues entire week 
+            or activity time frame is limited for single day.
+            </param>
+            <param name="seqNumberResetPolicy">
+            Defines session sequence number reset policy.
+            </param>
+        </member>
+        <member name="M:FIXForge.NET.FIX.Scheduling.SessionSchedule.ToString">
+            <summary>
+            Convert object to string representation.
+            </summary>
+            <returns>String representation of object.</returns>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionSchedule.LogonTimes">
+            <summary>
+            Defines logon time for the session for each 
+            day of the week. If logon is  not performed 
+            on particular day, value of entry correspondent 
+            for that day is equal to TimeSpan.MinValue.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionSchedule.LogoutTimes">
+            <summary>
+            Defines logout time for the session for each 
+            day of the week. If logout is  not performed 
+            on particular day, value of entry correspondent 
+            for that day is equal to TimeSpan.MinValue.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionSchedule.FirstDay">
+            <summary>
+            Defines first day of activity week for the session.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionSchedule.LastDay">
+            <summary>
+            Defines last day of activity week for the session.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionSchedule.SessionDuration">
+            <summary>
+            Defines whether session continues entire week 
+            or activity time frame is limited for single day.
+            </summary>
+        </member>
+        <member name="P:FIXForge.NET.FIX.Scheduling.SessionSchedule.SequenceNumberResetPolicy">
+            <summary>
+            Defines session sequence number reset policy.
+            </summary>
+        </member>
+    </members>
+</doc>

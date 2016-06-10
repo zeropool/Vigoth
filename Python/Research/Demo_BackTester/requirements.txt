@@ -1,0 +1,8 @@
+click==6.2
+numpy==1.10.2
+pandas==0.17.1
+pyOpenSSL==0.15.1
+coolfig==0.4.0
+rainbow-logging-handler==2.2.2
+TA-Lib==0.4.9
+requests==2.9.1

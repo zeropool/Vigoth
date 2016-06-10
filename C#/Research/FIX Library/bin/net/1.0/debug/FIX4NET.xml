@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FIX4NET</name>
+    </assembly>
+    <members>
+        <member name="T:FIX4NET.IEngine">
+            <summary>
+            Inteface to send/recive messages over a transport.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IEngine.MsgSeqNumInRecover">
+            <summary>
+            MsgSeqNum for incoming messages after recovery is complete.  This only get update when opening the cache.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IEngine.MsgSeqNumOutRecover">
+            <summary>
+            MsgSeqNum for outgoing messages after recovery is complete.  This only get update when opening the cache.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.ILogonArgs">
+            <summary>
+            Summary description for ILogonArgs.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessage">
+            <summary>
+            Interface for a message.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IMessage.Item(System.Int32)">
+            <summary>
+            Get/Set value using the tag #.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageCache">
+            <summary>
+            Interface to read/write messages from local storage.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.AddMessage(FIX4NET.IMessage)">
+            <summary>
+            Add a message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.GetMsgSeqNum(FIX4NET.MessageDirection)">
+            <summary>
+            Get current MsgSeqNum by MessageDirection.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.Initialize(FIX4NET.IMessageFactory)">
+            <summary>
+            Initialize the cache.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.Open(System.String,System.String,System.String,System.String)">
+            <summary>
+            Opens the cache for read/write access.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.Open(System.String,System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Opens the cache for read/write access of a specific date.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.Open(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Opens the cache for read or read/write access.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.Open(System.String,System.String,System.String,System.String,System.DateTime,System.Boolean)">
+            <summary>
+            Opens the cache for read or read/write access of a specific date.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.IMessageCache.Close">
+            <summary>
+            Close the cache.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IMessageCache.Item(System.Int32)">
+            <summary>
+            Gets a message by the index position.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IMessageCache.Item(FIX4NET.MessageDirection,System.Int32)">
+            <summary>
+            Gets a message by the MessageDirection and MsgSeqNum.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IMessageCache.MsgIndex">
+            <summary>
+            Current MsgIndex for messages.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IMessageCache.MsgSeqNumOut">
+            <summary>
+            Current MsgSeqNum for incoming messages.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.IMessageCache.MsgSeqNumIn">
+            <summary>
+            Current MsgSeqNum for outgoing messages.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageFactory">
+            <summary>
+            Summary description for IMessageFactory.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageHeartbeat">
+            <summary>
+            Summary description for IMessageHeartbeat.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageLogon">
+            <summary>
+            Summary description for IMessageLogon.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageLogout">
+            <summary>
+            Summary description for IMessageLogout.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageReject">
+            <summary>
+            Summary description for IMessageReject.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageResendRequest">
+            <summary>
+            Summary description for IMessageResendRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageSequenceReset">
+            <summary>
+            Summary description for IMessageSequenceReset.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.IMessageTestRequest">
+            <summary>
+            Summary description for IMessageTestRequest.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.MessageDirection">
+            <summary>
+            Direction of a message(Sent=Out and Received=In).
+            </summary>
+        </member>
+        <member name="T:FIX4NET.ParseFieldException">
+            <summary>
+            Summary description for ParseFieldException.
+            </summary>
+        </member>
+    </members>
+</doc>

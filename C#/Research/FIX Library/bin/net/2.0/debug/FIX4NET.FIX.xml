@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FIX4NET.FIX</name>
+    </assembly>
+    <members>
+        <member name="T:FIX4NET.FIX.Field">
+            <summary>
+            Summary description for Field.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.Message">
+            <summary>
+            Summary description for Message.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.FIX.Message.Item(System.Int32)">
+            <summary>
+            Get/Set value using the tag #.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.MessageFactoryFIX">
+            <summary>
+            Summary description for MessageFactoryFIX.
+            </summary>
+        </member>
+        <member name="F:FIX4NET.FIX.MessageFactoryFIX.TAG_DELIM">
+            <summary>
+            Delimiter between tag and value in a FIX message.
+            </summary>
+        </member>
+        <member name="F:FIX4NET.FIX.MessageFactoryFIX.FIELD_DELIM">
+            <summary>
+            Delimiter between tags in a FIX message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.#ctor(System.String)">
+            <summary>
+            Base constructor to initialize a MessageFactoryFIX.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.IsRelatedMessage(System.String)">
+            <summary>
+            Checks if the string is a relevent FIX message with the proper BeginString.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstance(System.String)">
+            <summary>
+            Creates an instance of a specified message type.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceLogon">
+            <summary>
+            Creates an instance of a Logon message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceLogout">
+            <summary>
+            Creates an instance of a Logout message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceHeartbeat">
+            <summary>
+            Creates an instance of a Heartbeat message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceTestRequest">
+            <summary>
+            Creates an instance of a TestRequest message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceResendRequest">
+            <summary>
+            Creates an instance of a ResendRequest message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceSequenceReset">
+            <summary>
+            Creates an instance of a SequenceReset message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceReject">
+            <summary>
+            Creates an instance of a Reject message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceReject(FIX4NET.ParseFieldException)">
+            <summary>
+            Creates an instance of a Reject message with a ParseFieldException object.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateInstanceParseFieldException(System.String,System.Exception,FIX4NET.IField,System.String)">
+            <summary>
+            Creates an instance of the ParseFieldException class.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ValidateFixChecksum(System.String)">
+            <summary>
+            Compares the checksum suplied in the message to a calculated value.  
+            If any transmission errors occured the checksum could be different. 
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ValidateBodyLength(System.String)">
+            <summary>
+            Compares the BodyLen supplied in the message to a calculated value.  
+            If transmission errors occured this could fail.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.IsResendRequestMessage(FIX4NET.IMessage)">
+            <summary>
+            Checks if the message supplied is a ResendRequest message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.IsLogoutMessage(FIX4NET.IMessage)">
+            <summary>
+            Checks if the message supplied is a Logout message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.IsSequenceResetMessage(FIX4NET.IMessage)">
+            <summary>
+            Checks if the message supplied is a SequenceReset message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.IsLogonMessage(FIX4NET.IMessage)">
+            <summary>
+            Checks if the message supplied is a Logon message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.IsTestRequestMessage(FIX4NET.IMessage)">
+            <summary>
+            Checks if the message supplied is a TestRequest message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.IsAdminitrativeMessage(FIX4NET.IMessage)">
+            <summary>
+            Checks if the message supplied is a administrative message.  
+            Administrative messages don't get re-trasmitted when a ResendRequest is received.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.Build(FIX4NET.IMessage)">
+            <summary>
+            Converts to a string representation of a FIX message for possible tranmission.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ParseMsgType(System.String)">
+            <summary>
+            Parses the MsgType value from a supplied FIX message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ParseMsgSeqNum(System.String)">
+            <summary>
+            Parses the MsgSeqNum value from a supplied FIX message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.GetSearchStringMessageEndPrefix">
+            <summary>
+            Returns the string prefix that ends FIX message.  
+            Useful when you have a stream with many FIX messages and need to find the end of one message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.GetSearchStringMessageEndSuffix">
+            <summary>
+            Returns the string suffix that ends FIX message.  
+            Useful when you have a stream with many FIX messages and need to find the end of one message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CalcCheckSum(System.Text.StringBuilder)">
+            <summary>
+            Calculates the FIX checksum of a message in a StringBuilder.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CalcCheckSum(System.String,System.Int32,System.Int32)">
+            <summary>
+            Calculates the FIX checksum of a message in a String.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ParseInt(System.String)">
+            <summary>
+            Parses a int32 from a string.
+            </summary>
+            <param name="s">string that gets parsed</param>
+            <returns>int value of string</returns>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ParseInt(System.String,System.Int32,System.Int32)">
+            <summary>
+            Parses a int32 from a string.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ParseByte(System.String,System.Int32,System.Int32)">
+            <summary>
+            Parses a int16 from a string.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ToFIXUTCTimestamp(System.DateTime)">
+            <summary>
+            Converts from a DateTime object to the standard FIX UTC Timestamp format.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.FromFIXUTCTimestamp(System.String)">
+            <summary>
+            Converts from the standard FIX UTC Timestamp to a DateTime object.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.FromFIXMonthYear(System.String)">
+            <summary>
+            Converts from the standard FIX Month-Year to a DateTime object.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ToFIXMonthYear(System.DateTime)">
+            <summary>
+            Converts from a DateTime object to the standard FIX Month-Year format.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ToFIXBoolean(System.Boolean)">
+            <summary>
+            Converts from a Boolean to the standard FIX format.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.FromFIXBoolean(System.Char)">
+            <summary>
+            Converts from the standard FIX to a Boolean.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.FromFIXBoolean(System.String)">
+            <summary>
+            Converts from the standard FIX to a Boolean.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.FromFIXLocalMktDate(System.String)">
+            <summary>
+            Converts from the standard FIX to a LocalMktDate to a DateTime object.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.ToFIXLocalMktDate(System.DateTime)">
+            <summary>
+            Converts from DateTime object to the standard FIX LocalMktDate format.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.CreateMessageHelper(FIX4NET.IMessage)">
+            <summary>
+            Abstract method to creat a MessageHelper instance used in the build/parse process.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.MessageFactoryFIX.MessageHelper">
+            <summary>
+            MessageHelper class to build/parse messages.
+            Understands how to build/parse the standard healder/trailer.
+            The different messages will inherit and build on top of this.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.MessageHelper.#ctor(FIX4NET.IMessage)">
+            <summary>
+            Initialize instance of MessageHelper.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.MessageHelper.BuildBody(System.Text.StringBuilder)">
+            <summary>
+            Build the standard body tags and values into a StringBuilder.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.MessageHelper.InsertHeader(System.Text.StringBuilder)">
+            <summary>
+            Inserts standard header tags and values into a message.  
+            The BeginString and BodyLen are only 2 that need to be inserted.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.MessageHelper.AppendTrailer(System.Text.StringBuilder)">
+            <summary>
+            Appends the standard trailer tags and values into a message.
+            Only the CheckSum is appended.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.FIX.MessageFactoryFIX.MessageHelper.ParseField(FIX4NET.IField)">
+            <summary>
+            Parse a Field object into a FIX message object.
+            The Field object contains a FIX string that must be converted to the proper data type.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.FIX.Values.MsgType">
+            <summary>
+            Summary description for MsgType.
+            </summary>
+        </member>
+    </members>
+</doc>

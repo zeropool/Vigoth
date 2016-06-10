@@ -1,0 +1,3338 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VigiothCapital.QuantTrader.Brokerages</name>
+    </assembly>
+    <members>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage">
+            <summary>
+            Represents a brokerage to be used during backtesting. This is intended to be only be used with the BacktestingTransactionHandler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.#ctor(VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new BacktestingBrokerage for the specified algorithm
+            </summary>
+            <param name="algorithm">The algorithm instance</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.#ctor(VigiothCapital.QuantTrader.Interfaces.IAlgorithm,System.String)">
+            <summary>
+            Creates a new BacktestingBrokerage for the specified algorithm
+            </summary>
+            <param name="algorithm">The algorithm instance</param>
+            <param name="name">The name of the brokerage</param>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.IsConnected">
+            <summary>
+            Gets the connection status
+            </summary>
+            <remarks>
+            The BacktestingBrokerage is always connected
+            </remarks>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.GetOpenOrders">
+            <summary>
+            Gets all open orders on the account
+            </summary>
+            <returns>The open orders returned from IB</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.GetAccountHoldings">
+            <summary>
+            Gets all holdings for the account
+            </summary>
+            <returns>The current holdings from the account</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.GetCashBalance">
+            <summary>
+            Gets the current cash balance for each currency held in the brokerage account
+            </summary>
+            <returns>The current cash balance for each currency available for trading</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.PlaceOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Places a new order and assigns a new broker ID to the order
+            </summary>
+            <param name="order">The order to be placed</param>
+            <returns>True if the request for a new order has been placed, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.UpdateOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Updates the order with the same ID
+            </summary>
+            <param name="order">The new order information</param>
+            <returns>True if the request was made for the order to be updated, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.CancelOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Cancels the order with the specified ID
+            </summary>
+            <param name="order">The order to cancel</param>
+            <returns>True if the request was made for the order to be canceled, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.Scan">
+            <summary>
+            Scans all the outstanding orders and applies the algorithm model fills to generate the order events
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.Connect">
+            <summary>
+            The BacktestingBrokerage is always connected. This is a no-op.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.Disconnect">
+            <summary>
+            The BacktestingBrokerage is always connected. This is a no-op.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage.SetPendingOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Sets the pending order as a clone to prevent object reference nastiness
+            </summary>
+            <param name="order">The order to be added to the pending orders dictionary</param>
+            <returns></returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerageFactory">
+            <summary>
+            Factory type for the <see cref="T:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerage"/>
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerageFactory.BrokerageType">
+            <summary>
+            Gets the type of brokerage produced by this factory
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerageFactory.BrokerageData">
+            <summary>
+            Gets the brokerage data required to run the IB brokerage from configuration
+            </summary>
+            <remarks>
+            The implementation of this property will create the brokerage data dictionary required for
+            running live jobs. See <see cref="M:VigiothCapital.QuantTrader.Interfaces.IJobQueueHandler.NextJob(System.String@)"/>
+            </remarks>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerageFactory.BrokerageModel">
+            <summary>
+            Gets a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokersBrokerageModel"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerageFactory.CreateBrokerage(VigiothCapital.QuantTrader.Packets.LiveNodePacket,VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new IBrokerage instance
+            </summary>
+            <param name="job">The job packet to create the brokerage for</param>
+            <param name="algorithm">The algorithm instance</param>
+            <returns>A new brokerage instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Backtesting.BacktestingBrokerageFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Brokerage">
+            <summary>
+            Represents the base Brokerage implementation. This provides logging on brokerage events.
+            </summary>
+        </member>
+        <member name="E:VigiothCapital.QuantTrader.Brokerages.Brokerage.OrderStatusChanged">
+            <summary>
+            Event that fires each time an order is filled
+            </summary>
+        </member>
+        <member name="E:VigiothCapital.QuantTrader.Brokerages.Brokerage.AccountChanged">
+            <summary>
+            Event that fires each time a user's brokerage account is changed
+            </summary>
+        </member>
+        <member name="E:VigiothCapital.QuantTrader.Brokerages.Brokerage.Message">
+            <summary>
+            Event that fires when an error is encountered in the brokerage
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Brokerage.Name">
+            <summary>
+            Gets the name of the brokerage
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Brokerage.IsConnected">
+            <summary>
+            Returns true if we're currently connected to the broker
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.#ctor(System.String)">
+            <summary>
+            Creates a new Brokerage instance with the specified name
+            </summary>
+            <param name="name">The name of the brokerage</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.PlaceOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Places a new order and assigns a new broker ID to the order
+            </summary>
+            <param name="order">The order to be placed</param>
+            <returns>True if the request for a new order has been placed, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.UpdateOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Updates the order with the same id
+            </summary>
+            <param name="order">The new order information</param>
+            <returns>True if the request was made for the order to be updated, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.CancelOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Cancels the order with the specified ID
+            </summary>
+            <param name="order">The order to cancel</param>
+            <returns>True if the request was made for the order to be canceled, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.Connect">
+            <summary>
+            Connects the client to the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.Disconnect">
+            <summary>
+            Disconnects the client from the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.OnOrderEvent(VigiothCapital.QuantTrader.Orders.OrderEvent)">
+            <summary>
+            Event invocator for the OrderFilled event
+            </summary>
+            <param name="e">The OrderEvent</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.OnAccountChanged(VigiothCapital.QuantTrader.Securities.AccountEvent)">
+            <summary>
+            Event invocator for the AccountChanged event
+            </summary>
+            <param name="e">The AccountEvent</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.OnMessage(VigiothCapital.QuantTrader.Brokerages.BrokerageMessageEvent)">
+            <summary>
+            Event invocator for the Message event
+            </summary>
+            <param name="e">The error</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.GetOpenOrders">
+            <summary>
+            Gets all open orders on the account. 
+            NOTE: The order objects returned do not have QC order IDs.
+            </summary>
+            <returns>The open orders returned from IB</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.GetAccountHoldings">
+            <summary>
+            Gets all holdings for the account
+            </summary>
+            <returns>The current holdings from the account</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Brokerage.GetCashBalance">
+            <summary>
+            Gets the current cash balance for each currency held in the brokerage account
+            </summary>
+            <returns>The current cash balance for each currency available for trading</returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.BrokerageException">
+            <summary>
+            Represents an error retuned from a broker's server
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.BrokerageException.#ctor(System.String)">
+            <summary>
+            Creates a new BrokerageException with the specified message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.BrokerageException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new BrokerageException with the specified message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory">
+            <summary>
+            Provides a base implementation of IBrokerageFactory that provides a helper for reading data from a job's brokerage data dictionary
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory.BrokerageType">
+            <summary>
+            Gets the type of brokerage produced by this factory
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory.BrokerageData">
+            <summary>
+            Gets the brokerage data required to run the brokerage from configuration/disk
+            </summary>
+            <remarks>
+            The implementation of this property will create the brokerage data dictionary required for
+            running live jobs. See <see cref="M:VigiothCapital.QuantTrader.Interfaces.IJobQueueHandler.NextJob(System.String@)"/>
+            </remarks>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory.BrokerageModel">
+            <summary>
+            Gets a brokerage model that can be used to model this brokerage's unique
+            behaviors
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory.CreateBrokerage(VigiothCapital.QuantTrader.Packets.LiveNodePacket,VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new IBrokerage instance
+            </summary>
+            <param name="job">The job packet to create the brokerage for</param>
+            <param name="algorithm">The algorithm instance</param>
+            <returns>A new brokerage instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory"/> class for the specified <paramref name="brokerageType"/>
+            </summary>
+            <param name="brokerageType">The type of brokerage created by this factory</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.BrokerageFactory.Read``1(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String,System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Reads a value from the brokerage data, adding an error if the key is not found
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage">
+            <summary>
+            FXCM brokerage - implementation of IBrokerage interface
+            </summary>
+            <summary>
+            FXCM brokerage - implementation of IDataQueueHandler interface
+            </summary>
+            <summary>
+            FXCM brokerage - Java API related functions and interface implementations
+            </summary>
+            <summary>
+            FXCM brokerage - private helper functions
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.#ctor(VigiothCapital.QuantTrader.Securities.IOrderProvider,VigiothCapital.QuantTrader.Securities.ISecurityProvider,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage"/> class
+            </summary>
+            <param name="orderProvider">The order provider</param>
+            <param name="securityProvider">The holdings provider</param>
+            <param name="server">The url of the server</param>
+            <param name="terminal">The terminal name</param>
+            <param name="userName">The user name (login id)</param>
+            <param name="password">The user password</param>
+            <param name="accountId">The account id</param>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.IsConnected">
+            <summary>
+            Returns true if we're currently connected to the broker
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.Connect">
+            <summary>
+            Connects the client to the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.Disconnect">
+            <summary>
+            Disconnects the client from the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.GetOpenOrders">
+            <summary>
+            Gets all open orders on the account. 
+            NOTE: The order objects returned do not have QC order IDs.
+            </summary>
+            <returns>The open orders returned from FXCM</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.GetAccountHoldings">
+            <summary>
+            Gets all holdings for the account
+            </summary>
+            <returns>The current holdings from the account</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.GetCashBalance">
+            <summary>
+            Gets the current cash balance for each currency held in the brokerage account
+            </summary>
+            <returns>The current cash balance for each currency available for trading</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.PlaceOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Places a new order and assigns a new broker ID to the order
+            </summary>
+            <param name="order">The order to be placed</param>
+            <returns>True if the request for a new order has been placed, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.UpdateOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Updates the order with the same id
+            </summary>
+            <param name="order">The new order information</param>
+            <returns>True if the request was made for the order to be updated, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.CancelOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Cancels the order with the specified ID
+            </summary>
+            <param name="order">The order to cancel</param>
+            <returns>True if the request was made for the order to be canceled, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.GetNextTicks">
+            <summary>
+            Get the next ticks from the live trading data queue
+            </summary>
+            <returns>IEnumerable list of ticks since the last update.</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.Subscribe(VigiothCapital.QuantTrader.Packets.LiveNodePacket,System.Collections.Generic.IEnumerable{VigiothCapital.QuantTrader.Symbol})">
+            <summary>
+            Adds the specified symbols to the subscription
+            </summary>
+            <param name="job">Job we're subscribing for:</param>
+            <param name="symbols">The symbols to be added keyed by SecurityType</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.Unsubscribe(VigiothCapital.QuantTrader.Packets.LiveNodePacket,System.Collections.Generic.IEnumerable{VigiothCapital.QuantTrader.Symbol})">
+            <summary>
+            Removes the specified symbols to the subscription
+            </summary>
+            <param name="job">Job we're processing.</param>
+            <param name="symbols">The symbols to be removed keyed by SecurityType</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.GetBidAndAsk(System.Collections.Generic.List{System.String})">
+            <summary>
+            Provides as public access to this data without requiring consumers to reference
+            IKVM libraries
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.GetQuotes(System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets the quotes for the symbol
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.GetUsdConversion(System.String)">
+            <summary>
+            Gets the current conversion rate into USD
+            </summary>
+            <remarks>Synchronous, blocking</remarks>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.messageArrived(com.fxcm.messaging.ITransportable)">
+            <summary>
+            Receives generic messages from the FXCM API
+            </summary>
+            <param name="message">Generic message received</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OnTradingSessionStatus(com.fxcm.fix.pretrade.TradingSessionStatus)">
+            <summary>
+            TradingSessionStatus message handler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OnCollateralReport(com.fxcm.fix.posttrade.CollateralReport)">
+            <summary>
+            CollateralReport message handler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OnMarketDataSnapshot(com.fxcm.fix.pretrade.MarketDataSnapshot)">
+            <summary>
+            MarketDataSnapshot message handler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OnExecutionReport(com.fxcm.fix.trade.ExecutionReport)">
+            <summary>
+            ExecutionReport message handler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OnRequestForPositionsAck(com.fxcm.fix.posttrade.RequestForPositionsAck)">
+            <summary>
+            RequestForPositionsAck message handler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OnPositionReport(com.fxcm.fix.posttrade.PositionReport)">
+            <summary>
+            PositionReport message handler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OnOrderCancelReject(com.fxcm.fix.trade.OrderCancelReject)">
+            <summary>
+            OrderCancelReject message handler
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.messageArrived(com.fxcm.messaging.ISessionStatus)">
+            <summary>
+            Receives status messages from the FXCM API
+            </summary>
+            <param name="message">Status message received</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.ConvertOrder(com.fxcm.fix.trade.ExecutionReport)">
+            <summary>
+            Converts an FXCM order to a VigiothCapital.QuantTrader order.
+            </summary>
+            <param name="fxcmOrder">The FXCM order</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.ConvertDuration(com.fxcm.fix.ITimeInForce)">
+            <summary>
+            Converts an FXCM order duration to VigiothCapital.QuantTrader order duration
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.ConvertHolding(com.fxcm.fix.posttrade.PositionReport)">
+            <summary>
+            Converts an FXCM position to a VigiothCapital.QuantTrader holding.
+            </summary>
+            <param name="fxcmPosition">The FXCM position</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.ConvertOrderStatus(com.fxcm.entity.ICode)">
+            <summary>
+            Converts an FXCM OrderStatus to a VigiothCapital.QuantTrader <see cref="T:VigiothCapital.QuantTrader.Orders.OrderStatus"/>
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OrderIsOpen(System.String)">
+            <summary>
+            Returns true if the specified order is considered open, otherwise false
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OrderIsClosed(System.String)">
+            <summary>
+            Returns true if the specified order is considered close, otherwise false
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.OrderIsBeingProcessed(System.String)">
+            <summary>
+            Returns true if the specified order is being processed, otherwise false
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage.FromJavaDate(java.util.Date)">
+            <summary>
+            Converts a Java Date value to a DateTime value
+            </summary>
+            <param name="javaDate">The Java date</param>
+            <returns></returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerageFactory">
+            <summary>
+            Provides an implementation of <see cref="T:VigiothCapital.QuantTrader.Interfaces.IBrokerageFactory"/> that produces a <see cref="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerage"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerageFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerageFactory"/> class
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerageFactory.BrokerageData">
+            <summary>
+            Gets the brokerage data required to run the brokerage from configuration/disk
+            </summary>
+            <remarks>
+            The implementation of this property will create the brokerage data dictionary required for
+            running live jobs. See <see cref="M:VigiothCapital.QuantTrader.Interfaces.IJobQueueHandler.NextJob(System.String@)"/>
+            </remarks>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerageFactory.BrokerageModel">
+            <summary>
+            Gets a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.FxcmBrokerageModel"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerageFactory.CreateBrokerage(VigiothCapital.QuantTrader.Packets.LiveNodePacket,VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new <see cref="T:VigiothCapital.QuantTrader.Interfaces.IBrokerage"/> instance
+            </summary>
+            <param name="job">The job packet to create the brokerage for</param>
+            <param name="algorithm">The algorithm instance</param>
+            <returns>A new brokerage instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmBrokerageFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper">
+            <summary>
+            Provides the mapping between Lean symbols and FXCM symbols.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.TupleList`2">
+            <summary>
+            Helper class to allow collection initializer on a List of tuples
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.FxcmSymbolMappings">
+            <summary>
+            The list of mappings from FXCM symbols to Lean symbols.
+            </summary>
+            <remarks>T1 is FXCM symbol, T2 is Lean symbol</remarks>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.KnownCurrencies">
+            <summary>
+            The list of known FXCM currencies.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.#cctor">
+            <summary>
+            Static constructor for the <see cref="T:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper"/> class
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.GetBrokerageSymbol(VigiothCapital.QuantTrader.Symbol)">
+            <summary>
+            Converts a Lean symbol instance to an FXCM symbol
+            </summary>
+            <param name="symbol">A Lean symbol instance</param>
+            <returns>The FXCM symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.GetLeanSymbol(System.String,VigiothCapital.QuantTrader.SecurityType,System.String)">
+            <summary>
+            Converts an FXCM symbol to a Lean symbol instance
+            </summary>
+            <param name="brokerageSymbol">The FXCM symbol</param>
+            <param name="securityType">The security type</param>
+            <param name="market">The market</param>
+            <returns>A new Lean Symbol instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.GetBrokerageSecurityType(System.String)">
+            <summary>
+            Returns the security type for an FXCM symbol
+            </summary>
+            <param name="brokerageSymbol">The FXCM symbol</param>
+            <returns>The security type</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.GetLeanSecurityType(System.String)">
+            <summary>
+            Returns the security type for a Lean symbol
+            </summary>
+            <param name="leanSymbol">The Lean symbol</param>
+            <returns>The security type</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.IsKnownBrokerageSymbol(System.String)">
+            <summary>
+            Checks if the symbol is supported by FXCM
+            </summary>
+            <param name="brokerageSymbol">The FXCM symbol</param>
+            <returns>True if FXCM supports the symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.IsKnownLeanSymbol(VigiothCapital.QuantTrader.Symbol)">
+            <summary>
+            Checks if the symbol is supported by FXCM
+            </summary>
+            <param name="symbol">The Lean symbol</param>
+            <returns>True if FXCM supports the symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.ConvertFxcmSymbolToLeanSymbol(System.String)">
+            <summary>
+            Converts an FXCM symbol to a Lean symbol string
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Fxcm.FxcmSymbolMapper.ConvertLeanSymbolToFxcmSymbol(System.String)">
+            <summary>
+            Converts a Lean symbol string to an FXCM symbol
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage">
+            <summary>
+            The Interactive Brokers brokerage
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.IsConnected">
+            <summary>
+            Returns true if we're currently connected to the broker
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.#ctor(VigiothCapital.QuantTrader.Securities.IOrderProvider,VigiothCapital.QuantTrader.Securities.ISecurityProvider)">
+            <summary>
+            Creates a new InteractiveBrokersBrokerage using values from configuration:
+                ib-account (required)
+                ib-host (optional, defaults to LOCALHOST)
+                ib-port (optional, defaults to 4001)
+                ib-agent-description (optional, defaults to Individual)
+            </summary>
+            <param name="orderProvider">An instance of IOrderProvider used to fetch Order objects by brokerage ID</param>
+            <param name="securityProvider">The security provider used to give access to algorithm securities</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.#ctor(VigiothCapital.QuantTrader.Securities.IOrderProvider,VigiothCapital.QuantTrader.Securities.ISecurityProvider,System.String)">
+            <summary>
+            Creates a new InteractiveBrokersBrokerage for the specified account
+            </summary>
+            <param name="orderProvider">An instance of IOrderProvider used to fetch Order objects by brokerage ID</param>
+            <param name="securityProvider">The security provider used to give access to algorithm securities</param>
+            <param name="account">The account used to connect to IB</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.#ctor(VigiothCapital.QuantTrader.Securities.IOrderProvider,VigiothCapital.QuantTrader.Securities.ISecurityProvider,System.String,System.String,System.Int32,Krs.Ats.IBNet.AgentDescription)">
+            <summary>
+            Creates a new InteractiveBrokersBrokerage from the specified values
+            </summary>
+            <param name="orderProvider">An instance of IOrderProvider used to fetch Order objects by brokerage ID</param>
+            <param name="securityProvider">The security provider used to give access to algorithm securities</param>
+            <param name="account">The Interactive Brokers account name</param>
+            <param name="host">host name or IP address of the machine where TWS is running. Leave blank to connect to the local host.</param>
+            <param name="port">must match the port specified in TWS on the Configure&gt;API&gt;Socket Port field.</param>
+            <param name="agentDescription">Used for Rule 80A describes the type of trader.</param>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.Client">
+            <summary>
+            Provides public access to the underlying IBClient instance
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.PlaceOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Places a new order and assigns a new broker ID to the order
+            </summary>
+            <param name="order">The order to be placed</param>
+            <returns>True if the request for a new order has been placed, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.UpdateOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Updates the order with the same id
+            </summary>
+            <param name="order">The new order information</param>
+            <returns>True if the request was made for the order to be updated, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.CancelOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Cancels the order with the specified ID
+            </summary>
+            <param name="order">The order to cancel</param>
+            <returns>True if the request was made for the order to be canceled, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetOpenOrders">
+            <summary>
+            Gets all open orders on the account
+            </summary>
+            <returns>The open orders returned from IB</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetAccountHoldings">
+            <summary>
+            Gets all holdings for the account
+            </summary>
+            <returns>The current holdings from the account</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetCashBalance">
+            <summary>
+            Gets the current cash balance for each currency held in the brokerage account
+            </summary>
+            <returns>The current cash balance for each currency available for trading</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetExecutions(System.String,System.Nullable{Krs.Ats.IBNet.SecurityType},System.String,System.Nullable{System.DateTime},System.Nullable{Krs.Ats.IBNet.ActionSide})">
+            <summary>
+            Gets the execution details matching the filter
+            </summary>
+            <returns>A list of executions matching the filter</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.Connect">
+            <summary>
+            Connects the client to the IB gateway
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.Disconnect">
+            <summary>
+            Disconnects the client from the IB gateway
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetAccountValues">
+            <summary>
+            Gets the raw account values sent from IB
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.IBPlaceOrder(VigiothCapital.QuantTrader.Orders.Order,System.Boolean,System.String)">
+            <summary>
+            Places the order with InteractiveBrokers
+            </summary>
+            <param name="order">The order to be placed</param>
+            <param name="needsNewID">Set to true to generate a new order ID, false to leave it alone</param>
+            <param name="exchange">The exchange to send the order to, defaults to "Smart" to use IB's smart routing</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetUsdConversion(System.String)">
+            <summary>
+            Gets the current conversion rate into USD
+            </summary>
+            <remarks>Synchronous, blocking</remarks>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.HandleError(System.Object,Krs.Ats.IBNet.ErrorEventArgs)">
+            <summary>
+            Handles error messages from IB
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.TryWaitForReconnect">
+            <summary>
+            If we lose connection to TWS/IB servers we don't want to send the Error event if it is within
+            the scheduled server reset times
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.HandleUpdateAccountValue(System.Object,Krs.Ats.IBNet.UpdateAccountValueEventArgs)">
+            <summary>
+            Stores all the account values
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.HandleOrderStatusUpdates(System.Object,Krs.Ats.IBNet.OrderStatusEventArgs)">
+            <summary>
+            Handle order events from IB
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.HandlePortfolioUpdates(System.Object,Krs.Ats.IBNet.UpdatePortfolioEventArgs)">
+            <summary>
+            Handle portfolio changed events from IB
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.ConvertOrder(VigiothCapital.QuantTrader.Orders.Order,Krs.Ats.IBNet.Contract,System.Int32)">
+            <summary>
+            Converts a QC order to an IB order
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.CreateContract(VigiothCapital.QuantTrader.Symbol,System.String)">
+            <summary>
+            Creates an IB contract from the order.
+            </summary>
+            <param name="symbol">The symbol whose contract we need to create</param>
+            <param name="exchange">The exchange where the order will be placed, defaults to 'Smart'</param>
+            <returns>A new IB contract for the order</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.ConvertOrderDirection(VigiothCapital.QuantTrader.Orders.OrderDirection)">
+            <summary>
+            Maps OrderDirection enumeration
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.ConvertOrderType(VigiothCapital.QuantTrader.Orders.OrderType)">
+            <summary>
+            Maps OrderType enum
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.ConvertOrderType(Krs.Ats.IBNet.Order)">
+            <summary>
+            Maps OrderType enum
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.ConvertOrderStatus(Krs.Ats.IBNet.OrderStatus)">
+            <summary>
+            Maps IB's OrderStats enum
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.ConvertSecurityType(VigiothCapital.QuantTrader.SecurityType)">
+            <summary>
+            Maps SecurityType enum
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.ConvertSecurityType(Krs.Ats.IBNet.SecurityType)">
+            <summary>
+            Maps SecurityType enum
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.CreateHolding(Krs.Ats.IBNet.UpdatePortfolioEventArgs)">
+            <summary>
+            Creates a holding object from te UpdatePortfolioEventArgs
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.MapSymbol(Krs.Ats.IBNet.Contract)">
+            <summary>
+            Maps the IB Contract's symbol to a QC symbol
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetNextBrokerageOrderID">
+            <summary>
+            Handles the threading issues of creating an IB order ID
+            </summary>
+            <returns>The new IB ID</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.IncrementClientID">
+            <summary>
+            Increments the client ID for communication with the gateway
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.IsWithinScheduledServerResetTimes">
+            <summary>
+            This function is used to decide whether or not we should kill an algorithm
+            when we lose contact with IB servers. IB performs server resets nightly
+            and on Fridays they take everything down, so we'll prevent killing algos
+            on Saturdays completely for the time being.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.GetNextTicks">
+            <summary>
+            IDataQueueHandler interface implementaion 
+            </summary>
+            
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.Subscribe(VigiothCapital.QuantTrader.Packets.LiveNodePacket,System.Collections.Generic.IEnumerable{VigiothCapital.QuantTrader.Symbol})">
+            <summary>
+            Adds the specified symbols to the subscription
+            </summary>
+            <param name="job">Job we're subscribing for:</param>
+            <param name="symbols">The symbols to be added keyed by SecurityType</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.Unsubscribe(VigiothCapital.QuantTrader.Packets.LiveNodePacket,System.Collections.Generic.IEnumerable{VigiothCapital.QuantTrader.Symbol})">
+            <summary>
+            Removes the specified symbols to the subscription
+            </summary>
+            <param name="job">Job we're processing.</param>
+            <param name="symbols">The symbols to be removed keyed by SecurityType</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage.AdjustQuantity(VigiothCapital.QuantTrader.SecurityType,System.Int32)">
+            <summary>
+            Modifies the quantity received from IB based on the security type
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerageFactory">
+            <summary>
+            Factory type for the <see cref="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerage"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerageFactory.#ctor">
+            <summary>
+            Initializes a new instance of the InteractiveBrokersBrokerageFactory class
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerageFactory.BrokerageData">
+            <summary>
+            Gets the brokerage data required to run the IB brokerage from configuration
+            </summary>
+            <remarks>
+            The implementation of this property will create the brokerage data dictionary required for
+            running live jobs. See <see cref="M:VigiothCapital.QuantTrader.Interfaces.IJobQueueHandler.NextJob(System.String@)"/>
+            </remarks>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerageFactory.BrokerageModel">
+            <summary>
+            Gets a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokersBrokerageModel"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerageFactory.CreateBrokerage(VigiothCapital.QuantTrader.Packets.LiveNodePacket,VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new IBrokerage instance and set ups the environment for the brokerage
+            </summary>
+            <param name="job">The job packet to create the brokerage for</param>
+            <param name="algorithm">The algorithm instance</param>
+            <returns>A new brokerage instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersBrokerageFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            Stops the InteractiveBrokersGatewayRunner
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersGatewayRunner">
+            <summary>
+            Handles launching and killing the IB Controller script
+            </summary>
+            <remarks>
+            Requires TWS or IB Gateway and IBController installed to run
+            </remarks>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersGatewayRunner.StartFromConfiguration">
+            <summary>
+            Starts the interactive brokers gateway using values from configuration
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersGatewayRunner.Start(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Starts the IB Gateway
+            </summary>
+            <param name="ibControllerDirectory">Directory to the IB controller installation</param>
+            <param name="twsDirectory"></param>
+            <param name="userID">The log in user id</param>
+            <param name="password">The log in password</param>
+            <param name="useTws">True to use Trader Work Station, false to just launch the API gateway</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersGatewayRunner.Stop">
+            <summary>
+            Stops the IB Gateway
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersSymbolMapper">
+            <summary>
+            Provides the mapping between Lean symbols and InteractiveBrokers symbols.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersSymbolMapper.GetBrokerageSymbol(VigiothCapital.QuantTrader.Symbol)">
+            <summary>
+            Converts a Lean symbol instance to an InteractiveBrokers symbol
+            </summary>
+            <param name="symbol">A Lean symbol instance</param>
+            <returns>The InteractiveBrokers symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokers.InteractiveBrokersSymbolMapper.GetLeanSymbol(System.String,VigiothCapital.QuantTrader.SecurityType,System.String)">
+            <summary>
+            Converts an InteractiveBrokers symbol to a Lean symbol instance
+            </summary>
+            <param name="brokerageSymbol">The InteractiveBrokers symbol</param>
+            <param name="securityType">The security type</param>
+            <param name="market">The market</param>
+            <returns>A new Lean Symbol instance</returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.ISymbolMapper">
+            <summary>
+            Provides the mapping between Lean symbols and brokerage specific symbols.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.ISymbolMapper.GetBrokerageSymbol(VigiothCapital.QuantTrader.Symbol)">
+            <summary>
+            Converts a Lean symbol instance to a brokerage symbol
+            </summary>
+            <param name="symbol">A Lean symbol instance</param>
+            <returns>The brokerage symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.ISymbolMapper.GetLeanSymbol(System.String,VigiothCapital.QuantTrader.SecurityType,System.String)">
+            <summary>
+            Converts a brokerage symbol to a Lean symbol instance
+            </summary>
+            <param name="brokerageSymbol">The brokerage symbol</param>
+            <param name="securityType">The security type</param>
+            <param name="market">The market</param>
+            <returns>A new Lean Symbol instance</returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Account">
+            <summary>
+            Represents the Oanda Account.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.AccountResponse">
+            <summary>
+            Represents the web response when creating a new account with Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.AccountsResponse">
+            <summary>
+            Represents the web response when querying the list of accounts belong to one Oanda user.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.InstrumentsResponse">
+            <summary>
+            Represent web response for the list of active/tradable instruments provided by Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.OrdersResponse">
+            <summary>
+            Represents the web response of the current active orders from Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.PositionsResponse">
+            <summary>
+            Represents the current active positions from Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.PostOrderResponse">
+            <summary>
+            Represents the post order response from Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.PricesResponse">
+            <summary>
+            Represent the web response of the current price of active instruments from Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.Response">
+            <summary>
+            Represents the Restful web response from Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.TradesResponse">
+            <summary>
+            Represent the Active Trades Web Response. 
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Event">
+            <summary>
+            Represents a single event when subscribed to the streaming events.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Heartbeat">
+            <summary>
+            Represent a Heartbeat for an <see cref="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Event"/> class.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.IHeartbeat">
+            <summary>
+            Represents the interface for the HeartBeat and RateStreamResponse class.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.IsOptionalAttribute">
+            <summary>
+            Represents whether a property is optional.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.MaxValueAttribute">
+            <summary>
+            Represents maximum value of a property.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.MinValueAttribute">
+            <summary>
+            Represents minimum value of a property.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Instrument">
+            <summary>
+            Represents a financial instrument / product provided by Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Order">
+            <summary>
+            Represents an order on Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Position">
+            <summary>
+            Represent a Position in Oanda.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Price">
+            <summary>
+            Represents the Price object creating Orders for each instrument.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.TradeData">
+            <summary>
+            Represents a Trade Data object containing the details of a trade.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Transaction">
+            <summary>
+            Represents a Transaction object with details about an Oanda transaction.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Transaction.GetTitle">
+            <summary>
+            Gets a basic title for the type of transaction
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Transaction.GetReadableString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.Environment">
+            <summary>
+            Represents different environments available for the REST API.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.Environment.Sandbox">
+            <summary>
+            An environment purely for testing; it is not as fast, stable and reliable as the other environments (i.e. it can go down once in a while). 
+            Market data returned from this environment is simulated (not real market data).
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.Environment.Practice">
+            <summary>
+            A stable environment; recommended for testing with your fxTrade Practice account and your personal access token.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.Environment.Trade">
+            <summary>
+            A stable environment; recommended for production-ready code to execute with your fxTrade account and your personal access token.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.Framework.Common">
+            <summary>
+            Common reflection helper methods for Oanda data types.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.Framework.EndpointResolver">
+            <summary>
+            Helper class to resolve the endpoint for the Oanda RESTful call.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.Framework.EndpointResolver.ResolveEndpoint(VigiothCapital.QuantTrader.Brokerages.Oanda.Environment,VigiothCapital.QuantTrader.Brokerages.Oanda.Server)">
+            <summary>
+            Resolves the endpoint.
+            </summary>
+            <param name="environment">The environment.</param>
+            <param name="server">The server.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage">
+            <summary>
+            Oanda Brokerage - implementation of IBrokerage interface
+            </summary>
+            <summary>
+            Oanda Brokerage - implementation of IDataQueueHandler interface
+            </summary>
+            <summary>
+            Oanda Brokerage - REST API related functions
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.#ctor(VigiothCapital.QuantTrader.Securities.IOrderProvider,VigiothCapital.QuantTrader.Securities.ISecurityProvider,VigiothCapital.QuantTrader.Brokerages.Oanda.Environment,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage"/> class.
+            </summary>
+            <param name="orderProvider">The order provider.</param>
+            <param name="securityProvider">The holdings provider.</param>
+            <param name="environment">The Oanda environment (Trade or Practice)</param>
+            <param name="accessToken">The Oanda access token (can be the user's personal access token or the access token obtained with OAuth by QC on behalf of the user)</param>
+            <param name="accountId">The account identifier.</param>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.IsConnected">
+            <summary>
+            Returns true if we're currently connected to the broker
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.Connect">
+            <summary>
+            Connects the client to the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.Disconnect">
+            <summary>
+            Disconnects the client from the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetOpenOrders">
+            <summary>
+            Gets all open orders on the account. 
+            NOTE: The order objects returned do not have QC order IDs.
+            </summary>
+            <returns>The open orders returned from Oanda</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetAccountHoldings">
+            <summary>
+            Gets all holdings for the account
+            </summary>
+            <returns>The current holdings from the account</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetCashBalance">
+            <summary>
+            Gets the current cash balance for each currency held in the brokerage account
+            </summary>
+            <returns>The current cash balance for each currency available for trading</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.PlaceOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Places a new order and assigns a new broker ID to the order
+            </summary>
+            <param name="order">The order to be placed</param>
+            <returns>True if the request for a new order has been placed, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.UpdateOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Updates the order with the same id
+            </summary>
+            <param name="order">The new order information</param>
+            <returns>True if the request was made for the order to be updated, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.CancelOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Cancels the order with the specified ID
+            </summary>
+            <param name="order">The order to cancel</param>
+            <returns>True if the request was made for the order to be canceled, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetNextTicks">
+            <summary>
+            Get the next ticks from the live trading data queue
+            </summary>
+            <returns>IEnumerable list of ticks since the last update.</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.Subscribe(VigiothCapital.QuantTrader.Packets.LiveNodePacket,System.Collections.Generic.IEnumerable{VigiothCapital.QuantTrader.Symbol})">
+            <summary>
+            Adds the specified symbols to the subscription
+            </summary>
+            <param name="job">Job we're subscribing for:</param>
+            <param name="symbols">The symbols to be added keyed by SecurityType</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.Unsubscribe(VigiothCapital.QuantTrader.Packets.LiveNodePacket,System.Collections.Generic.IEnumerable{VigiothCapital.QuantTrader.Symbol})">
+            <summary>
+            Removes the specified symbols from the subscription
+            </summary>
+            <param name="job">Job we're processing.</param>
+            <param name="symbols">The symbols to be removed keyed by SecurityType</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.ProcessSubscriptionRequest">
+            <summary>
+            Groups multiple subscribe/unsubscribe calls to avoid closing and reopening the streaming session on each call
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.SubscribeSymbols(System.Collections.Generic.List{VigiothCapital.QuantTrader.Symbol})">
+            <summary>
+            Subscribes to the requested symbols (using a single streaming session)
+            </summary>
+            <param name="symbolsToSubscribe">The list of symbols to subscribe</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetDateTimeFromString(System.String)">
+            <summary>
+            Returns a DateTime from an RFC3339 string (with microsecond resolution)
+            </summary>
+            <param name="time">The time string</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.OnDataReceived(VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Communications.RateStreamResponse)">
+            <summary>
+            Event handler for streaming ticks
+            </summary>
+            <param name="data">The data object containing the received tick</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetInstruments(System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets the list of available tradable instruments/products from Oanda
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.OnEventReceived(VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Event)">
+            <summary>
+            Event handler for streaming events
+            </summary>
+            <param name="data">The event object</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.UpdateOrder(System.Int64,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Modify the specified order, updating it with the parameters provided
+            </summary>
+            <param name="orderId">the identifier of the order to update</param>
+            <param name="requestParams">the parameters to update (name, value pairs)</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetRates(System.Collections.Generic.List{System.String})">
+            <summary>
+            Retrieves the current rate for each of a list of instruments
+            </summary>
+            <param name="instruments">the list of instruments to check</param>
+            <returns>List of Price objects with the current price for each instrument</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.PostOrderAsync(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Posts an order on the given account with the given parameters
+            </summary>
+            <param name="requestParams">the parameters to use in the request</param>
+            <returns>PostOrderResponse with details of the results (throws if if fails)</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetOrderList(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Retrieves the list of open orders belonging to the account
+            </summary>
+            <param name="requestParams">optional additional parameters for the request (name, value pairs)</param>
+            <returns>List of Order objects (or empty list, if no orders)</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.StartRatesSession(System.Collections.Generic.List{VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Instrument},System.Int32)">
+            <summary>
+            Initializes a streaming rates session with the given instruments on the given account
+            </summary>
+            <param name="instruments">list of instruments to stream rates for</param>
+            <param name="accountId">the account ID you want to stream on</param>
+            <returns>the WebResponse object that can be used to retrieve the rates as they stream</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.StartEventsSession(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Initializes a streaming events session which will stream events for the given accounts
+            </summary>
+            <param name="accountId">the account IDs you want to stream on</param>
+            <returns>the WebResponse object that can be used to retrieve the events as they stream</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.MakeRequest``1(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Primary (internal) request handler
+            </summary>
+            <typeparam name="T">The response type</typeparam>
+            <param name="requestString">the request to make</param>
+            <param name="method">method for the request (defaults to GET)</param>
+            <param name="requestParams">optional parameters (note that if provided, it's assumed the requestString doesn't contain any)</param>
+            <returns>response via type T</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.MakeRequestWithBody``1(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Secondary (internal) request handler. differs from primary in that parameters are placed in the body instead of the request string
+            </summary>
+            <typeparam name="T">response type</typeparam>
+            <param name="method">method to use (usually POST or PATCH)</param>
+            <param name="requestParams">the parameters to pass in the request body</param>
+            <param name="requestString">the request to make</param>
+            <returns>response, via type T</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetPositions(System.Int32)">
+            <summary>
+            Retrieves the current non-zero positions for a given account
+            </summary>
+            <param name="accountId">positions will be retrieved for this account id</param>
+            <returns>List of Position objects with the details for each position (or empty list iff no positions)</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.CreateParamString(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Helper function to create the parameter string out of a dictionary of parameters
+            </summary>
+            <param name="requestParams">the parameters to convert</param>
+            <returns>string containing all the parameters for use in requests</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.ConvertOrder(VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Order)">
+            <summary>
+            Converts the specified Oanda order into a qc order.
+            The 'task' will have a value if we needed to issue a rest call for the stop price, otherwise it will be null
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.ConvertQuantity(VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Order)">
+            <summary>
+            Converts the Oanda order quantity into a qc quantity
+            </summary>
+            <remarks>
+            Oanda quantities are always positive and use the direction to denote +/-, where as qc
+            order quantities determine the direction
+            </remarks>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.ConvertHolding(VigiothCapital.QuantTrader.Brokerages.Oanda.DataType.Position)">
+            <summary>
+            Converts the Oanda position into a VigiothCapital.QuantTrader holding.
+            </summary>
+            <param name="position">The position.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage.GetUsdConversion(System.String)">
+            <summary>
+            Gets the current conversion rate into USD
+            </summary>
+            <remarks>Synchronous, blocking</remarks>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerageFactory">
+            <summary>
+            Provides an implementations of <see cref="T:VigiothCapital.QuantTrader.Interfaces.IBrokerageFactory"/> that produces a <see cref="T:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerage"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerageFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerageFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerageFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerageFactory.BrokerageData">
+            <summary>
+            Gets the brokerage data required to run the brokerage from configuration/disk
+            </summary>
+            <remarks>
+            The implementation of this property will create the brokerage data dictionary required for
+            running live jobs. See <see cref="M:VigiothCapital.QuantTrader.Interfaces.IJobQueueHandler.NextJob(System.String@)"/>
+            </remarks>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerageFactory.BrokerageModel">
+            <summary>
+            Gets a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.OandaBrokerageModel"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaBrokerageFactory.CreateBrokerage(VigiothCapital.QuantTrader.Packets.LiveNodePacket,VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new <see cref="T:VigiothCapital.QuantTrader.Interfaces.IBrokerage"/> instance
+            </summary>
+            <param name="job">The job packet to create the brokerage for</param>
+            <param name="algorithm">The algorithm instance</param>
+            <returns>A new brokerage instance</returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper">
+            <summary>
+            Provides the mapping between Lean symbols and Oanda symbols.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.KnownSymbols">
+            <summary>
+            The list of known Oanda symbols.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.KnownCurrencies">
+            <summary>
+            The list of known Oanda currencies.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.GetBrokerageSymbol(VigiothCapital.QuantTrader.Symbol)">
+            <summary>
+            Converts a Lean symbol instance to an Oanda symbol
+            </summary>
+            <param name="symbol">A Lean symbol instance</param>
+            <returns>The Oanda symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.GetLeanSymbol(System.String,VigiothCapital.QuantTrader.SecurityType,System.String)">
+            <summary>
+            Converts an Oanda symbol to a Lean symbol instance
+            </summary>
+            <param name="brokerageSymbol">The Oanda symbol</param>
+            <param name="securityType">The security type</param>
+            <param name="market">The market</param>
+            <returns>A new Lean Symbol instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.GetBrokerageSecurityType(System.String)">
+            <summary>
+            Returns the security type for an Oanda symbol
+            </summary>
+            <param name="brokerageSymbol">The Oanda symbol</param>
+            <returns>The security type</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.GetLeanSecurityType(System.String)">
+            <summary>
+            Returns the security type for a Lean symbol
+            </summary>
+            <param name="leanSymbol">The Lean symbol</param>
+            <returns>The security type</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.IsKnownBrokerageSymbol(System.String)">
+            <summary>
+            Checks if the symbol is supported by Oanda
+            </summary>
+            <param name="brokerageSymbol">The Oanda symbol</param>
+            <returns>True if Oanda supports the symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.IsKnownLeanSymbol(VigiothCapital.QuantTrader.Symbol)">
+            <summary>
+            Checks if the symbol is supported by Oanda
+            </summary>
+            <param name="symbol">The Lean symbol</param>
+            <returns>True if Oanda supports the symbol</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.ConvertOandaSymbolToLeanSymbol(System.String)">
+            <summary>
+            Converts an Oanda symbol to a Lean symbol string
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Oanda.OandaSymbolMapper.ConvertLeanSymbolToOandaSymbol(System.String)">
+            <summary>
+            Converts a Lean symbol string to an Oanda symbol
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.Server">
+            <summary>
+            Represents the server instance that we will be performing the RESTful call.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.Server.Account">
+            <summary>
+            The account
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.Server.Rates">
+            <summary>
+            The rates
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.Server.StreamingRates">
+            <summary>
+            The streaming rates
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Oanda.Server.StreamingEvents">
+            <summary>
+            The streaming events
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.Session.EventsSession">
+            <summary>
+            Initialise an events sessions for Oanda Brokerage.
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Oanda.Session.StreamSession`1">
+            <summary>
+            StreamSession abstract class used to model the Oanda Events Sessions.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerage">
+            <summary>
+            Paper Trading Brokerage
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerage.#ctor(VigiothCapital.QuantTrader.Interfaces.IAlgorithm,VigiothCapital.QuantTrader.Packets.LiveNodePacket)">
+            <summary>
+            Creates a new PaperBrokerage
+            </summary>
+            <param name="algorithm">The algorithm under analysis</param>
+            <param name="job">The job packet</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerage.GetCashBalance">
+            <summary>
+            Gets the current cash balance for each currency held in the brokerage account
+            </summary>
+            <returns>The current cash balance for each currency available for trading</returns>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerageFactory">
+            <summary>
+            The factory type for the <see cref="T:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerage"/>
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerageFactory.BrokerageType">
+            <summary>
+            Gets the type of brokerage produced by this factory
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerageFactory.BrokerageData">
+            <summary>
+            Gets the brokerage data required to run the IB brokerage from configuration
+            </summary>
+            <remarks>
+            The implementation of this property will create the brokerage data dictionary required for
+            running live jobs. See <see cref="M:VigiothCapital.QuantTrader.Interfaces.IJobQueueHandler.NextJob(System.String@)"/>
+            </remarks>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerageFactory.BrokerageModel">
+            <summary>
+            Gets a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.InteractiveBrokersBrokerageModel"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerageFactory.CreateBrokerage(VigiothCapital.QuantTrader.Packets.LiveNodePacket,VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new IBrokerage instance
+            </summary>
+            <param name="job">The job packet to create the brokerage for</param>
+            <param name="algorithm">The algorithm instance</param>
+            <returns>A new brokerage instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Paper.PaperBrokerageFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage">
+            <summary>
+            Tradier Class: 
+             - Handle authentication.
+             - Data requests.
+             - Rate limiting.
+             - Placing orders.
+             - Getting user data.
+            </summary>
+        </member>
+        <member name="E:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.SessionRefreshed">
+            <summary>
+            Event fired when our session has been refreshed/tokens updated
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ExpectedExpiry">
+            <summary>
+            When we expect this access token to expire, leaves an hour of padding
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.AccessToken">
+            <summary>
+            Access Token Access:
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.RefreshToken">
+            <summary>
+            Refresh Token Access:
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.UserId">
+            <summary>
+            The QC User id, used for refreshing the session
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.LastResponse">
+            <summary>
+            Get the last string returned
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.#ctor(VigiothCapital.QuantTrader.Securities.IOrderProvider,VigiothCapital.QuantTrader.Securities.ISecurityProvider,System.Int64)">
+            <summary>
+            Create a new Tradier Object:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.SetTokens(System.Int32,System.String,System.String,System.DateTime,System.TimeSpan)">
+            <summary>
+            Set the access token and login information for the tradier brokerage 
+            </summary>
+            <param name="userId">Userid for this brokerage</param>
+            <param name="accessToken">Viable access token</param>
+            <param name="refreshToken">Our refresh token</param>
+            <param name="issuedAt">When the token was issued</param>
+            <param name="lifeSpan">Life span for our token.</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.Execute``1(RestSharp.RestRequest,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierApiRequestType,System.String,System.Int32,System.Int32)">
+            <summary>
+            Execute a authenticated call:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.RefreshSession">
+            <summary>
+            Verify we have a user session; or refresh the access token.
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetUserProfile">
+            <summary>
+            Using this auth token get the tradier user:
+            </summary>
+            <remarks>
+            Returns null if the request was unsucessful
+            </remarks>
+            <returns>Tradier user model:</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetBalanceDetails(System.Int64)">
+            <summary>
+            Get all the users balance information:
+            </summary>
+            <remarks>
+            Returns null if the request was unsucessful
+            </remarks>
+            <returns>Balance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetPositions">
+            <summary>
+            Get a list of the tradier positions for this account:
+            </summary>
+            <remarks>
+            Returns null if the request was unsucessful
+            </remarks>
+            <returns>Array of the symbols we hold.</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetAccountEvents(System.Int64)">
+            <summary>
+            Get a list of historical events for this account:
+            </summary>
+            <remarks>
+            Returns null if the request was unsucessful
+            </remarks>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetGainLoss(System.Int64)">
+            <summary>
+            GainLoss of recent trades for this account:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetIntradayAndPendingOrders">
+            <summary>
+            Get Intraday and pending orders for users account: accounts/{account_id}/orders
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetOrder(System.Int64)">
+            <summary>
+            Get information about a specific order: accounts/{account_id}/orders/{id}
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.PlaceOrder(System.Int64,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderClass,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection,System.String,System.Decimal,System.Decimal,System.Decimal,System.String,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDuration)">
+            <summary>
+            Place Order through API.
+            accounts/{account-id}/orders
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ChangeOrder(System.Int64,System.Int64,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDuration,System.Decimal,System.Decimal)">
+            <summary>
+            Update an exiting Tradier Order:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.CancelOrder(System.Int64,System.Int64)">
+            <summary>
+            Cancel the order with this account and id number
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetQuotes(System.Collections.Generic.List{System.String})">
+            <summary>
+            List of quotes for symbols 
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetTimeSeries(System.String,System.DateTime,System.DateTime,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesIntervals)">
+            <summary>
+            Get the historical bars for this period
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetHistoricalData(System.String,System.DateTime,System.DateTime,VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoricalDataIntervals)">
+            <summary>
+            Get full daily, weekly or monthly bars of historical periods:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetMarketStatus">
+            <summary>
+            Get the current market status
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetMarketCalendar(System.Int32,System.Int32)">
+            <summary>
+            Get the list of days status for this calendar month, year:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.Search(System.String,System.Boolean)">
+            <summary>
+            Get the list of days status for this calendar month, year:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.LookUpSymbol(System.String,System.Boolean)">
+            <summary>
+            Get the list of days status for this calendar month, year:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.CreateStreamSession">
+            <summary>
+            Get the current market status
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.Stream(System.Collections.Generic.List{System.String})">
+            <summary>
+            Connect to tradier API strea:
+            </summary>
+            <param name="symbols">symbol list</param>
+            <returns></returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetEnumDescription(System.Enum)">
+            <summary>
+            Convert the C# Enums back to the Tradier API Equivalent:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.DeserializeRemoveRoot``1(System.String,System.String)">
+            <summary>
+            Get the rype inside the nested root:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.OnSessionRefreshed(VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse)">
+            <summary>
+            Event invocator for the SessionRefreshed event
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.IsConnected">
+            <summary>
+            Returns true if we're currently connected to the broker
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetOpenOrders">
+            <summary>
+            Gets all open orders on the account. 
+            NOTE: The order objects returned do not have QC order IDs.
+            </summary>
+            <returns>The open orders returned from IB</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetAccountHoldings">
+            <summary>
+            Gets all holdings for the account
+            </summary>
+            <returns>The current holdings from the account</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetCashBalance">
+            <summary>
+            Gets the current cash balance for each currency held in the brokerage account
+            </summary>
+            <returns>The current cash balance for each currency available for trading</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.PlaceOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Places a new order and assigns a new broker ID to the order
+            </summary>
+            <param name="order">The order to be placed</param>
+            <returns>True if the request for a new order has been placed, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.UpdateOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Updates the order with the same id
+            </summary>
+            <param name="order">The new order information</param>
+            <returns>True if the request was made for the order to be updated, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.CancelOrder(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Cancels the order with the specified ID
+            </summary>
+            <param name="order">The order to cancel</param>
+            <returns>True if the request was made for the order to be canceled, false otherwise</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.Connect">
+            <summary>
+            Connects the client to the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.Disconnect">
+            <summary>
+            Disconnects the client from the broker's remote servers
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.OnMessage(VigiothCapital.QuantTrader.Brokerages.BrokerageMessageEvent)">
+            <summary>
+            Event invocator for the Message event
+            </summary>
+            <param name="e">The error</param>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.CheckForFills">
+            <summary>
+            Checks for fill events by polling FetchOrders for pending orders and diffing against the last orders seen
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.OrderIsOpen(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder)">
+            <summary>
+            Returns true if the specified order is considered open, otherwise false
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.OrderIsClosed(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder)">
+            <summary>
+            Returns true if the specified order is considered close, otherwise false
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.IsShort(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection)">
+            <summary>
+            Returns true if the specified tradier order direction represents a short position
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertOrder(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder)">
+            <summary>
+            Converts the specified tradier order into a qc order.
+            The 'task' will have a value if we needed to issue a rest call for the stop price, otherwise it will be null
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertOrderType(VigiothCapital.QuantTrader.Orders.OrderType)">
+            <summary>
+            Converts the qc order type into a tradier order type
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertDuration(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDuration)">
+            <summary>
+            Converts the tradier order duration into a qc order duration
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertStatus(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus)">
+            <summary>
+            Converts the tradier order status into a qc order status
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertStatus(VigiothCapital.QuantTrader.Orders.OrderStatus)">
+            <summary>
+            Converts the qc order status into a tradier order status
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertQuantity(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder)">
+            <summary>
+            Converts the tradier order quantity into a qc quantity
+            </summary>
+            <remarks>
+            Tradier quantities are always positive and use the direction to denote +/-, where as qc
+            order quantities determine the direction
+            </remarks>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertHolding(VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPosition)">
+            <summary>
+            Converts the tradier position into a qc holding
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertDirection(VigiothCapital.QuantTrader.Orders.OrderDirection,System.Decimal)">
+            <summary>
+            Converts the QC order direction to a tradier order direction
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.OrderCrossesZero(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Determines whether or not the specified order will bring us across the zero line for holdings
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetOrderDuration(VigiothCapital.QuantTrader.Orders.OrderDuration)">
+            <summary>
+            Converts the qc order duration into a tradier order duration
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ConvertOrderType(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Converts the qc order type into a tradier order type
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetStopPrice(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Gets the stop price used in API calls with tradier from the specified qc order instance
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.GetLimitPrice(VigiothCapital.QuantTrader.Orders.Order)">
+            <summary>
+            Gets the limit price used in API calls with tradier from the specified qc order instance
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ContingentOrderQueue.QCOrder">
+            <summary>
+            The original order produced by the algorithm
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ContingentOrderQueue.Contingents">
+            <summary>
+            A queue of contingent orders to be placed after fills
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerage.ContingentOrderQueue.Next">
+            <summary>
+            Dequeues the next contingent order, or null if there are none left
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalance">
+            <summary>
+            Inside "Account" User-account balance information.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalance.Balances">
+            Balances of the Tradier Account:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails">
+            <summary>
+            Trader Balance Detail:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.AccountNumber">
+            Account Number
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.Type">
+            Account Type (margin, cash, pdt)
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.CashAvailable">
+            The amount of cash that could be withdrawn or invested in new investments, cash that is not required to support existing positions
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.ClosingProfitLoss">
+            The ProfitLoss of the current trading day’s closed positions.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.CurrentRequirement">
+            The option requirement of current account positions.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.DividendBalance">
+            Dividend Balance
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.Equity">
+            Equity Value
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.LongLiquidValue">
+            Long Liquid Value
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.LongMarketValue">
+            Long Market Value
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.MarketValue">
+            Market Value
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.NetValue">
+            Net Value
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.OpenProfitLoss">
+            The Profit Loss of current account positions.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.OptionLongValue">
+            The value of long options held in the account.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.OptionRequirement">
+            Option Requirement
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.OptionShortValue">
+            The value of short options held in the account.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.PendingCash">
+            The amount of cash that is being held for open orders.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.PendingOrdersCount">
+            The amount of open orders.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.ShortLiquidValue">
+            Short Liquid Value
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.ShortMarketValue">
+            Short Market Value
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.StockLongValue">
+            The value of long stocks held in the account.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.UnclearedFunds">
+            The amount of funds that are not currently available for trading.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.UnsettledFunds">
+            Cash that is in the account from recent stock or option sales, but has not yet settled; 
+            cash from stock sales occurring during the last 3 trading days or from option sales occurring during the previous trading day.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.TotalCash">
+            The total amount of cash in the account.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.TotalEquity">
+            The total account value.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.CashTypeSettings">
+            Settings class for PDT specific accounts:
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.PatternTraderTypeSettings">
+            Settings class for PDT specific accounts:
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBalanceDetails.MarginTypeSettings">
+            Settings class for margin specific accounts
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeSettings">
+            <summary>
+            Common Account Settings.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeSettings.FedCall">
+            The amount that the account is in deficit for trades that have occurred but not been paid for.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeSettings.MaintenanceCall">
+            The amount that the account is under the minimum equity required in the account to support the current holdings.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeSettings.StockBuyingPower">
+            The amount of funds available to purchase fully marginable securities.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeSettings.OptionBuyingPower">
+            The amount of funds available to purchase non-marginable securities.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeSettings.StockShortValue">
+            The value of short stocks held in the account.
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeSettings.#ctor">
+            Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeDayTrader">
+            <summary>
+            Account Type Day Trader Settings:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeDayTrader.DayTradeBuyingPower">
+            The total amount of funds available for the purchase of fully marginable stock during that trading day, a portion of these funds cannot be held overnight.
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeDayTrader.#ctor">
+            Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeMargin">
+            <summary>
+            Account Type Margin Settings:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeMargin.Sweep">
+            "Sweep"
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeMargin.#ctor">
+            Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeCash">
+            <summary>
+            Account Type Margin Settings:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeCash.Sweep">
+            "Sweep"
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeCash.CashAvailable">
+            "Cash Available"
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeCash.UnsettledFunds">
+            "Unsettled."
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountTypeCash.#ctor">
+            Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierApiRequestType">
+            <summary>
+            Rate limiting categorization
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierApiRequestType.Standard">
+            Standard Rate Limit
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierApiRequestType.Data">
+            Data API Rate Limiting
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierApiRequestType.Orders">
+            Orders API Rate Limit
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountType">
+            <summary>
+            Tradier account type:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountType.DayTrader">
+            Account Type: Trader
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountType.Cash">
+            Account Type: Cash
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountType.Margin">
+            Account Type: Margin
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection">
+            <summary>
+            Direction of the order
+            (buy, buy_to_open, buy_to_cover, buy_to_close, sell, sell_short, sell_to_open, sell_to_close)
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.Buy">
+            TradierOrderDirection: Buy          -- Equity -- Open Buy New Position
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.SellShort">
+            TradierOrderDirection: Sell Short   -- Equity -- Open New Short Sell 
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.Sell">
+            TradierOrderDirection: Sell         -- Equity -- Closing Long Existing Positions
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.BuyToCover">
+            TradierOrderDirection: Buy to Cover -- Equity -- Closing a short equity
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.SellToOpen">
+            OPTIONS ONLY vvvvvvvvvvvvvvvvvvvvvvv
+            TradierOrderDirection: Sell to Open
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.SellToClose">
+            TradierOrderDirection: Sell to Close
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.BuyToClose">
+            TradierOrderDirection: Buy to Close
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.BuyToOpen">
+            TradierOrderDirection: Buy to Open 
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDirection.None">
+            Order Fail Case:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus">
+            <summary>
+            Status of the tradier order.
+             (filled, canceled, open, expired, rejected, pending, partially_filled, submitted)
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.Filled">
+            TradierOrderStatus: Fill
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.Canceled">
+            TradierOrderStatus: Cancelled
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.Open">
+            TradierOrderStatus: Open
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.Expired">
+            TradierOrderStatus: Expired
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.Rejected">
+            TradierOrderStatus: Rejected
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.Pending">
+            TradierOrderStatus: Pending
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.PartiallyFilled">
+            TradierOrderStatus: Partially Filled
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderStatus.Submitted">
+            TradierOrderStatus: Submitted
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDuration">
+            <summary>
+            Length of the order offer.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDuration.GTC">
+            TradierOrderDuration: Good to Cancelled
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDuration.Day">
+            TradierOrderDuration: Day Period
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderClass">
+            <summary>
+            Class of the order.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderClass.Equity">
+            TradierOrderClass: Equity
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderClass.Option">
+            TradierOrderClass: Option
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderClass.Multileg">
+            TradierOrderClass: Multi
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderClass.Combo">
+            TradierOrderClass: Combo
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountStatus">
+            <summary>
+            Account status flag.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountStatus.New">
+            TradierAccountStatus: New
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountStatus.Approved">
+            TradierAccountStatus: Approved
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountStatus.Closed">
+            TradierAccountStatus: Closed
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionStatus">
+            <summary>
+            Tradier options status
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionStatus.Exercise">
+            TradierOptionStatus: exercise
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionStatus.Expired">
+            TradierOptionStatus: Expired
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionStatus.Assignment">
+            TradierOptionStatus: Assignment
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesIntervals">
+            <summary>
+            TradeBar windows for Tradier's data histories
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesIntervals.Tick">
+            TradierTimeSeriesIntervals: Tick
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesIntervals.OneMinute">
+            TradierTimeSeriesIntervals: 1min
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesIntervals.FiveMinutes">
+            TradierTimeSeriesIntervals: 5min
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesIntervals.FifteenMinutes">
+            TradierTimeSeriesIntervals: 15min
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoricalDataIntervals">
+            <summary>
+            Historical data intervals for tradier requests:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoricalDataIntervals.Daily">
+            TradierTimeSeriesIntervals: Daily
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoricalDataIntervals.Weekly">
+            TradierTimeSeriesIntervals: Weekly
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoricalDataIntervals.Monthly">
+            TradierTimeSeriesIntervals: Molnthly
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionType">
+            <summary>
+            Tradier option type
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionType.Put">
+            Option Type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionType.Call">
+            Option Type
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionExpirationType">
+            <summary>
+            Tradier options expiration
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionExpirationType.Standard">
+            Option Expiration std.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionExpirationType.Weekly">
+            Option Expiration std.
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountClassification">
+            <summary>
+            Account classification
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountClassification.Individual">
+            Account Classification Individual
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountClassification.IRA">
+            Account Classification IRA
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountClassification.Roth_Ira">
+            Account Classification Roth_Ira
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountClassification.Joint">
+            Account Classification Joint
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierAccountClassification.Entity">
+            Account Classification Entity
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventType">
+            <summary>
+            Tradier event type:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventType.Trade">
+            Trade Event
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventType.Journal">
+            Journal Event
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventType.Option">
+            Option Event
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventType.Dividend">
+            Dividend Event
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeType">
+            <summary>
+            Market type of the trade: 
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeType.Equity">
+            Equity Trade Type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeType.Option">
+            Option Trade Type
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType">
+            <summary>
+            Tradier order type: (market, limit, stop, stop_limit or market) //credit, debit, even
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType.Limit">
+            Order Type: Limit
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType.Market">
+            Order Type: Market
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType.StopLimit">
+            Order Type: Stop Limit
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType.StopMarket">
+            Order Type: Stop Market
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType.Credit">
+            Order Type: Credit
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType.Debit">
+            Order Type: Debit
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderType.Even">
+            Order Type: Even
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesContainer">
+            <summary>
+            Container for timeseries array
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeriesContainer.TimeSeries">
+            Data Time Series
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries">
+            <summary>
+            One bar of historical Tradier data.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries.Time">
+            Time of Price Sample
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries.Price">
+            Tick data requests:
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries.Open">
+            Bar Requests: Open
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries.High">
+            Bar Requests: High
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries.Low">
+            Bar Requests: Low
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries.Close">
+            Bar Requests: Close
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTimeSeries.Volume">
+            Bar Requests: Volume
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuoteContainer">
+            <summary>
+            Container for quotes:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuoteContainer.Quotes">
+            Price Quotes:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote">
+            <summary>
+            Quote data from Tradier:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Symbol">
+            Quote Symbol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Description">
+            Quote Description
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Exchange">
+            Quote Exchange
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Type">
+            Quote Type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Last">
+            Quote Last Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Change">
+            Quote Change Absolute
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.PercentageChange">
+            Quote Change Percentage
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Volume">
+            Quote Volume
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.AverageVolume">
+            Quote Average Volume
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.LastVolume">
+            Quote Last Volume
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.TradeDateUnix">
+            Last Trade Date in Unix Time
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Open">
+            Open Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.High">
+            High Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Low">
+            Low Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Close">
+            Closng Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.PreviousClose">
+            Previous Close
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Week52High">
+            52 W high
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Week52Low">
+            52 W Low
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Bid">
+            Bid Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.BidSize">
+            Bid Size:
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.BigExchange">
+            Bid Exchange
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.BidDateUnix">
+            Bid Date Unix
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Ask">
+            Asking Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.AskSize">
+            Asking Quantity
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.AskExchange">
+            Ask Exchange
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.AskDateUnix">
+            Date of Ask
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Options_OpenInterest">
+            Open Interest
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Options_UnderlyingAsset">
+            Option Underlying Asset
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Options_Strike">
+            Option Strike Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Options_ContractSize">
+            Option Constract Size
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Options_ExpirationDate">
+            Option Exp Date
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Options_ExpirationType">
+            Option Exp Type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.Options_OptionType">
+            Option Type
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierQuote.#ctor">
+            Empty Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryDataContainer">
+            <summary>
+            Container for deserializing history classes
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryDataContainer.Data">
+            Historical Data Contents
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryBar">
+            <summary>
+            "Bar" for a history unit.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryBar.Time">
+            Historical Data Bar: Date
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryBar.Open">
+            Historical Data Bar: Open
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryBar.High">
+            Historical Data Bar: High
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryBar.Low">
+            Historical Data Bar: Low
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryBar.Close">
+            Historical Data Bar: Close
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierHistoryBar.Volume">
+            Historical Data Bar: Volume
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierMarketStatus">
+            <summary>
+            Current market status description
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierMarketStatus.Date">
+            Market Status: Date
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierMarketStatus.Description">
+            Market Status: Description
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierMarketStatus.NextChange">
+            Market Status: Next Change in Status
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierMarketStatus.State">
+            Market Status: State 
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierMarketStatus.TimeStamp">
+            Market Status: Timestamp
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarStatus">
+            <summary>
+            Calendar status:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarStatus.Days">
+            Trading Calendar: Day
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarStatus.Month">
+            Trading Calendar: month
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarStatus.Year">
+            Trading Calendar: year
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDayContainer">
+            <summary>
+            Container for the days array:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDayContainer.Days">
+            Trading Calendar: Days List
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDay">
+            <summary>
+            Single days properties from the calendar:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDay.Date">
+            Trading Calendar: Day
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDay.Status">
+            Trading Calendar: Sattus
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDay.Description">
+            Trading Calendar: Description
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDay.Premarket">
+            Trading Calendar: Premarket Hours
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDay.Open">
+            Trading Calendar: Open Hours
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDay.Postmarket">
+            Trading Calendar: Post Hours
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDayMarketHours">
+            <summary>
+            Start and finish time of market hours for this market.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDayMarketHours.Start">
+            Trading Calendar: Start Hours
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierCalendarDayMarketHours.End">
+            Trading Calendar: End Hours
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierSearchContainer">
+            <summary>
+            Tradier Search Container for Deserialization:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierSearchContainer.Results">
+            Trading Search container
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierSearchResult">
+            <summary>
+            One search result from API
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierSearchResult.Symbol">
+            Trading Search: Symbol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierSearchResult.Exchange">
+            Trading Search: Exch
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierSearchResult.Type">
+            Trading Search: Type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierSearchResult.Description">
+            Trading Search: Description
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamSession">
+            <summary>
+            Create a new stream session
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamSession.SessionId">
+            Trading Stream: Session Id 
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamSession.Url">
+            Trading Stream: Stream URL
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData">
+            <summary>
+            One data packet from a tradier stream:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.Type">
+            Trading Stream: Type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.Symbol">
+            Trading Stream: Symbol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.SummaryOpen">
+            Trading Stream: Open
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.SummaryHigh">
+            Trading Stream: High
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.SummaryLow">
+            Trading Stream: Low
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.SummaryClose">
+            Trading Stream: Close
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.BidPrice">
+            Trading Stream: Bid Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.BidSize">
+            Trading Stream: BidSize
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.BidExchange">
+            Trading Stream: Bid Exhc
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.BidDateUnix">
+            Trading Stream: Bid Time
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.TradePrice">
+            Trading Stream: Last Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.TradeSize">
+            Trading Stream: Last Size
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.TradeExchange">
+            Trading Stream: Last Exh
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.TradeCVol">
+            Trading Stream: Last Vol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.AskPrice">
+            Trading Stream: Ask Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.AskSize">
+            Trading Stream: Ask Size
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.AskExchange">
+            Trading Stream: Ask Exhc
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierStreamData.AskDateUnix">
+            Trading Stream: Ask Date
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFaultContainer">
+            <summary>
+            Wrapper container for fault:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFaultContainer.Fault">
+            Inner Fault Object
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFaultContainer.#ctor">
+            Fault Container Constructor:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFault">
+            <summary>
+            Tradier fault object:
+            {"fault":{"faultstring":"Access Token expired","detail":{"errorcode":"keymanagement.service.access_token_expired"}}}
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFault.Description">
+            Description of fault
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFault.Details">
+            Detail object for fault exception
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFault.#ctor">
+            Tradier Fault Constructor:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFaultDetail">
+            <summary>
+            Error code associated with this fault.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFaultDetail.ErrorCode">
+            Error code for fault
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierFaultDetail.#ctor">
+            Tradier Detail Fault Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLossContainer">
+            <summary>
+            Gain loss parent class for deserialization
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLossContainer.GainLossClosed">
+            Profit Loss
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLossContainer.#ctor">
+            Null Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLossClosed">
+            <summary>
+            Gain loss class
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLossClosed.ClosedPositions">
+            Array of user account details:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss">
+            <summary>
+            Account only settings for a tradier user:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.CloseDate">
+            Date the position was closed.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.OpenDate">
+            Date the position was opened
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.Cost">
+            Total cost of the order.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.GainLoss">
+            Gain or loss on the position.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.GainLossPercentage">
+            Percentage of gain or loss on the position.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.Proceeds">
+            Total amount received for the order.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.Quantity">
+            Number of shares/contracts
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.Symbol">
+            Symbol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.Term">
+            Number of shares/contracts
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierGainLoss.#ctor">
+            <summary>
+            Closed position trade summary
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventContainer">
+            <summary>
+            Tradier deserialization container for history
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventContainer.TradierEvents">
+            Event Contents:
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventContainer.#ctor">
+            Default constructor for json serialization
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvents">
+            <summary>
+            Events array container.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvents.Events">
+            Events List:
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvents.#ctor">
+            Default Constructor for JSON
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent">
+            <summary>
+            Tradier event model:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent.Amount">
+            Tradier Event: Amount
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent.Date">
+            Tradier Event: Date
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent.Type">
+            Tradier Event: Type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent.TradeEvent">
+            Tradier Event: TradeEvent
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent.JournalEvent">
+            Tradier Event: Journal Event
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent.OptionEvent">
+            Tradier Event: Option Event
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEvent.DividendEvent">
+            Tradier Event: Dividend Event
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventDetail">
+            <summary>
+            Common base class for events detail information:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventDetail.Description">
+            Tradier Event: Description
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventDetail.Quantity">
+            Tradier Event: Quantity
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierEventDetail.#ctor">
+            Empty Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeEvent">
+            <summary>
+            Trade event in history for tradier:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeEvent.Commission">
+            Tradier Event: Comission
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeEvent.Price">
+            Tradier Event: Price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeEvent.Symbol">
+            Tradier Event: Symbol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeEvent.TradeType">
+            Tradier Event: Trade Type
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierTradeEvent.#ctor">
+            Empty constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierJournalEvent">
+            <summary>
+            Journal event in history:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierJournalEvent.#ctor">
+            
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierDividendEvent">
+            <summary>
+            Dividend event in history:
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierDividendEvent.#ctor">
+            
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionEvent">
+            <summary>
+            Option event record in history:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionEvent.Type">
+            
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOptionEvent.#ctor">
+            
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrdersContainer">
+            <summary>
+            Order parent class for deserialization
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrdersContainer.Orders">
+            Orders Contents:
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrdersContainer.#ctor">
+            Constructor: Orders parent:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrders">
+            <summary>
+            Order container class
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrders.Orders">
+            Array of user account details:
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrders.#ctor">
+            Null Constructor:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder">
+            <summary>
+            Intraday or pending order for user
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Id">
+            Unique order id.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Type">
+            Market, Limit Order etc.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Symbol">
+            Symbol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Direction">
+            Long short.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Quantity">
+            Quantity
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Status">
+            Status of the order (filled, canceled, open, expired, rejected, pending, partially_filled, submitted).
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Duration">
+            Duration of the order (day, gtc)
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Price">
+            Percentage of gain or loss on the position.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.AverageFillPrice">
+            Average fill price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.QuantityExecuted">
+            Quantity executed
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.LastFillPrice">
+            Last fill price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.LastFillQuantity">
+            Last amount filled
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.RemainingQuantity">
+            Quantity Remaining in Order.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.CreatedDate">
+            Date order was created.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.TransactionDate">
+            Date order was created.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Class">
+            Classification of order (equity, option, multileg, combo)
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.NumberOfLegs">
+            The number of legs
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.Legs">
+            Numberof legs in order
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrder.#ctor">
+            Closed position trade summary
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailedContainer">
+            <summary>
+            Detailed order parent class
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailedContainer.DetailedOrder">
+            Details of the order
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponse">
+            <summary>
+            Deserialization wrapper for order response:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponse.Order">
+            Tradier Order information
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponse.Errors">
+            Errors in request
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponseError">
+            <summary>
+            Errors result from an order request.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponseError.Errors">
+            List of errors
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponseOrder">
+            <summary>
+            Order response when purchasing equity.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponseOrder.Id">
+            id or order response
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponseOrder.PartnerId">
+            Partner id - me
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderResponseOrder.Status">
+            Status of order
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailed">
+            <summary>
+            Detailed order type.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailed.Exchange">
+            Order exchange
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailed.ExecutionExchange">
+            Executed Exchange
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailed.OptionType">
+            Option type
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailed.OptionExpirationDate">
+            Expiration date
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderDetailed.StopPrice">
+            Stop Price
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg">
+            <summary>
+            Leg of a tradier order:
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.Type">
+            Date order was created.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.Symbol">
+            Symbol
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.Direction">
+            Long short.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.Quantity">
+            Quantity
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.Status">
+            Status of the order (filled, canceled, open, expired, rejected, pending, partially_filled, submitted).
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.Duration">
+            Duration of the order (day, gtc)
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.Price">
+            Percentage of gain or loss on the position.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.AverageFillPrice">
+            Average fill price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.QuantityExecuted">
+            Quantity executed
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.LastFillPrice">
+            Last fill price
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.LastFillQuantity">
+            Last amount filled
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.RemainingQuantity">
+            Quantity Remaining in Order.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.CreatedDate">
+            Date order was created.
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.TransacionDate">
+            Date order was created.
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierOrderLeg.#ctor">
+            Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPositionsContainer">
+            <summary>
+            Empty class for deserializing positions held.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPositionsContainer.TradierPositions">
+            Positions Class
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPositionsContainer.#ctor">
+            Default Constructor:
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPositions">
+            <summary>
+            Position array container.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPositions.Positions">
+            Positions Class List
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPositions.#ctor">
+            Default Constructor for JSON
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPosition">
+            <summary>
+            Individual Tradier position model.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPosition.Id">
+            Position Id
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPosition.DateAcquired">
+            Postion Date Acquired,
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPosition.Quantity">
+            Position Quantity
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPosition.CostBasis">
+            Position Cost:
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierPosition.Symbol">
+            Position Symbol
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse">
+            <summary>
+            Token response model from VigiothCapital.QuantTrader terminal
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse.AccessToken">
+            Access token for current requests:
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse.RefreshToken">
+            Refersh token for next time
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse.ExpiresIn">
+            Seconds the tokens expires
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse.Scope">
+            Scope of token access
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse.IssuedAt">
+            Time the token was issued:
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse.Success">
+            Success flag:
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TokenResponse.#ctor">
+            <summary>
+             Default constructor:
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory">
+            <summary>
+            Provides an implementations of IBrokerageFactory that produces a TradierBrokerage
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Configuration">
+            <summary>
+            Gets tradier values from configuration
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Configuration.UserID">
+            <summary>
+            Gets the account ID to be used when instantiating a brokerage
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Configuration.AccountID">
+            <summary>
+            Gets the account ID to be used when instantiating a brokerage
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Configuration.AccessToken">
+            <summary>
+            Gets the access token from configuration
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Configuration.RefreshToken">
+            <summary>
+            Gets the refresh token from configuration
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Configuration.TokensIssuedAt">
+            <summary>
+            Gets the date time the tokens were issued at from configuration
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Configuration.LifeSpan">
+            <summary>
+            Gets the life span of the tokens from configuration
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.TokensFile">
+            <summary>
+            File path used to store tradier token data
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.#ctor">
+            <summary>
+            Initializes a new instance of he TradierBrokerageFactory class
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.BrokerageData">
+            <summary>
+            Gets the brokerage data required to run the brokerage from configuration/disk
+            </summary>
+            <remarks>
+            The implementation of this property will create the brokerage data dictionary required for
+            running live jobs. See <see cref="M:VigiothCapital.QuantTrader.Interfaces.IJobQueueHandler.NextJob(System.String@)"/>
+            </remarks>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.BrokerageModel">
+            <summary>
+            Gets a new instance of the <see cref="T:VigiothCapital.QuantTrader.Brokerages.TradierBrokerageModel"/>
+            </summary>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.CreateBrokerage(VigiothCapital.QuantTrader.Packets.LiveNodePacket,VigiothCapital.QuantTrader.Interfaces.IAlgorithm)">
+            <summary>
+            Creates a new IBrokerage instance
+            </summary>
+            <param name="job">The job packet to create the brokerage for</param>
+            <param name="algorithm">The algorithm instance</param>
+            <returns>A new brokerage instance</returns>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.GetTokens">
+            <summary>
+            Reads the tradier tokens from the <see cref="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierBrokerageFactory.TokensFile"/> or from configuration
+            </summary>
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserContainer">
+            <summary>
+            Model for a TradierUser returned from the API.
+            </summary>
+        </member>
+        <member name="F:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserContainer.Profile">
+            User Profile Contents
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserContainer.#ctor">
+            Constructor: Create user from tradier data.
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUser">
+            <summary>
+            User profile array:
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUser.Id">
+            Unique brokerage user id.
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUser.Name">
+            Name of user:
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUser.Accounts">
+            Array of user account details:
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUser.#ctor">
+            Empty Constructor
+        </member>
+        <member name="T:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount">
+            <summary>
+            Account only settings for a tradier user:
+            </summary>
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.AccountNumber">
+            Users account number
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.DayTrader">
+            Pattern Trader:
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.OptionLevel">
+            Options level permissions on account.
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.Type">
+            Cash or Margin Account:
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.LastUpdated">
+            Date time of the last update:
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.Status">
+            Status of the users account:
+        </member>
+        <member name="P:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.Classification">
+            Type of user account
+        </member>
+        <member name="M:VigiothCapital.QuantTrader.Brokerages.Tradier.TradierUserAccount.#ctor">
+            <summary>
+            Create a new account:
+            </summary>
+        </member>
+    </members>
+</doc>

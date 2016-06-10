@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FIX4NET.MessageCache.FlatFile</name>
+    </assembly>
+    <members>
+        <member name="T:FIX4NET.MessageCache.FlatFile.FileDateFormat">
+            <summary>
+            Generates a date trailer string using the standard Date/Time formatter.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.MessageCache.FlatFile.IFileDateFormat">
+            <summary>
+            When creating cache file name the implementing class can customize date trailer 
+            allowing it to control how often the MsgSeqNum In/Out gets reset.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.IFileDateFormat.ToString(System.DateTime)">
+            <summary>
+            Create the trailer string put at the end of the file name to roll files.
+            </summary>
+            <param name="date">The date to be used when generating the file name trailer.</param>
+            <returns>The value that gets appended to the file name to roll files.</returns>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.FileDateFormat.ToString(System.DateTime)">
+            <summary>
+            Create the trailer string put at the end of the file name to roll files.
+            </summary>
+            <param name="date">The date to be used when generating the file name trailer.</param>
+            <returns>The value that gets appended to the file name to roll files.</returns>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.FileDateFormat.Format">
+            <summary>
+            Format to be used when generating the date trailer at the end of a file.
+            </summary>
+        </member>
+        <member name="T:FIX4NET.MessageCache.FlatFile.FileDateFormatWeekly">
+            <summary>
+            Generates a weekly date trailer put at the end of a file.  This will roll the cache file weekly so MsgSeqNum In/Out chages weekly.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.FileDateFormatWeekly.ToString(System.DateTime)">
+            <summary>
+            Create the trailer string put at the end of the file name to roll files.
+            </summary>
+            <param name="date">The date to be used when generating the file name trailer.</param>
+            <returns>The value that gets appended to the file name to roll files.</returns>
+        </member>
+        <member name="T:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile">
+            <summary>
+            Summary description for MessageCacheDisk.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.AddMessage(FIX4NET.IMessage)">
+            <summary>
+            Add a message.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.GetMsgSeqNum(FIX4NET.MessageDirection)">
+            <summary>
+            Get current MsgSeqNum by MessageDirection.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Initialize(FIX4NET.IMessageFactory)">
+            <summary>
+            Initialize the cache.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Open(System.String,System.String,System.String,System.String)">
+            <summary>
+            Opens the cache for read/write access.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Open(System.String,System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Opens the cache for read/write access of a specific date.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Open(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Opens the cache for read or read/write access.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Open(System.String,System.String,System.String,System.String,System.DateTime,System.Boolean)">
+            <summary>
+            Opens the cache for read or read/write access of a specific date.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Item(System.Int32)">
+            <summary>
+            Gets a message by the index position.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Path">
+            <summary>
+            Get/Set the path where data/index files will be stored.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.FileDateFormat">
+            <summary>
+            Format class used to generate the date trailer on the end of a file name.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.Item(FIX4NET.MessageDirection,System.Int32)">
+            <summary>
+            Get a message by the MessageDirection and MsgSeqNum.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.MsgIndex">
+            <summary>
+            Current MsgIndex for messages.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.MsgSeqNumOut">
+            <summary>
+            Current MsgSeqNum for incoming messages.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFile.MsgSeqNumIn">
+            <summary>
+            Current MsgSeqNum for outgoing messages.  This updates in real-time as messages are added.
+            </summary>
+        </member>
+        <member name="M:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFileFactory.CreateInstance">
+            <summary>
+            Creates instance of IMessageCache object used to save/retreive messages.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFileFactory.Path">
+            <summary>
+            Get/Set the path where data/index files will be stored.
+            </summary>
+        </member>
+        <member name="P:FIX4NET.MessageCache.FlatFile.MessageCacheFlatFileFactory.FileDateFormat">
+            <summary>
+            Format class used to generate the date trailer on the end of a file name.
+            </summary>
+        </member>
+    </members>
+</doc>

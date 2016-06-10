@@ -1,0 +1,9 @@
+FilePartCount= 
+InSeqNum= 
+OutSeqNum= 
+SenderCompID=Client
+SessionCreationTime=20160608-02:17:54.380531200
+TargetCompID=MarketDataFeed
+Terminated=true
+Version=FIX.4.4
+ 

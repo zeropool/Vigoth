@@ -1,0 +1,5 @@
+C:\Users\SHLBND\Downloads\TALib-CSharp-Sample-master\TALib-CSharp-Sample-master\TALibTester\bin\Debug\TALibTester.exe
+C:\Users\SHLBND\Downloads\TALib-CSharp-Sample-master\TALib-CSharp-Sample-master\TALibTester\bin\Debug\TALibTester.pdb
+C:\Users\SHLBND\Downloads\TALib-CSharp-Sample-master\TALib-CSharp-Sample-master\TALibTester\bin\Debug\TA-Lib-Core.dll
+C:\Users\SHLBND\Downloads\TALib-CSharp-Sample-master\TALib-CSharp-Sample-master\TALibTester\obj\x86\Debug\TALibTester.exe
+C:\Users\SHLBND\Downloads\TALib-CSharp-Sample-master\TALib-CSharp-Sample-master\TALibTester\obj\x86\Debug\TALibTester.pdb

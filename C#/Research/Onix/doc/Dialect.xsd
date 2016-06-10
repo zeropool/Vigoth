@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright Onix Solutions Limited [OnixS]. All rights reserved.
+
+    This software owned by Onix Solutions Limited [OnixS] and is protected by copyright law
+    and international copyright treaties.
+
+    Access to and use of the software is governed by the terms of the applicable OnixS Software
+    Services Agreement (the Agreement) and Customer end user license agreements granting
+    a non-assignable, non-transferable and non-exclusive license to use the software
+    for it's own data processing purposes under the terms defined in the Agreement.
+
+    Except as otherwise granted within the terms of the Agreement, copying or reproduction of any part
+    of this source code or associated reference material to any other location for further reproduction
+    or redistribution, and any amendments to this copyright notice, are expressly prohibited.
+
+    Any reproduction or redistribution for sale or hiring of the Software not in accordance with
+    the terms of the Agreement is a violation of copyright law.
+
+-->
+<xs:schema targetNamespace="http://ref.onixs.biz/fix/dialects"
+           xmlns="http://ref.onixs.biz/fix/dialects"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           version="2.14">
+
+  <xs:simpleType name="FixVersion">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="4.0"/>
+      <xs:enumeration value="4.1"/>
+      <xs:enumeration value="4.2"/>
+      <xs:enumeration value="4.3"/>
+      <xs:enumeration value="4.4"/>
+      <xs:enumeration value="5.0"/>
+      <xs:enumeration value="5.0_SP1"/>
+      <xs:enumeration value="5.0_SP2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FieldValueType">
+    <xs:restriction base="xs:string">
+      <xs:pattern  value="AMT"/>
+      <xs:pattern  value="BOOLEAN"/>
+      <xs:pattern  value="CHAR"/>
+      <xs:pattern  value="COUNTRY"/>
+      <xs:pattern  value="CURRENCY"/>
+      <xs:pattern  value="DAYOFMONTH"/>
+      <xs:pattern  value="DATA"/>
+      <xs:pattern  value="EXCHANGE"/>
+      <xs:pattern  value="FLOAT"/>
+      <xs:pattern  value="INT"/>
+      <xs:pattern  value="LENGTH"/>
+      <xs:pattern  value="LANGUAGE"/>
+      <xs:pattern  value="LOCALMKTDATE"/>
+      <xs:pattern  value="MULTIPLEVALUESTRING"/>
+      <xs:pattern  value="MULTIPLECHARVALUE"/>
+      <xs:pattern  value="MULTIPLESTRINGVALUE"/>
+      <xs:pattern  value="MONTHYEAR"/>
+      <xs:pattern  value="NUMINGROUP"/>
+      <xs:pattern  value="PRICE"/>
+      <xs:pattern  value="PRICEOFFSET"/>
+      <xs:pattern  value="PERCENTAGE"/>
+      <xs:pattern  value="PATTERN"/>
+      <xs:pattern  value="QTY"/>
+      <xs:pattern  value="RESERVED1000PLUS"/>
+      <xs:pattern  value="RESERVED100PLUS"/>
+      <xs:pattern  value="RESERVED4000PLUS"/>
+      <xs:pattern  value="SEQNUM"/>
+      <xs:pattern  value="STRING"/>
+      <xs:pattern  value="TZTIMEONLY"/>
+      <xs:pattern  value="TZTIMESTAMP"/>
+      <xs:pattern  value="TAGNUM"/>
+      <xs:pattern  value="TENOR"/>
+      <xs:pattern  value="UTCDATE"/>
+      <xs:pattern  value="UTCTIMESTAMP"/>
+      <xs:pattern  value="UTCTIMEONLY"/>
+      <xs:pattern  value="UTCDATEONLY"/>
+      <xs:pattern  value="XMLDATA"/>
+      <xs:pattern  value="[A-Za-z]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Mode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="append"/>
+      <xs:enumeration value="override"/>
+      <xs:enumeration value="remove"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="CommonAttr">
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="comment" type="xs:string"/>
+  </xs:attributeGroup>
+
+  <xs:complexType name="Field">
+    <xs:attribute name="tag" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="isRequired" type="xs:boolean" default="false"/>
+    <xs:attribute name="mode" type="Mode" default="override"/>
+    <xs:attribute name="type" type="FieldValueType" use="optional"/>
+    <xs:attributeGroup ref="CommonAttr"/>
+  </xs:complexType>
+
+  <xs:complexType name="Group">
+    <xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Field" type="Field"/>
+        <xs:element name="Group" type="Group"/>
+        <xs:element name="Component" type="Component"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="numberOfInstancesTag" type="xs:positiveInteger"/>
+    <xs:attribute name="mode" type="Mode" default="append"/>
+    <xs:attributeGroup ref="CommonAttr"/>
+  </xs:complexType>
+
+  <xs:complexType name="Component">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Field" type="Field"/>
+                <xs:element name="Group" type="Group"/>
+				<xs:element name="Component" type="Component"/>
+            </xs:choice>
+        </xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Message">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Field" type="Field"/>
+        <xs:element name="Group" type="Group"/>
+				<xs:element name="Component" type="Component"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="mode" type="Mode" default="append"/>
+    <xs:attributeGroup ref="CommonAttr"/>
+  </xs:complexType>
+
+  <xs:complexType name="FIX">
+    <xs:sequence>
+      <xs:element name="Type" type="Type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Component" type="Component" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Message" type="Message" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="FixVersion"/>
+    <xs:attribute name="id" type="xs:string" use="optional"/>
+    <xs:attribute name="revision" type="xs:string" use="optional"/>
+    <xs:attribute name="mode" type="Mode" default="append"/>
+    <xs:attributeGroup ref="CommonAttr"/>
+  </xs:complexType>
+
+  <xs:complexType name="Type">
+    <xs:sequence>
+      <xs:element name="Value" type="EnumValue" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="mode" type="Mode" default="append"/>
+  </xs:complexType>
+
+  <xs:complexType name="EnumValue">
+    <xs:attribute name="enum" type="xs:string" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Dialect">
+    <xs:sequence>
+      <xs:element name="FIX" type="FIX" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="optional"/>
+    <xs:attributeGroup ref="CommonAttr"/>
+  </xs:complexType>
+
+  <xs:element name="Dialect" type="Dialect"/>
+</xs:schema>

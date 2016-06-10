@@ -1,0 +1,101 @@
+﻿<Window x:Class="forex_arbitrage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fa="clr-namespace:forex_arbitrage"
+        Title="MainWindow" Height="350" Width="525" Background="Black" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Connect" Click="File_Connect_Clicked" />
+                <MenuItem Header="_Disconnect" Click="File_Disconnect_Clicked" />
+                <MenuItem Header="_Test" Click="File_Test_Clicked" />
+                <MenuItem Header="Exit" Click="File_Exit_Clicked" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+        </Menu>
+        <Viewbox Grid.Row="2" x:Name="myViewbox" >
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Text="MEAN/SD"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Mean, FallbackValue=0.0000, StringFormat='{}{0:#,0}'}"/>
+                            <TextBlock Text="/" />
+                            <Label Content="{Binding SD, FallbackValue=0.0000, StringFormat='{}{0:#,0}'}"/>
+                        </StackPanel>
+                        <Separator />
+                        <TextBlock Text="A/B λmax"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding ALambdaMax, FallbackValue=0.0000, StringFormat='{}{0:#,0}'}"/>
+                            <TextBlock Text="/" />
+                            <Label Content="{Binding BLambdaMax, FallbackValue=0.0000, StringFormat='{}{0:#,0}'}"/>
+                        </StackPanel>
+                        <Separator  />
+                    </StackPanel>
+                    <Grid x:Name="myGrid" ShowGridLines="True" />
+                </StackPanel>
+                <TabControl>
+                    <TabItem Header="Active">
+                        <ListBox x:Name="m_activeListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300">
+                            <ListBoxItem>USD.EUR > EUR.CHF > CHF.USD (0.01%)</ListBoxItem>
+                            <ListBoxItem>USD.JPY > JPY.CHF > CHF.USD (0.02%)</ListBoxItem>
+                        </ListBox>
+                    </TabItem>
+                    <TabItem Header="Historic">
+                        <ListBox x:Name="m_historicListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300">
+                            <ListBoxItem>USD.EUR > EUR.CHF > CHF.USD (0.01%)</ListBoxItem>
+                            <ListBoxItem>USD.JPY > JPY.CHF > CHF.USD (0.02%)</ListBoxItem>
+                        </ListBox>
+                    </TabItem>
+                    <TabItem Header="Watch">
+                        <ListBox x:Name="m_watchListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300">
+                            <ListBoxItem>USD.EUR > EUR.CHF > CHF.USD (0.01%)</ListBoxItem>
+                            <ListBoxItem>USD.JPY > JPY.CHF > CHF.USD (0.02%)</ListBoxItem>
+                        </ListBox>
+                    </TabItem>
+                    <TabItem Header="Stasis">
+                        <ListBox x:Name="m_stasisListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300">
+                            <ListBoxItem>USD.EUR > EUR.CHF > CHF.USD (0.01%)</ListBoxItem>
+                            <ListBoxItem>USD.JPY > JPY.CHF > CHF.USD (0.02%)</ListBoxItem>
+                        </ListBox>
+                    </TabItem>                    
+                </TabControl>
+            </StackPanel>
+        </Viewbox>
+        <StatusBar Grid.Row="3">
+            <TextBlock x:Name="networkStatus">Offline</TextBlock>
+            <Separator />
+            <TextBlock x:Name="generalStatus" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis">Welcome!</TextBlock>
+        </StatusBar>
+    </Grid>
+</Window>
+
+    
