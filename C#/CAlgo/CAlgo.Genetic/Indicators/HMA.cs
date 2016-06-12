@@ -5,47 +5,35 @@ using cAlgo.API.Indicators;
 namespace cAlgo.Indicators
 {
     [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
-    public class HullMovingAverage : Indicator
+    public class HMA : Indicator
     {
-        private WeightedMovingAverage _wma;
-        private WeightedMovingAverage _wma2;
-        private WeightedMovingAverage _wma3;
-        private IndicatorDataSeries _iSeries;
+        [Output("HMA", Color = Colors.Orange)]
+        public IndicatorDataSeries hma { get; set; }
 
-        [Parameter]
-        public DataSeries Source { get; set; }
-
-        [Parameter(DefaultValue = 20, MinValue = 1)]
+        [Parameter(DefaultValue = 21)]
         public int Period { get; set; }
 
-
-        [Output("Main", Color = Colors.Violet)]
-        public IndicatorDataSeries Result { get; set; }
+        private IndicatorDataSeries diff;
+        private WeightedMovingAverage wma1;
+        private WeightedMovingAverage wma2;
+        private WeightedMovingAverage wma3;
 
         protected override void Initialize()
         {
-            //wma(2*wma(close,period/2)-wma(close,period), sqrt(Period))
-            _iSeries = CreateDataSeries();
-
-            _wma = Indicators.WeightedMovingAverage(Source, Period / 2);
-            _wma2 = Indicators.WeightedMovingAverage(Source, Period);
-            _wma3 = Indicators.WeightedMovingAverage(_iSeries, (int)Math.Sqrt(Period));
+            diff = CreateDataSeries();
+            wma1 = Indicators.WeightedMovingAverage(MarketSeries.Close, (int)Period / 2);
+            wma2 = Indicators.WeightedMovingAverage(MarketSeries.Close, Period);
+            wma3 = Indicators.WeightedMovingAverage(diff, (int)Math.Sqrt(Period));
         }
+
         public override void Calculate(int index)
         {
-            double price = Source[index];
+            double var1 = 2 * wma1.Result[index];
+            double var2 = wma2.Result[index];
 
-            if (index < Period)
-            {
-                Result[index] = price;
-                return;
-            }
+            diff[index] = var1 - var2;
 
-            _iSeries[index] = 2 * _wma.Result[index] - _wma2.Result[index];
-            Result[index] = _wma3.Result[index];
-
+            hma[index] = wma3.Result[index];
         }
-
-
     }
 }

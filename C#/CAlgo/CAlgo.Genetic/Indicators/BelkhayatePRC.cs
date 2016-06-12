@@ -4,7 +4,7 @@ using cAlgo.API.Indicators;
 
 namespace cAlgo.Indicators
 {
-    [Indicator(IsOverlay = true)]
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
     public class BelkhayatePRC : Indicator
     {
         [Parameter(DefaultValue = 3.0, MinValue = 1, MaxValue = 4)]
@@ -22,26 +22,28 @@ namespace cAlgo.Indicators
         [Parameter(DefaultValue = 3.4)]
         public double strdDev3 { get; set; }
 
-        [Output("PRC", Color = Colors.Gray)]
+        [Output("PRC", Color = Colors.Gray, LineStyle = LineStyle.Lines)]
         public IndicatorDataSeries prc { get; set; }
 
-        [Output("SQH", Color = Colors.Red)]
+        [Output("SQH", Color = Colors.Red, LineStyle = LineStyle.Lines)]
         public IndicatorDataSeries sqh { get; set; }
 
-        [Output("SQL", Color = Colors.Blue)]
+        [Output("SQL", Color = Colors.Blue, LineStyle = LineStyle.Lines)]
         public IndicatorDataSeries sql { get; set; }
 
-        [Output("SQL2", Color = Colors.Blue)]
+        [Output("SQL2", Color = Colors.Blue, LineStyle = LineStyle.Lines)]
         public IndicatorDataSeries sql2 { get; set; }
 
-        [Output("SQH2", Color = Colors.Red)]
+        [Output("SQH2", Color = Colors.Red, LineStyle = LineStyle.Lines)]
         public IndicatorDataSeries sqh2 { get; set; }
 
-        [Output("SQL3", Color = Colors.Blue)]
+        [Output("SQL3", Color = Colors.Blue, LineStyle = LineStyle.Lines)]
         public IndicatorDataSeries sql3 { get; set; }
 
-        [Output("SQH3", Color = Colors.Red)]
+        [Output("SQH3", Color = Colors.Red, LineStyle = LineStyle.Lines)]
         public IndicatorDataSeries sqh3 { get; set; }
+
+        public int ix { get; set; }
 
         private double[,] ai = new double[10, 10];
         private double[] b = new double[10];
@@ -68,12 +70,19 @@ namespace cAlgo.Indicators
 
         public override void Calculate(int index)
         {
+            if (!IsLastBar || index < period)
+                return;
+
+            int i = index;
+            ix = i;
             ip = period;
             p = ip;
             sx[1] = p + 1;
             nn = degree + 1;
             //----------------------sx-------------------------------------------------------------------
-            for (mi = 1; mi <= nn * 2 - 2; mi++) // 
+            // 
+
+            for (mi = 1; mi <= nn * 2 - 2; mi++)
             {
                 sum = 0;
                 for (n = i0; n <= i0 + p; n++)
@@ -83,17 +92,21 @@ namespace cAlgo.Indicators
                 sx[mi + 1] = sum;
             }
             //----------------------syx-----------
+
             for (mi = 1; mi <= nn; mi++)
             {
-                sum = 0.00000;
+                sum = 0.0;
                 for (n = i0; n <= i0 + p; n++)
                 {
-                    if (mi == 1) sum += MarketSeries.Close[index - n];
-                    else sum += MarketSeries.Close[index - n] * Math.Pow(n, mi - 1);
+                    if (mi == 1)
+                        sum += MarketSeries.Close[index - n];
+                    else
+                        sum += MarketSeries.Close[index - n] * Math.Pow(n, mi - 1);
                 }
                 b[mi] = sum;
             }
             //===============Matrix=======================================================================================================
+
             for (jj = 1; jj <= nn; jj++)
             {
                 for (ii = 1; ii <= nn; ii++)
@@ -102,6 +115,7 @@ namespace cAlgo.Indicators
                     ai[ii, jj] = sx[kk];
                 }
             }
+
             //===============Gauss========================================================================================================
             for (kk = 1; kk <= nn - 1; kk++)
             {
@@ -115,7 +129,8 @@ namespace cAlgo.Indicators
                         ll = ii;
                     }
                 }
-                if (ll == 0) return;
+                if (ll == 0)
+                    return;
                 if (ll != kk)
                 {
                     for (jj = 1; jj <= nn; jj++)
@@ -133,12 +148,15 @@ namespace cAlgo.Indicators
                     qq = ai[ii, kk] / ai[kk, kk];
                     for (jj = 1; jj <= nn; jj++)
                     {
-                        if (jj == kk) ai[ii, jj] = 0;
-                        else ai[ii, jj] = ai[ii, jj] - qq * ai[kk, jj];
+                        if (jj == kk)
+                            ai[ii, jj] = 0;
+                        else
+                            ai[ii, jj] = ai[ii, jj] - qq * ai[kk, jj];
                     }
                     b[ii] = b[ii] - qq * b[kk];
                 }
             }
+
             x[nn] = b[nn] / ai[nn, nn];
             for (ii = nn - 1; ii >= 1; ii--)
             {
@@ -159,23 +177,34 @@ namespace cAlgo.Indicators
                 {
                     sum += x[kk + 1] * Math.Pow(n, kk);
                 }
+
                 prc[index - n] = (x[1] + sum);
                 sq += Math.Pow(MarketSeries.Close[index - n] - prc[index - n], 2);
                 sq2 = sq;
                 sq3 = sq;
             }
+
             sq = Math.Sqrt(sq / (p + 1)) * strdDev;
             sq2 = Math.Sqrt(sq2 / (p + 1)) * strdDev2;
             sq3 = Math.Sqrt(sq3 / (p + 1)) * strdDev3;
-            for (n = i0; n <= i0 + p; n++)
+            for (n = 0; n <= period; n++)
             {
-                sqh[index - n] = (prc[index - n] + sq);
-                sql[index - n] = (prc[index - n] - sq);
-                sqh2[index - n] = (prc[index - n] + sq2);
-                sql2[index - n] = (prc[index - n] - sq2);
-                sqh3[index - n] = (prc[index - n] + sq3);
-                sql3[index - n] = (prc[index - n] - sq3);
+
+                sqh[index - n] = prc[index - n] + sq;
+                sqh2[index - n] = prc[index - n] + sq2;
+                sqh3[index - n] = prc[index - n] + sq3;
+                sql[index - n] = prc[index - n] - sq;
+                sql2[index - n] = prc[index - n] - sq2;
+                sql3[index - n] = prc[index - n] - sq3;
             }
+
+            prc[index - period] = double.NaN;
+            sqh[index - period] = double.NaN;
+            sqh2[index - period] = double.NaN;
+            sqh3[index - period] = double.NaN;
+            sql[index - period] = double.NaN;
+            sql2[index - period] = double.NaN;
+            sql3[index - period] = double.NaN;
         }
     }
 }
